@@ -68,3 +68,13 @@ Other main-runner options pass through; the launcher owns `--algorithms` and
 
 The pre-change state is tagged `project-cleanup`. The launcher change is tagged
 `parallel-runner`; undo it with `git revert parallel-runner`.
+
+Live progress update (`parallel-progress`): nine added Bash lines retain full
+logs through `tee` and display aligned per-method completed/total and remaining
+counts every 10 completed evaluations, plus initial/final counts and errors.
+Counts include validation candidates and test runs. Python code is unchanged.
+An eight-process smoke check verified aligned commas across 33 console lines,
+all 206 raw progress lines in the logs, and 137 unchanged JSON result files.
+Failure exit codes and all error logs are preserved. Undo only this logging
+update with `git revert parallel-progress`; revert it before `parallel-runner`
+if removing both changes.

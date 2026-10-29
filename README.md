@@ -50,6 +50,11 @@ one BLAS thread. A failed process makes the launcher exit unsuccessfully after
 the other methods finish; partial data and logs are retained. `bash run.bash`
 is an alias for this launcher.
 
+The terminal shows aligned per-algorithm completed/total and remaining counts
+every 10 completed evaluations, plus the initial/final counts and errors.
+These counts include validation candidates and test runs. Full logs are saved
+as before.
+
 To use fewer processes or a specific Python executable:
 
 ```bash

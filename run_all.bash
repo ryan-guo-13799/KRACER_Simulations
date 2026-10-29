@@ -74,7 +74,15 @@ for algorithm in "${algorithms[@]}"; do
         --horizon "$HORIZON" --seed-count "$SEED_COUNT" --start-seed "$START_SEED" \
         --validation-seed-count "$VALIDATION_SEED_COUNT" --validation-start-seed "$VALIDATION_START_SEED" \
         "$@" --algorithms "$algorithm" --output "$run_dir/work/$algorithm" \
-        >"$run_dir/logs/$algorithm.log" 2>&1 &
+        > >(tee "$run_dir/logs/$algorithm.log" | awk -v method="$algorithm" '
+            # BEGIN LIVE PROGRESS: retain the full log; show aligned counts every 10 runs.
+            /^Runs:/ && ($2 % 10 == 0 || $4 == 0 || $6 > 0) {
+                printf "%-22s, %5d/%-5d runs, %5d remaining, %3d failed, %3d skipped\n", method, $2, $11, $4, $6, $8
+                fflush()
+            }
+            /Failed:|Validation failed:|Traceback|Error:|error:/ { print "[" method "] " $0; fflush() }
+            # END LIVE PROGRESS.
+        ') 2>&1 &
     pids+=("$!")
     names+=("$algorithm")
     if (( ${#pids[@]} >= JOBS )); then wait_first; fi
