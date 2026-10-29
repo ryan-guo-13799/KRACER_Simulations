@@ -245,7 +245,7 @@ def TreeCertificate(
 
 
 # BEGIN K-RACER PARITY CHANGE (step 1): match the origin's directional
-# excitation, candidate ordering, reference ring, and forward orientation.
+# excitation, candidate ordering, and reference ring.
 def ExcitationSlate(
     I0: AngularInterval,
     V: Matrix,
@@ -263,11 +263,10 @@ def ExcitationSlate(
     center /= np.linalg.norm(center)
 
     radius = min(0.25, 1 / np.sqrt(2 * (1 + 1 / lambda0)))
-    slate = ExcitationRing(center, K, radius, reference=c)
-    vectors = np.array([item.emb for item in slate])
-    if float(vectors.mean(axis=0) @ c) < 0:
-        slate = [Item(-item.emb) for item in slate]
-    return slate
+    # BEGIN PAPER ALIGNMENT CHANGE: keep the signed center from Eq. (43).
+    # Eq. (44) displays this cap directly, without a global flip toward c.
+    return ExcitationRing(center, K, radius, reference=c)
+    # END PAPER ALIGNMENT CHANGE.
 
 
 def WorstNormal(I: AngularInterval, V: Matrix, c: Vector, g_i: Vector):

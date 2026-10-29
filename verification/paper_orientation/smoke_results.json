@@ -1,0 +1,42 @@
+{
+  "source_sha256": "9ffbd559cf1ae0a245fe137fbc9172f7f3f26bcefd5fa5ae190d63df7828830d",
+  "description": "Paper signed-center behavior; no global excitation flip; four full-horizon smoke runs.",
+  "runs": [
+    {
+      "algorithm": "kracer",
+      "seed": 6000,
+      "rounds": 10000,
+      "cutoff": 64,
+      "gamma": 0.95,
+      "consumed_regret": 73.72320052874154,
+      "slate_average_regret": 99.50576643554427
+    },
+    {
+      "algorithm": "analytical_certificate",
+      "seed": 6000,
+      "rounds": 10000,
+      "cutoff": 128,
+      "gamma": 0.5,
+      "consumed_regret": 141.5131464313717,
+      "slate_average_regret": 167.6414497385044
+    },
+    {
+      "algorithm": "minimum_eigenvector",
+      "seed": 6000,
+      "rounds": 10000,
+      "cutoff": 128,
+      "gamma": 0.95,
+      "consumed_regret": 100.94104174567117,
+      "slate_average_regret": 127.86866189175349
+    },
+    {
+      "algorithm": "without_restart",
+      "seed": 6000,
+      "rounds": 10000,
+      "cutoff": 32,
+      "gamma": 0.95,
+      "consumed_regret": 91.10138542404464,
+      "slate_average_regret": 115.58436007949835
+    }
+  ]
+}

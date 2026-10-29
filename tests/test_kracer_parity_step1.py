@@ -1,16 +1,14 @@
-"""Regression checks for the first K-RACER parity step."""
+"""Regression checks for retained step-one geometry and paper excitation."""
 
 # BEGIN K-RACER PARITY CHANGE (step 1): protect basis/excitation conventions
-# and representative origin regret values without importing the origin.
+# while preserving the paper's signed excitation center.
 import math
 
 import numpy as np
 import pytest
 
-from config import RecommenderConfig, SimConfig, UserConfig
 from recommenders.KRACER_functions import ExcitationSlate
 from recommenders.startup_functions import make_cone
-from simulation_function import run_simulation
 
 
 def test_startup_uses_the_origin_canonical_basis_order():
@@ -31,32 +29,33 @@ def test_excitation_ring_uses_the_public_axis_as_its_first_tangent():
     np.testing.assert_allclose(vectors, expected, atol=1e-14)
 
 
-def test_excitation_globally_flips_a_backward_cap():
+# BEGIN PAPER ALIGNMENT CHANGE: replace orientation-dependent origin totals
+# with Eq. (44)'s signed-cap conditions, including backward-facing centers.
+def test_excitation_keeps_a_backward_cap_at_its_signed_center():
     axis, direction = np.eye(3)[:2]
     slate = ExcitationSlate((.1, .5), np.diag([1., 4., 3.]),
                             axis, direction, 3, .5)
     center = np.array([item.emb for item in slate]).mean(axis=0)
-    assert center @ axis > 0
-    assert center @ direction < 0
+    assert center @ axis < 0
+    assert center @ direction > 0
 
 
-@pytest.mark.parametrize('dimension,K,seed,gamma,cutoff,origin_regrets', [
-    (5, 2, 6000, .95, 64, (73.72320051911986, 99.505766426168)),
-    (5, 2, 6001, .95, 64, (62.066284401649405, 87.61984574768029)),
-    (3, 2, 6000, .9, 32, (31.957157486567315, 40.21345279523891)),
-    (5, 3, 6000, .95, 32, (83.2710601443518, 108.9221743969934)),
-])
-def test_representative_kracer_runs_remain_close_to_origin(
-    dimension, K, seed, gamma, cutoff, origin_regrets,
-):
-    sim = SimConfig(ambient_dimension=dimension, num_steps=10000, seed=seed,
-                    user_config=UserConfig(sigma_u=.1 / math.sqrt(dimension)))
-    rec = RecommenderConfig(slate_size=K, cutoff=cutoff, gamma_ctr=gamma)
-    result = run_simulation(sim, rec, 'kracer', cutoff_after_startup=True)
-    preference = result.user.user_state.preference
-    consumed = math.fsum(1 - float(x.utility) for x in result.interactions)
-    slate = math.fsum(1 - float(np.mean([preference @ item.emb for item in x.slate]))
-                      for x in result.interactions)
-    assert len(result.interactions) == sim.num_steps
-    np.testing.assert_allclose((consumed, slate), origin_regrets, rtol=0, atol=1e-6)
+@pytest.mark.parametrize('K', [2, 3, 5, 9])
+def test_excitation_items_follow_the_paper_signed_cap_formula(K):
+    axis, direction = np.eye(3)[:2]
+    V = np.array([[2., .7, 0.], [.7, 3., 0.], [0., 0., 2.]])
+    # On [-.5,.5] this variance profile is maximized at the right endpoint.
+    normal = -math.sin(.5) * axis + math.cos(.5) * direction
+    center = np.linalg.solve(V + np.eye(3), normal)
+    center /= np.linalg.norm(center)
+    vectors = np.array([item.emb for item in ExcitationSlate(
+        (-.5, .5), V, axis, direction, K, 1.,
+    )])
+    radius = .25
+    np.testing.assert_allclose(vectors @ center, math.sqrt(1 - radius**2), atol=1e-14)
+    perturbations = (vectors - math.sqrt(1 - radius**2) * center) / radius
+    np.testing.assert_allclose(perturbations @ center, 0., atol=1e-14)
+    np.testing.assert_allclose(np.linalg.norm(perturbations, axis=1), 1., atol=1e-14)
+    assert vectors.mean(axis=0) @ axis < 0
+# END PAPER ALIGNMENT CHANGE.
 # END K-RACER PARITY CHANGE (step 1).
