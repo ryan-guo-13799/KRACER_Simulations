@@ -12,7 +12,7 @@ from cutoff_search import _can_share_next_step, evaluate_cutoffs
 from models.phase import Phase
 from recommenders.analytical_certificate import AnalyticalCertificate
 from recommenders.startup import Startup
-from simulation_function import RECOMMENDERS, run_simulation
+from simulation_state import CONE_RECOMMENDERS, run_simulation
 from simulation_state import SimulationState
 
 
@@ -49,7 +49,7 @@ def assert_same_result(left, right):
                                           getattr(right.recommender.state, field))
 
 
-@pytest.mark.parametrize('algorithm', list(RECOMMENDERS))
+@pytest.mark.parametrize('algorithm', list(CONE_RECOMMENDERS))
 @pytest.mark.parametrize('K', [2, 3])
 def test_forked_scores_exactly_equal_independent_runs(algorithm, K):
     sim, rec = configs(K=K)
@@ -61,7 +61,7 @@ def test_forked_scores_exactly_equal_independent_runs(algorithm, K):
     assert rec.cutoff == 35
 
 
-@pytest.mark.parametrize('algorithm', list(RECOMMENDERS))
+@pytest.mark.parametrize('algorithm', list(CONE_RECOMMENDERS))
 def test_failed_startup_is_shared_once(algorithm, monkeypatch):
     sim, rec = configs(horizon=2, sigma=.2)
     calls = []
@@ -173,10 +173,10 @@ def test_main_runner_selects_the_same_grid_as_independent_runs(tmp_path, monkeyp
     monkeypatch.setattr('sys.argv', ['simulation_main.py', '--horizon', '35',
         '--cutoffs', '0', '1', '4', '9', '--gamma-values', '.5', '.9',
         '--gate-sizes', '4', '16', '--validation-seed-count', '2', '--seed-count', '1',
-        '--output', str(tmp_path / 'run')])
+        '--output', str(tmp_path / 'run'), '--algorithms', *CONE_RECOMMENDERS])
     main.main()
 
-    for algorithm in RECOMMENDERS:
+    for algorithm in CONE_RECOMMENDERS:
         def parameters(value):
             return ({'gamma_ctr': .5, 'gate_size': value} if algorithm == 'analytical_certificate'
                     else {'gamma_ctr': value, 'gate_size': 4.})

@@ -1,8 +1,4 @@
-"""Run sphere cases and the K-by-noise grid with the manual K-RACER implementation.
-
-Each method selects a post-startup cutoff and its tuned parameter using
-separate validation seeds, then saves a full run for each test seed.
-"""
+"""Run K-RACER, three ablations and four baselines in one experiment."""
 
 import argparse
 from collections import Counter
@@ -16,7 +12,7 @@ import sys
 PROJECT = Path(__file__).resolve().parent.parent
 
 from config import RecommenderConfig, SimConfig, UserConfig
-from simulation_function import RECOMMENDERS, run_simulation
+from simulation_state import BASELINES, CONE_RECOMMENDERS, ONLINE_BASELINES, RECOMMENDERS, run_simulation
 # BEGIN T0 FORKING CHANGE: the search evaluator only returns validation scores.
 from cutoff_search import evaluate_cutoffs, validate_grid
 # END T0 FORKING CHANGE.
@@ -73,7 +69,10 @@ def run_cutoff_search(case, seed, horizon, cutoffs, algorithm="kracer", *, gamma
 def run_case(case, seed, horizon, cutoff, algorithm="kracer", *, gamma_ctr=0.5, gate_size=4.0):
     """Run one scenario and return its data in JSON-friendly form."""
     # BEGIN T0 FORKING CHANGE: serialization and held-out runs remain independent.
-    sim, rec = case_configs(case, seed, horizon, cutoff, gamma_ctr=gamma_ctr, gate_size=gate_size)
+    # BEGIN RUNNER CLEANUP: fixed baselines have no searched cutoff.
+    effective_cutoff = horizon if cutoff is None and algorithm in BASELINES else cutoff
+    sim, rec = case_configs(case, seed, horizon, effective_cutoff, gamma_ctr=gamma_ctr, gate_size=gate_size)
+    # END RUNNER CLEANUP.
     # END T0 FORKING CHANGE.
     result = run_simulation(sim, rec, algorithm, cutoff_after_startup=True)
     preference = result.user.user_state.preference
@@ -84,7 +83,7 @@ def run_case(case, seed, horizon, cutoff, algorithm="kracer", *, gamma_ctr=0.5, 
         mean_utility = sum(float(preference @ item) for item in items) / len(items)
         rounds.append({
             "t": interaction.timestep,
-            "phase": interaction.phase.name,
+            "phase": algorithm.upper() if algorithm in ONLINE_BASELINES else interaction.phase.name,
             "slate": [item.tolist() for item in items],
             "winner": interaction.chosen_id,
             "utility": float(interaction.utility),
@@ -93,39 +92,47 @@ def run_case(case, seed, horizon, cutoff, algorithm="kracer", *, gamma_ctr=0.5, 
             "slate_average_regret": 1.0 - mean_utility,
         })
 
-    startup = result.startup.state
+    # BEGIN RUNNER CLEANUP: keep baseline metadata distinct from cone startup.
+    settings = {
+        "dimension": sim.ambient_dimension, "slate_size": rec.slate_size,
+        "horizon": horizon, "post_startup_cutoff": cutoff,
+        "sigma_u": sim.user_config.sigma_u, "normalized_noise": case["noise"],
+        "risk": sim.user_config.risk, "delta_conf": sim.delta_conf,
+    }
+    if result.startup is None:
+        settings.update(
+            absolute_cutoff=cutoff,
+            cutoff_reference="absolute" if cutoff is not None else "not applicable",
+            # Use the same case-angle rounding as cone startup so mixed-method
+            # reports have one consistent scenario description.
+            startup_half_angle_radians=math.radians(
+                (90 + math.degrees(math.acos(1 / math.sqrt(case["dimension"])))) / 2),
+            startup_applies=False, policy_variant="fixed",
+        )
+        startup_data = {"status": "NOT_APPLICABLE", "rounds": 0}
+    else:
+        startup = result.startup.state
+        settings.update(
+            absolute_cutoff=min(horizon, startup.t - 1 + cutoff) if startup.status == "CERTIFIED" else None,
+            gamma_ctr=rec.gamma_ctr, analytical_gate_size=rec.analytical_gate_size,
+            startup_half_angle_radians=result.startup.half_angle,
+        )
+        startup_data = {
+            "status": startup.status, "rounds": startup.t - 1,
+            "counts": startup.counts.tolist(), "signs": startup.signs.tolist(),
+            "margins": [float(x) if math.isfinite(x) else None for x in startup.margins],
+            "constraints": [{"t": c.t, "coordinate": c.coordinate, "sign": c.sign, "margin": c.margin}
+                            for c in startup.constraints],
+        }
+    # END RUNNER CLEANUP.
     return {
         "case": case["id"],
         "algorithm": algorithm,
         "label": case["label"],
         "seed": seed,
-        "settings": {
-            "dimension": sim.ambient_dimension,
-            "slate_size": rec.slate_size,
-            "horizon": horizon,
-            "post_startup_cutoff": rec.cutoff,
-            "absolute_cutoff": min(horizon, result.startup.state.t - 1 + rec.cutoff)
-            if result.startup.state.status == "CERTIFIED" else None,
-            "sigma_u": sim.user_config.sigma_u,
-            "normalized_noise": case["noise"],
-            "risk": sim.user_config.risk,
-            "delta_conf": sim.delta_conf,
-            "gamma_ctr": rec.gamma_ctr,
-            "analytical_gate_size": rec.analytical_gate_size,
-            "startup_half_angle_radians": result.startup.half_angle,
-        },
+        "settings": settings,
         "preference": preference.tolist(),
-        "startup": {
-            "status": startup.status,
-            "rounds": startup.t - 1,
-            "counts": startup.counts.tolist(),
-            "signs": startup.signs.tolist(),
-            "margins": [float(x) if math.isfinite(x) else None for x in startup.margins],
-            "constraints": [
-                {"t": c.t, "coordinate": c.coordinate, "sign": c.sign, "margin": c.margin}
-                for c in startup.constraints
-            ],
-        },
+        "startup": startup_data,
         "summary": {
             "phase_counts": dict(Counter(x["phase"] for x in rounds)),
             "consumed_regret": sum(x["consumed_regret"] for x in rounds),
@@ -135,11 +142,23 @@ def run_case(case, seed, horizon, cutoff, algorithm="kracer", *, gamma_ctr=0.5, 
     }
 
 
+# BEGIN RUNNER CLEANUP: one explicit description of each method's tuning.
+def tuning_grid(algorithm, gamma_values, gate_sizes):
+    if algorithm in ONLINE_BASELINES:
+        return None, ()
+    if algorithm == "raes":
+        return "policy_variant", ("fixed",)
+    if algorithm == "analytical_certificate":
+        return "analytical_gate_size", gate_sizes
+    return "gamma_ctr", gamma_values
+# END RUNNER CLEANUP.
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--horizon", type=int, default=10_000)
     parser.add_argument("--cutoffs", type=int, nargs="+", default=DEFAULT_CUTOFFS,
-                        help="candidate post-startup exploration budgets")
+                        help="candidate T0 values: post-startup for cone policies, absolute for RAES")
     parser.add_argument("--gamma-values", type=float, nargs="+", default=GAMMA_VALUES)
     parser.add_argument("--gate-sizes", type=float, nargs="+", default=GATE_SIZES)
     parser.add_argument("--validation-seed-count", type=int, default=4)
@@ -169,11 +188,18 @@ def main():
 
     cases = study_cases()
     algorithms = list(dict.fromkeys(args.algorithms))
-    total_runs = len(cases) * sum(
-        len(cutoffs) * len(set(args.gate_sizes if algorithm == "analytical_certificate" else args.gamma_values))
-        * len(validation_seeds) + len(test_seeds)
-        for algorithm in algorithms
-    )
+    # BEGIN RUNNER CLEANUP: pairwise methods only participate in K=2 cases.
+    jobs = [(case, algorithm) for case in cases for algorithm in algorithms
+            if algorithm in CONE_RECOMMENDERS or case["K"] == 2]
+
+    def planned_runs(algorithm):
+        if algorithm in ONLINE_BASELINES:
+            return len(test_seeds)
+        _, parameters = tuning_grid(algorithm, args.gamma_values, args.gate_sizes)
+        return len(cutoffs) * len(set(parameters)) * len(validation_seeds) + len(test_seeds)
+
+    total_runs = sum(planned_runs(algorithm) for _, algorithm in jobs)
+    # END RUNNER CLEANUP.
     completed = failed_runs = skipped = 0
 
     def show_progress():
@@ -199,22 +225,24 @@ def main():
 
     failures = 0
     show_progress()
-    for case in cases:
-        case_dir = output / case["id"]
-        case_dir.mkdir()
-        for algorithm in algorithms:
-            algorithm_dir = case_dir / algorithm
-            algorithm_dir.mkdir()
-            parameter_name = "analytical_gate_size" if algorithm == "analytical_certificate" else "gamma_ctr"
-            parameters = args.gate_sizes if algorithm == "analytical_certificate" else args.gamma_values
+    # BEGIN RUNNER CLEANUP: all eligible methods share selection and saving.
+    for case, algorithm in jobs:
+        algorithm_dir = output / case["id"] / algorithm
+        algorithm_dir.mkdir(parents=True)
+        parameter_name, parameters = tuning_grid(algorithm, args.gamma_values, args.gate_sizes)
+
+        def parameters_for(value):
+            if algorithm in ONLINE_BASELINES:
+                return {}
+            if algorithm == "analytical_certificate":
+                return {"gamma_ctr": 0.5, "gate_size": value}
+            if algorithm == "raes":
+                return {"gamma_ctr": 0.5, "gate_size": 4.0}
+            return {"gamma_ctr": value, "gate_size": 4.0}
+
+        selected = selected_parameter = None
+        if algorithm not in ONLINE_BASELINES:
             attempts_before = completed + failed_runs
-
-            def parameters_for(value):
-                if algorithm == "analytical_certificate":
-                    return {"gamma_ctr": 0.5, "gate_size": value}
-                return {"gamma_ctr": value, "gate_size": 4.0}
-
-            # BEGIN T0 FORKING CHANGE: each seed/parameter shares one T0 search.
             validation_cache = {}
 
             def cached_score(seed, cutoff, parameter):
@@ -228,7 +256,6 @@ def main():
             def validation_score(seed, cutoff, parameter):
                 print(f"Validating {case['id']}, {algorithm}, cutoff {cutoff}, {parameter_name} {parameter}, seed {seed}...", flush=True)
                 return run_with_progress(seed, cutoff, parameter, evaluate=cached_score)
-            # END T0 FORKING CHANGE.
 
             try:
                 selected, selected_parameter, scores = validate_grid(cutoffs, parameters, validation_seeds, validation_score)
@@ -244,22 +271,22 @@ def main():
             with (algorithm_dir / "validation.json").open("x", encoding="utf-8") as file:
                 json.dump(validation, file, indent=2, allow_nan=False)
             if "error" in validation:
-                planned = len(cutoffs) * len(set(parameters)) * len(validation_seeds) + len(test_seeds)
-                skipped += planned - (completed + failed_runs - attempts_before)
+                skipped += planned_runs(algorithm) - (completed + failed_runs - attempts_before)
                 show_progress()
                 continue
 
-            for seed in test_seeds:
-                print(f"Testing {case['id']}, {algorithm}, cutoff {selected}, {parameter_name} {selected_parameter}, seed {seed}...", flush=True)
-                try:
-                    data = run_with_progress(case, seed, args.horizon, selected, algorithm, **parameters_for(selected_parameter))
-                except Exception as error:
-                    data = {"case": case["id"], "algorithm": algorithm, "seed": seed,
-                            "error": f"{type(error).__name__}: {error}"}
-                    print(f"  Failed: {data['error']}", flush=True)
-                    failures += 1
-                with (algorithm_dir / f"seed_{seed}.json").open("x", encoding="utf-8") as file:
-                    json.dump(data, file, indent=2, allow_nan=False)
+        for seed in test_seeds:
+            print(f"Testing {case['id']}, {algorithm}, cutoff {selected}, {parameter_name} {selected_parameter}, seed {seed}...", flush=True)
+            try:
+                data = run_with_progress(case, seed, args.horizon, selected, algorithm, **parameters_for(selected_parameter))
+            except Exception as error:
+                data = {"case": case["id"], "algorithm": algorithm, "seed": seed,
+                        "error": f"{type(error).__name__}: {error}"}
+                print(f"  Failed: {data['error']}", flush=True)
+                failures += 1
+            with (algorithm_dir / f"seed_{seed}.json").open("x", encoding="utf-8") as file:
+                json.dump(data, file, indent=2, allow_nan=False)
+    # END RUNNER CLEANUP.
 
     print(f"Results saved in {output}")
     if failures:

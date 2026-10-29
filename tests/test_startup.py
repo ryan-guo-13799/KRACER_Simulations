@@ -8,7 +8,7 @@ from models.interaction import Interaction
 from models.phase import Phase
 from recommenders.startup import Startup
 from recommenders.startup_functions import make_cone, sign_threshold
-from simulation_function import run_simulation
+from simulation_state import run_simulation
 
 
 def response(slate, winner, t):

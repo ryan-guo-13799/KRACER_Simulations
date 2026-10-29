@@ -21,6 +21,10 @@ def _can_share_next_step(state, cutoff):
     if agent is None:
         return True  # Startup is independent of the post-startup T0 budget.
     remaining = state.deadline_for(cutoff) - state.t + 1
+    # BEGIN RUNNER CLEANUP: RAES reads T0 only in its stopping condition.
+    if state.algorithm == "raes":
+        return remaining > 0
+    # END RUNNER CLEANUP.
     if remaining <= 0 or type(agent) not in _SHAREABLE:
         return False
     if agent._remaining_depth:
@@ -33,7 +37,22 @@ def _can_share_next_step(state, cutoff):
 
 def _exploiting(state):
     agent = state.recommender
+    # BEGIN RUNNER CLEANUP: RAES has no startup and keeps T0 in its adapter.
+    if state.algorithm == "raes":
+        return state.t > agent.policy.cfg.T0
+    # END RUNNER CLEANUP.
     return agent is not None and type(agent) in _SHAREABLE and state.t > agent.cutoff
+
+
+# BEGIN RUNNER CLEANUP: preserve the baseline runner's validation arithmetic.
+def _score_losses(state, losses):
+    if state.algorithm != "raes":
+        return sum(losses)
+    score = 0.0
+    for loss in losses:
+        score += loss
+    return score
+# END RUNNER CLEANUP.
 
 
 def _finish_score(state):
@@ -47,14 +66,15 @@ def _finish_score(state):
             remaining = state.sim_config.num_steps - state.t + 1
             # Sum the same ordered loss sequence as the independent runner,
             # including Python versions that use compensated float summation.
-            return sum(state.slate_losses + [loss] * remaining)
+            return _score_losses(state, state.slate_losses + [loss] * remaining)
         state.step()
-    return state.slate_regret
+    return _score_losses(state, state.slate_losses)
 
 
 def evaluate_cutoffs(sim_config, recommender_config, cutoffs, algorithm="kracer"):
-    """Return {post_startup_T0: final_slate_regret} for one seed/parameter.
+    """Return {T0: final_slate_regret} for one seed/parameter.
 
+    T0 is post-startup for cone policies and absolute for RAES.
     The largest budget owns the live run. Fork smaller budgets before their
     next action might differ; never share user histories after that point.
     """

@@ -18,7 +18,7 @@ sys.dont_write_bytecode = True
 sys.path.insert(0, str(PROJECT / 'src'))
 from config import SimConfig, UserConfig, RecommenderConfig
 from cutoff_search import evaluate_cutoffs
-from simulation_function import RECOMMENDERS, run_simulation
+from simulation_state import CONE_RECOMMENDERS as RECOMMENDERS, run_simulation
 
 
 def legacy_runner():

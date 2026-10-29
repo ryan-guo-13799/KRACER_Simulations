@@ -33,7 +33,7 @@ def main():
     args = parser.parse_args()
     sys.path[:0] = [str(PROJECT / 'src'), str(args.origin)]
     from config import RecommenderConfig, SimConfig, UserConfig
-    from simulation_function import run_simulation
+    from simulation_state import run_simulation
     from simulation.design import study_cases
     from simulation.episode import EpisodeState
 

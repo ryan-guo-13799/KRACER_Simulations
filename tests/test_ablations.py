@@ -9,7 +9,7 @@ from recommenders import analytical_certificate as analytical_module
 from recommenders.analytical_certificate import AnalyticalCertificate
 from recommenders.minimum_eigenvector import MinimumEigenvector
 from recommenders.without_restart import WithoutRestart
-from simulation_function import RECOMMENDERS, run_simulation
+from simulation_state import CONE_RECOMMENDERS, run_simulation
 
 
 def make_agent(algorithm, *, cutoff=8, W=(0.5, 0.3), V=None):
@@ -161,7 +161,7 @@ def test_fixed_chart_tree_builds_each_branch_once(monkeypatch):
     assert len(calls) == 2 + 4 + 8
 
 
-@pytest.mark.parametrize("algorithm", list(RECOMMENDERS))
+@pytest.mark.parametrize("algorithm", list(CONE_RECOMMENDERS))
 def test_each_variant_runs_the_shared_user_loop_reproducibly(algorithm):
     def run():
         sim = SimConfig(ambient_dimension=3, num_steps=15, seed=42,

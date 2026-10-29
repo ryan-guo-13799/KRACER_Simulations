@@ -1,0 +1,198 @@
+{
+  "reference": "unified-before-cleanup",
+  "baseline_records": [
+    {
+      "dimension": 3,
+      "seed": 6000,
+      "algorithm": "raes",
+      "all_trajectory_and_regret_fields_exact": true,
+      "old_reference_angle": 1.2630564724597029,
+      "new_reference_angle": 1.2630564724597029
+    },
+    {
+      "dimension": 3,
+      "seed": 6000,
+      "algorithm": "dbgd",
+      "all_trajectory_and_regret_fields_exact": true,
+      "old_reference_angle": 1.2630564724597029,
+      "new_reference_angle": 1.2630564724597029
+    },
+    {
+      "dimension": 3,
+      "seed": 6000,
+      "algorithm": "doubler",
+      "all_trajectory_and_regret_fields_exact": true,
+      "old_reference_angle": 1.2630564724597029,
+      "new_reference_angle": 1.2630564724597029
+    },
+    {
+      "dimension": 3,
+      "seed": 6000,
+      "algorithm": "sparring",
+      "all_trajectory_and_regret_fields_exact": true,
+      "old_reference_angle": 1.2630564724597029,
+      "new_reference_angle": 1.2630564724597029
+    },
+    {
+      "dimension": 5,
+      "seed": 120000,
+      "algorithm": "raes",
+      "all_trajectory_and_regret_fields_exact": true,
+      "old_reference_angle": 1.3389725222944935,
+      "new_reference_angle": 1.3389725222944937
+    },
+    {
+      "dimension": 5,
+      "seed": 120000,
+      "algorithm": "dbgd",
+      "all_trajectory_and_regret_fields_exact": true,
+      "old_reference_angle": 1.3389725222944935,
+      "new_reference_angle": 1.3389725222944937
+    },
+    {
+      "dimension": 5,
+      "seed": 120000,
+      "algorithm": "doubler",
+      "all_trajectory_and_regret_fields_exact": true,
+      "old_reference_angle": 1.3389725222944935,
+      "new_reference_angle": 1.3389725222944937
+    },
+    {
+      "dimension": 5,
+      "seed": 120000,
+      "algorithm": "sparring",
+      "all_trajectory_and_regret_fields_exact": true,
+      "old_reference_angle": 1.3389725222944935,
+      "new_reference_angle": 1.3389725222944937
+    }
+  ],
+  "cone_records": [
+    {
+      "dimension": 3,
+      "seed": 6000,
+      "algorithm": "kracer",
+      "complete_record_exact": true
+    },
+    {
+      "dimension": 3,
+      "seed": 6000,
+      "algorithm": "analytical_certificate",
+      "complete_record_exact": true
+    },
+    {
+      "dimension": 3,
+      "seed": 6000,
+      "algorithm": "minimum_eigenvector",
+      "complete_record_exact": true
+    },
+    {
+      "dimension": 3,
+      "seed": 6000,
+      "algorithm": "without_restart",
+      "complete_record_exact": true
+    },
+    {
+      "dimension": 5,
+      "seed": 120000,
+      "algorithm": "kracer",
+      "complete_record_exact": true
+    },
+    {
+      "dimension": 5,
+      "seed": 120000,
+      "algorithm": "analytical_certificate",
+      "complete_record_exact": true
+    },
+    {
+      "dimension": 5,
+      "seed": 120000,
+      "algorithm": "minimum_eigenvector",
+      "complete_record_exact": true
+    },
+    {
+      "dimension": 5,
+      "seed": 120000,
+      "algorithm": "without_restart",
+      "complete_record_exact": true
+    }
+  ],
+  "raes_validation": [
+    {
+      "dimension": 3,
+      "seed": 6000,
+      "cutoffs": [
+        0,
+        1,
+        2,
+        4,
+        16,
+        40
+      ],
+      "all_scores_exact": true,
+      "scores": {
+        "0": 65.42230376979917,
+        "1": 65.29519225095017,
+        "2": 64.9307818968442,
+        "4": 63.70460497806938,
+        "16": 22.316036369889016,
+        "40": 37.56941863176852
+      }
+    },
+    {
+      "dimension": 5,
+      "seed": 120000,
+      "cutoffs": [
+        0,
+        1,
+        2,
+        4,
+        16,
+        80
+      ],
+      "all_scores_exact": true,
+      "scores": {
+        "0": 124.53550355985637,
+        "1": 124.42416480095672,
+        "2": 124.36940760930824,
+        "4": 123.83657515638022,
+        "16": 117.7273873887713,
+        "80": 70.44330106738174
+      }
+    }
+  ],
+  "source_hashes": {
+    "config.py": "3cbb28f037b7824bb137efaba9b56e369d3577443c126d397f087267e82f40ef",
+    "cutoff_search.py": "45f8739ef18c470d5d35a469175abc289893cc6e57a4ca42314d8b0548869511",
+    "models\\interaction.py": "af1d018029eccb5cef5a0788747ec342235362b081a2b87dfa751ab735c8fbe1",
+    "models\\item.py": "a4fb37ad7f22adf1de705e07ad089942b9153cdab0959d2e9b602b4981fb435c",
+    "models\\phase.py": "88bf4a6c392ccac9ede69cdd01ddecbd07246ac3f921129619a6aa0b932e4af9",
+    "protocols\\recommender.py": "c4dc751724fb0bed606eaf0cc9c58459f15c6116fcb311f0a889a1d7fa9032f9",
+    "protocols\\user.py": "8d090d41be7f192a87a6961951d8ade73afea50b7c63fb35c36b0f9ae03cc3ef",
+    "recommenders\\analytical_certificate.py": "6c9018117f7b49eab5a5392a021fd335d16a83bf866abec7939cc1fbc6e906f8",
+    "recommenders\\baseline_support\\adapter.py": "a53339ba29fad9baf2b45ce221d6bcf70d70a1aabd7065b5f0058825de5dd872",
+    "recommenders\\baseline_support\\agent.py": "f32d2670a18f2a11a33bbf49db6f8fa7a6ac9a27e1e09ac38edd862ff29aff5d",
+    "recommenders\\baseline_support\\dbgd.py": "480fc60183f25a07a40309056f9b24bf36f60b19342e9b48af1717309c434e7a",
+    "recommenders\\baseline_support\\doubler.py": "4c8165da06f511897447d7c68ba61a1c0e6bddd9462ecd98b2ef8bd349668df3",
+    "recommenders\\baseline_support\\dueling.py": "409bbd49fc795cc04593bc6adec4bbec85b77934e757d7ac3fc70b5609d92c59",
+    "recommenders\\baseline_support\\geometry.py": "f10a9c9414f592031c0e0ecf63894cc8513f1f996e26fb6f3d9514f01ce47c8d",
+    "recommenders\\baseline_support\\oful.py": "4a37a4e8d091e644f4abbc0c1d63bb97587882287636245cee2e8891d5c01e22",
+    "recommenders\\baseline_support\\raes.py": "6010426fd2270d9eb2c759ad0c55786f0dd2fd7330c7476b2915a0b3aafdca6e",
+    "recommenders\\baseline_support\\sparring.py": "ce988ea6c885591af3b0996596935fec1e049b712e7d41ec560ab6392a69c33e",
+    "recommenders\\dbgd.py": "2288568c51c89684386ee72bd6051126f5ff551b55149371789772c4f093d2d2",
+    "recommenders\\doubler.py": "549d210adb8d3c8e14d33e12513313fcfba60fd6db309da190ba15504f935702",
+    "recommenders\\KRACER.py": "9eeed0d0c0240c89a175c6d962c4e92907e83a580f3dc546a2b661c2478ba776",
+    "recommenders\\KRACER_functions.py": "cb2cac28ca0a6090ccc5226f478d6a02e5f3a6ff6e13e1cb2644288b86d8911e",
+    "recommenders\\KRACER_state.py": "f30dba4993ed928c738820e371233fcbc20aca6fb86416f71882abd4751c48d1",
+    "recommenders\\minimum_eigenvector.py": "83266dc6762d89134031b72272a383ca9f4225c535e53538b0fb4a784102061d",
+    "recommenders\\raes_reworked.py": "45075ef73158dac4b75374817fb6b357400aae875487e3fe294aed25a7bf6815",
+    "recommenders\\sparring.py": "3c79e1332bee393ce8d0bb115f4a864aeb19ba2fefbda4c7de9dd1b832e88902",
+    "recommenders\\startup.py": "c7ffec5526ca8d11f87d524bd1afee3d1f6074b33494016437125168ec5d9df9",
+    "recommenders\\startup_functions.py": "7096900618500d154c6e314f6dfac2e610cb436d7d0ed3775196ec7ed671b554",
+    "recommenders\\startup_state.py": "768d48996b41e502bf37c994a03117c56c7d67f91aaee3f3dfb113b6ce659faf",
+    "recommenders\\without_restart.py": "afd779f6c8f57d38bba64ddf61345773a32282628e824ac7bbcf218abf405341",
+    "simulation_main.py": "58ddd12150b6c0bfedf86bddfd62ee0eea6026bcb2e4453e410beb7a76428f0f",
+    "simulation_state.py": "69a32145d340331ba1ec89c123de2f297b2a4bdd98404c67184dcb2f81bb6508",
+    "users\\bayesian_user.py": "89ddb1ce850ece5cc22aabe0087ecf4cff532751b6a428f5375a4537c25abc64",
+    "users\\user_state.py": "343dd7b9fb99175cdef5e37954509aee487836e439c4cb1730fadf6d7f3b37d9"
+  }
+}

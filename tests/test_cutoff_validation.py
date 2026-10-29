@@ -6,7 +6,7 @@ import pytest
 from config import RecommenderConfig, SimConfig, UserConfig
 from cutoff_search import validate_cutoffs, validate_grid
 from models.phase import Phase
-from simulation_function import run_simulation
+from simulation_state import run_simulation
 import simulation_main
 
 
