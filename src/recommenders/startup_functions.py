@@ -2,6 +2,10 @@ import math
 
 import numpy as np
 
+# BEGIN K-RACER PARITY CHANGE (step 1): reuse the origin's tangent-frame convention.
+from recommenders.KRACER_functions import TangentFrame
+# END K-RACER PARITY CHANGE (step 1).
+
 
 def sign_threshold(dimension: int, half_angle: float) -> float:
     """Return the paper's sign-certification threshold for the target cone."""
@@ -20,8 +24,9 @@ def make_cone(signs: np.ndarray, half_angle: float):
     if not np.all(np.isin(signs, [-1, 1])):
         raise ValueError("each coordinate needs a certified sign")
     c = np.asarray(signs, dtype=float) / math.sqrt(D)
-    # c has a nonzero first coordinate, so these D columns are independent.
-    frame = np.linalg.qr(np.column_stack((c, np.eye(D)[:, 1:])))[0]
-    F = frame[:, 1:]
+    # BEGIN K-RACER PARITY CHANGE (step 1): replace QR with canonical-axis
+    # projection. Equal cone widths make the basis order affect later queries.
+    F = TangentFrame(c)
+    # END K-RACER PARITY CHANGE (step 1).
     W = np.full(D - 1, math.tan(half_angle)**2)
     return c, F, W

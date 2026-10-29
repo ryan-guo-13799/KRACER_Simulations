@@ -1,0 +1,2151 @@
+{
+  "environment": {
+    "python": "3.14.0",
+    "numpy": "2.3.3",
+    "scipy": "1.16.2"
+  },
+  "origin": "D:\\comp_courses\\comp3770\\K-RACER\\simulations",
+  "selection_reference": "D:\\comp_courses\\comp3770\\K-RACER\\simulations\\output\\sphere_slow_baseline_20\\selected_T0.csv",
+  "source_hashes": {
+    "rewrite": {
+      "config.py": "3cbb28f037b7824bb137efaba9b56e369d3577443c126d397f087267e82f40ef",
+      "cutoff_validation.py": "50ff9fd7d661921d946487c38d4f940f429d905263d5bbf85eaf2f360f8b22a2",
+      "models\\interaction.py": "af1d018029eccb5cef5a0788747ec342235362b081a2b87dfa751ab735c8fbe1",
+      "models\\item.py": "a4fb37ad7f22adf1de705e07ad089942b9153cdab0959d2e9b602b4981fb435c",
+      "models\\phase.py": "88bf4a6c392ccac9ede69cdd01ddecbd07246ac3f921129619a6aa0b932e4af9",
+      "protocols\\recommender.py": "c4dc751724fb0bed606eaf0cc9c58459f15c6116fcb311f0a889a1d7fa9032f9",
+      "protocols\\user.py": "8d090d41be7f192a87a6961951d8ade73afea50b7c63fb35c36b0f9ae03cc3ef",
+      "recommenders\\analytical_certificate.py": "6c9018117f7b49eab5a5392a021fd335d16a83bf866abec7939cc1fbc6e906f8",
+      "recommenders\\baseline_support\\adapter.py": "a53339ba29fad9baf2b45ce221d6bcf70d70a1aabd7065b5f0058825de5dd872",
+      "recommenders\\baseline_support\\agent.py": "f32d2670a18f2a11a33bbf49db6f8fa7a6ac9a27e1e09ac38edd862ff29aff5d",
+      "recommenders\\baseline_support\\dbgd.py": "480fc60183f25a07a40309056f9b24bf36f60b19342e9b48af1717309c434e7a",
+      "recommenders\\baseline_support\\doubler.py": "4c8165da06f511897447d7c68ba61a1c0e6bddd9462ecd98b2ef8bd349668df3",
+      "recommenders\\baseline_support\\dueling.py": "409bbd49fc795cc04593bc6adec4bbec85b77934e757d7ac3fc70b5609d92c59",
+      "recommenders\\baseline_support\\geometry.py": "f10a9c9414f592031c0e0ecf63894cc8513f1f996e26fb6f3d9514f01ce47c8d",
+      "recommenders\\baseline_support\\oful.py": "4a37a4e8d091e644f4abbc0c1d63bb97587882287636245cee2e8891d5c01e22",
+      "recommenders\\baseline_support\\raes.py": "6010426fd2270d9eb2c759ad0c55786f0dd2fd7330c7476b2915a0b3aafdca6e",
+      "recommenders\\baseline_support\\sparring.py": "ce988ea6c885591af3b0996596935fec1e049b712e7d41ec560ab6392a69c33e",
+      "recommenders\\dbgd.py": "2288568c51c89684386ee72bd6051126f5ff551b55149371789772c4f093d2d2",
+      "recommenders\\doubler.py": "549d210adb8d3c8e14d33e12513313fcfba60fd6db309da190ba15504f935702",
+      "recommenders\\KRACER.py": "9eeed0d0c0240c89a175c6d962c4e92907e83a580f3dc546a2b661c2478ba776",
+      "recommenders\\KRACER_functions.py": "eb43e001b172fa325e13af399e7077e8e3f842ba04130e45d56759f484865f77",
+      "recommenders\\KRACER_state.py": "f30dba4993ed928c738820e371233fcbc20aca6fb86416f71882abd4751c48d1",
+      "recommenders\\minimum_eigenvector.py": "83266dc6762d89134031b72272a383ca9f4225c535e53538b0fb4a784102061d",
+      "recommenders\\raes_reworked.py": "45075ef73158dac4b75374817fb6b357400aae875487e3fe294aed25a7bf6815",
+      "recommenders\\sparring.py": "3c79e1332bee393ce8d0bb115f4a864aeb19ba2fefbda4c7de9dd1b832e88902",
+      "recommenders\\startup.py": "e44517febe6c4748bb198aed2694d8828a0e5eaef4565e9cae7fc31308a5f4bf",
+      "recommenders\\startup_functions.py": "7096900618500d154c6e314f6dfac2e610cb436d7d0ed3775196ec7ed671b554",
+      "recommenders\\startup_state.py": "768d48996b41e502bf37c994a03117c56c7d67f91aaee3f3dfb113b6ce659faf",
+      "recommenders\\without_restart.py": "afd779f6c8f57d38bba64ddf61345773a32282628e824ac7bbcf218abf405341",
+      "run_pairwise_baselines.py": "632a0d4101baf945fb8506caaea16762eada0b2496a058fff64ebaa9e467af3b",
+      "simulation_function.py": "3e4486b6ca09ff492857a04eebc747c33d492195ee95c826a76b7fe4e7e90cfa",
+      "simulation_main.py": "2c6b9840023a718e068a8aedb5d94f8bb9462cd304936824a670044b953d7c9c",
+      "users\\bayesian_user.py": "89ddb1ce850ece5cc22aabe0087ecf4cff532751b6a428f5375a4537c25abc64",
+      "users\\user_state.py": "343dd7b9fb99175cdef5e37954509aee487836e439c4cb1730fadf6d7f3b37d9"
+    },
+    "origin": {
+      "__init__.py": "4da8840c6cc0d76e8e256898f7d37e6f9f287cc9af894bc8483bec1bab788e93",
+      "agents\\__init__.py": "790e9afd8d6e7dc1a1d1cb34324d411013b0a4fb6720f568b09d846690dbe5db",
+      "agents\\adaptive_eq.py": "62c4701c16e1f8ee64a40772498baeda27257be515c4d4524d0a6ad832fb8920",
+      "agents\\base.py": "f32d2670a18f2a11a33bbf49db6f8fa7a6ac9a27e1e09ac38edd862ff29aff5d",
+      "agents\\dbgd.py": "b67fe5016f0fc1a29aff70e913e62f5722dc57db6d56465089dd2b8c44d0ed89",
+      "agents\\doubler.py": "a477f20a1862a3add56bc23278eb44f871cde3bf06a5f5e61c1893dda22474bd",
+      "agents\\exact_tree.py": "5e58c27478f1fbf7c5dbeafbca2b5b18a8f1df7dcfb70a83ce16b0bfed40c760",
+      "agents\\excitation_full_dimension.py": "c1a13cce4bc07058c2b32d8688f7cbcd122435757203653d274ce3bdd6331db7",
+      "agents\\excitation_max_normal.py": "f414d1a8e725f5294e7c2b4cb8a558bdb8235db5121c493ae4c2ef343edbf2c4",
+      "agents\\excitation_min_eigenvector.py": "449a0a6d5d78170e5cc9516c8cdfe83f45ccea732d199aaaa1b044e28ae54edc",
+      "agents\\fixed_chart.py": "1e0f39f152605a6bb44747dc6244011dd9978f43c33578032521b12b48e86ccc",
+      "agents\\greedy.py": "5cc59dcd3482ab526bb0fda7e7bf3f76c92c3ab6a8da7d47f0687160476b6bd7",
+      "agents\\orientation.py": "e7fc7e4b17e861d7b62689e21d94b53030df7dd3e96e6b9b9ef856a01dbe1729",
+      "agents\\oriented_greedy.py": "b30328d13aac172163627e4e8c5eb69585a434daa7f23dd1eb64b241004b66c8",
+      "agents\\preparation_analytical.py": "7846ee976e30619ef3582fdbed27d7a5a6951ff86f261c10ce133a1e6895e9a0",
+      "agents\\preparation_lookahead.py": "fafcdd793b99ced4ae4b940d58c80a679add9803da8fe3f26e72702d938dbc44",
+      "agents\\raes.py": "41862305cb74f828dccdba2c99a5f0c2f877b709e4cec9466385cc0412451be0",
+      "agents\\sparring.py": "23a5165a07f1be05f67387f6dc2d6c858dad97f33dc6dba5a942f8e414666e35",
+      "audit.py": "d3c86203e5d7f19d327b3fecab46752c68a54950670c961a574a19087c36b7ab",
+      "baselines\\__init__.py": "96c7d67df7185969b33ba5b502393c00fd2dcd443e3643255498f7e17b6ff9da",
+      "baselines\\base.py": "ffa1cd5fea7aab21691f05a8a03e9ee13ed2cb2619aa9c937efa579396d8e0d4",
+      "baselines\\oful.py": "52e7d51a7949c74757865242d59de7f8bc6c1ffa9adee42f629007d5365afedd",
+      "baselines\\oful_debug.py": "f8361d04dab851cb8fc751bfe480daead23a8dadf7edf188cad57409793df69e",
+      "certified_geometry.py": "be55fa2360815272d2153a43563a5d0f449e11439ec2a6ffad77fbd5c8a8a2e1",
+      "config.py": "5ab8181adba5a35795da37077cf2f30cee60c9a5ea0fa082dab4d859d096a34d",
+      "design.py": "d3f2f6372f1324cec60104f95a2904bed484f83929b5771753158e71a40c1718",
+      "episode.py": "c39ec3a7e1168d28ec5ff27d6ef76989e8a2984a2f22150d0b769d2ef540d6e6",
+      "evaluation.py": "c1067dd8b1c448d5194650da0551d9b185075c1e406ed0c056ccec9c878f2a16",
+      "geometry.py": "15f8d04a8537ec376502e87729ee1e5d50c7707d862ae3ad5062a53e5e7f2d2b",
+      "k_speed_reporting.py": "8fbe65b2309e044b3a11f0b8c14bab682d2344a70267a63e5e98c6e2ae72908d",
+      "metrics.py": "aee77a1055fd1dc90efcbc7fe78e9cadddc47e9f1a412a3828bf0f316cf0a4f8",
+      "phase_regret.py": "03b95e6e7b7aee8541766e9c8e3bf9310ee6c874e2a231180097c02ec40e1c06",
+      "registry.py": "6ede1aa750152a1f3842b206751c519199ba70ac5352e3fac7ccc8f61d9b4a91",
+      "reporting.py": "e5e908f058c67ba8933cd3c4bcb9e8f79161fb6c4f8595c14e6657b6b3651f42",
+      "results.py": "bc79d539a619c173d7987864fa8c93374edcacd689e800072e57d7c4c319c5ef",
+      "runner.py": "0f1b38c8a248e3e1268ab43a71cc4c5913af16323d99abf6d524437601e14657",
+      "sphere_startup.py": "53b1c5a06d033c397f50fd6b51b8b7e3a80adac9f5497664711048c7e80526a0",
+      "storage.py": "3f70b2fee3597572cb28d9da093e919863bc6359f1e983191220ba1551c6c145",
+      "study.py": "22bcc5692975ccdf8d990f96a53994d8c16e1e5885432909e7a0cc638fd59d1e",
+      "target_calibration.py": "06363e96d79b118429f16836405da845c746fe6d62a04d5a003fa85b2c9b967b",
+      "tuning.py": "dfa1ba0dcdf939d78eb4db52636a34acb5841d2513962e6028fbc6e86dceb89a",
+      "user.py": "44cd66c60d349b70b4a120209534ea6e33f521d09f4af2fc2d09b7df6e17fcc4",
+      "warm_start.py": "8ae018c2c8da7d924348ced6054da5030f66b56cc06e73a1c8265b53ac075dbf"
+    }
+  },
+  "runs": [
+    {
+      "case": "sphere_baseline",
+      "seed": 6000,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 64,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 7.429123982660712e-11,
+      "first_slate_difference_over_1e-7": null,
+      "first_winner_difference": null,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        73.72320051911986,
+        99.505766426168
+      ],
+      "rewrite_final_regrets": [
+        73.72320052876056,
+        99.50576643559681
+      ],
+      "maximum_cumulative_regret_error": [
+        9.6593026910341e-09,
+        9.447362003811577e-09
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "excite": 6,
+        "localize": 58,
+        "exploit": 9866
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "EXCITE": 6,
+        "LOCALIZE": 58,
+        "EXPLOIT": 9866
+      }
+    },
+    {
+      "case": "sphere_baseline",
+      "seed": 6001,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 64,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 8.141992635657402e-11,
+      "first_slate_difference_over_1e-7": null,
+      "first_winner_difference": null,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        62.066284401649405,
+        87.61984574768029
+      ],
+      "rewrite_final_regrets": [
+        62.066284407452635,
+        87.61984575316512
+      ],
+      "maximum_cumulative_regret_error": [
+        5.8053828411175346e-09,
+        5.4870099575055065e-09
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "excite": 10,
+        "localize": 54,
+        "exploit": 9866
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "EXCITE": 10,
+        "LOCALIZE": 54,
+        "EXPLOIT": 9866
+      }
+    },
+    {
+      "case": "sphere_baseline",
+      "seed": 6002,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 64,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 6.331668522818745e-11,
+      "first_slate_difference_over_1e-7": null,
+      "first_winner_difference": null,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        66.14556925146366,
+        94.68872397901912
+      ],
+      "rewrite_final_regrets": [
+        66.14556924422429,
+        94.68872397166507
+      ],
+      "maximum_cumulative_regret_error": [
+        7.205400720522448e-09,
+        7.320124950638274e-09
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "excite": 13,
+        "localize": 51,
+        "exploit": 9866
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "EXCITE": 13,
+        "LOCALIZE": 51,
+        "EXPLOIT": 9866
+      }
+    },
+    {
+      "case": "sphere_baseline",
+      "seed": 6003,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 64,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 1.6807179153154277,
+      "first_slate_difference_over_1e-7": 88,
+      "first_winner_difference": 88,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        67.5301560640855,
+        92.22926090984866
+      ],
+      "rewrite_final_regrets": [
+        67.58850676343333,
+        92.28744423752654
+      ],
+      "maximum_cumulative_regret_error": [
+        0.12715776609628193,
+        0.12707816226716773
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "excite": 6,
+        "localize": 58,
+        "exploit": 9866
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "EXCITE": 6,
+        "LOCALIZE": 58,
+        "EXPLOIT": 9866
+      }
+    },
+    {
+      "case": "sphere_baseline",
+      "seed": 6004,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 64,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 1.7883396641837677,
+      "first_slate_difference_over_1e-7": 79,
+      "first_winner_difference": 79,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        66.65829146417208,
+        96.3476018174428
+      ],
+      "rewrite_final_regrets": [
+        66.66357883430649,
+        96.35327401259242
+      ],
+      "maximum_cumulative_regret_error": [
+        0.6304359393250962,
+        0.630435939331548
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "excite": 8,
+        "localize": 56,
+        "exploit": 9866
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "EXCITE": 8,
+        "LOCALIZE": 56,
+        "EXPLOIT": 9866
+      }
+    },
+    {
+      "case": "sphere_baseline",
+      "seed": 6005,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 64,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 1.7915459531836149,
+      "first_slate_difference_over_1e-7": 79,
+      "first_winner_difference": 79,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        70.96885640220908,
+        100.73257042920123
+      ],
+      "rewrite_final_regrets": [
+        71.87723868248457,
+        101.64401826246102
+      ],
+      "maximum_cumulative_regret_error": [
+        0.9083822802623871,
+        0.9114478332466405
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "excite": 12,
+        "localize": 52,
+        "exploit": 9866
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "EXCITE": 12,
+        "LOCALIZE": 52,
+        "EXPLOIT": 9866
+      }
+    },
+    {
+      "case": "sphere_baseline",
+      "seed": 6006,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 64,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 1.6907357429284944,
+      "first_slate_difference_over_1e-7": 88,
+      "first_winner_difference": 88,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        77.71794915389954,
+        109.46418748755603
+      ],
+      "rewrite_final_regrets": [
+        77.71863002695481,
+        109.46530375141839
+      ],
+      "maximum_cumulative_regret_error": [
+        0.28093274085161823,
+        0.28064171003923377
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "excite": 12,
+        "localize": 52,
+        "exploit": 9866
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "EXCITE": 12,
+        "LOCALIZE": 52,
+        "EXPLOIT": 9866
+      }
+    },
+    {
+      "case": "sphere_baseline",
+      "seed": 6007,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 64,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 7.496220311153934e-11,
+      "first_slate_difference_over_1e-7": null,
+      "first_winner_difference": null,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        67.74335046645228,
+        91.80702697689382
+      ],
+      "rewrite_final_regrets": [
+        67.74335044696979,
+        91.80702695714447
+      ],
+      "maximum_cumulative_regret_error": [
+        1.9487671920614957e-08,
+        1.9713212395799928e-08
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "excite": 6,
+        "localize": 58,
+        "exploit": 9866
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "EXCITE": 6,
+        "LOCALIZE": 58,
+        "EXPLOIT": 9866
+      }
+    },
+    {
+      "case": "sphere_baseline",
+      "seed": 6008,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 64,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 1.7015547663118822,
+      "first_slate_difference_over_1e-7": 87,
+      "first_winner_difference": 87,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        70.3953778307786,
+        90.6544347884097
+      ],
+      "rewrite_final_regrets": [
+        71.54539429789679,
+        91.80019110753891
+      ],
+      "maximum_cumulative_regret_error": [
+        1.405741339316485,
+        1.4049892712918535
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "excite": 6,
+        "localize": 58,
+        "exploit": 9866
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "EXCITE": 6,
+        "LOCALIZE": 58,
+        "EXPLOIT": 9866
+      }
+    },
+    {
+      "case": "sphere_baseline",
+      "seed": 6009,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 64,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 1.7949968791713873,
+      "first_slate_difference_over_1e-7": 79,
+      "first_winner_difference": 79,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        59.15162009456021,
+        88.36945919986174
+      ],
+      "rewrite_final_regrets": [
+        58.650196731376376,
+        87.86842275460798
+      ],
+      "maximum_cumulative_regret_error": [
+        0.5014233632069107,
+        0.5010364452767107
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "excite": 8,
+        "localize": 56,
+        "exploit": 9866
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "EXCITE": 8,
+        "LOCALIZE": 56,
+        "EXPLOIT": 9866
+      }
+    },
+    {
+      "case": "sphere_baseline",
+      "seed": 6010,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 64,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 6.872558078185875e-11,
+      "first_slate_difference_over_1e-7": null,
+      "first_winner_difference": null,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        69.00212207403737,
+        99.26403926043817
+      ],
+      "rewrite_final_regrets": [
+        69.00212207005733,
+        99.26403925627268
+      ],
+      "maximum_cumulative_regret_error": [
+        3.978257723247225e-09,
+        4.204906645099982e-09
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "excite": 13,
+        "localize": 51,
+        "exploit": 9866
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "EXCITE": 13,
+        "LOCALIZE": 51,
+        "EXPLOIT": 9866
+      }
+    },
+    {
+      "case": "sphere_baseline",
+      "seed": 6011,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 64,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 1.6839523507123104,
+      "first_slate_difference_over_1e-7": 88,
+      "first_winner_difference": 88,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        69.95738289883377,
+        98.14064573574832
+      ],
+      "rewrite_final_regrets": [
+        69.95126073799572,
+        98.1347988637009
+      ],
+      "maximum_cumulative_regret_error": [
+        0.23300571208559262,
+        0.23283624850826357
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "excite": 12,
+        "localize": 52,
+        "exploit": 9866
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "EXCITE": 12,
+        "LOCALIZE": 52,
+        "EXPLOIT": 9866
+      }
+    },
+    {
+      "case": "sphere_baseline",
+      "seed": 6012,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 64,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 7.858563799700846e-11,
+      "first_slate_difference_over_1e-7": null,
+      "first_winner_difference": null,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        88.82620710643087,
+        119.15141760819056
+      ],
+      "rewrite_final_regrets": [
+        88.82620708691519,
+        119.15141758843095
+      ],
+      "maximum_cumulative_regret_error": [
+        1.9537594653229462e-08,
+        1.978150976356119e-08
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "excite": 12,
+        "localize": 52,
+        "exploit": 9866
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "EXCITE": 12,
+        "LOCALIZE": 52,
+        "EXPLOIT": 9866
+      }
+    },
+    {
+      "case": "sphere_baseline",
+      "seed": 6013,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 64,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 9.340822559877893e-11,
+      "first_slate_difference_over_1e-7": null,
+      "first_winner_difference": null,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        60.148925416819885,
+        87.30555557895126
+      ],
+      "rewrite_final_regrets": [
+        60.14892541767693,
+        87.30555557956818
+      ],
+      "maximum_cumulative_regret_error": [
+        8.460503408969089e-10,
+        6.059508450562134e-10
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "excite": 9,
+        "localize": 55,
+        "exploit": 9866
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "EXCITE": 9,
+        "LOCALIZE": 55,
+        "EXPLOIT": 9866
+      }
+    },
+    {
+      "case": "sphere_baseline",
+      "seed": 6014,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 64,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 1.7846801473535083,
+      "first_slate_difference_over_1e-7": 79,
+      "first_winner_difference": 79,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        75.80919193010226,
+        103.2907446510328
+      ],
+      "rewrite_final_regrets": [
+        75.81372657458024,
+        103.29511315961085
+      ],
+      "maximum_cumulative_regret_error": [
+        0.09438253017657416,
+        0.09434739298529848
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "excite": 9,
+        "localize": 55,
+        "exploit": 9866
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "EXCITE": 9,
+        "LOCALIZE": 55,
+        "EXPLOIT": 9866
+      }
+    },
+    {
+      "case": "sphere_baseline",
+      "seed": 6015,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 64,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 8.974254672722282e-11,
+      "first_slate_difference_over_1e-7": null,
+      "first_winner_difference": null,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        85.55279627059163,
+        106.14524073541993
+      ],
+      "rewrite_final_regrets": [
+        85.55279625038283,
+        106.14524071490224
+      ],
+      "maximum_cumulative_regret_error": [
+        2.0187968630125397e-08,
+        2.0496855768215028e-08
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "excite": 4,
+        "localize": 60,
+        "exploit": 9866
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "EXCITE": 4,
+        "LOCALIZE": 60,
+        "EXPLOIT": 9866
+      }
+    },
+    {
+      "case": "sphere_baseline",
+      "seed": 6016,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 64,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 7.16038894843507e-11,
+      "first_slate_difference_over_1e-7": null,
+      "first_winner_difference": null,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        65.5505931401779,
+        88.1367182712648
+      ],
+      "rewrite_final_regrets": [
+        65.55059314337193,
+        88.13671827422083
+      ],
+      "maximum_cumulative_regret_error": [
+        3.1710953862784663e-09,
+        2.9330351480894024e-09
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "excite": 8,
+        "localize": 56,
+        "exploit": 9866
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "EXCITE": 8,
+        "LOCALIZE": 56,
+        "EXPLOIT": 9866
+      }
+    },
+    {
+      "case": "sphere_baseline",
+      "seed": 6017,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 64,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 8.789136085596283e-11,
+      "first_slate_difference_over_1e-7": null,
+      "first_winner_difference": null,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        70.08782513551154,
+        97.64755528029214
+      ],
+      "rewrite_final_regrets": [
+        70.0878251177439,
+        97.64755526227816
+      ],
+      "maximum_cumulative_regret_error": [
+        1.7737889379532135e-08,
+        1.7946049979400414e-08
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "excite": 9,
+        "localize": 55,
+        "exploit": 9866
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "EXCITE": 9,
+        "LOCALIZE": 55,
+        "EXPLOIT": 9866
+      }
+    },
+    {
+      "case": "sphere_baseline",
+      "seed": 6018,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 64,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 7.648820465888662e-11,
+      "first_slate_difference_over_1e-7": null,
+      "first_winner_difference": null,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        74.53845153104581,
+        103.1301293072501
+      ],
+      "rewrite_final_regrets": [
+        74.53845151317697,
+        103.13012928907483
+      ],
+      "maximum_cumulative_regret_error": [
+        1.784695768947131e-08,
+        1.8153372138840496e-08
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "excite": 12,
+        "localize": 52,
+        "exploit": 9866
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "EXCITE": 12,
+        "LOCALIZE": 52,
+        "EXPLOIT": 9866
+      }
+    },
+    {
+      "case": "sphere_baseline",
+      "seed": 6019,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 64,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 7.775363686235437e-11,
+      "first_slate_difference_over_1e-7": null,
+      "first_winner_difference": null,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        68.05624430269954,
+        95.62073198387223
+      ],
+      "rewrite_final_regrets": [
+        68.05624429295698,
+        95.62073197395743
+      ],
+      "maximum_cumulative_regret_error": [
+        9.762388231138175e-09,
+        9.975011039387027e-09
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "excite": 12,
+        "localize": 52,
+        "exploit": 9866
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "EXCITE": 12,
+        "LOCALIZE": 52,
+        "EXPLOIT": 9866
+      }
+    },
+    {
+      "case": "sphere_dimension_3",
+      "seed": 6000,
+      "settings": {
+        "D": 3,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.05773502691896258,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 32,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.9,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 3.7131575592042054e-11,
+      "first_slate_difference_over_1e-7": null,
+      "first_winner_difference": null,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        31.957157486567315,
+        40.21345279523891
+      ],
+      "rewrite_final_regrets": [
+        31.957157494506927,
+        40.21345280317331
+      ],
+      "maximum_cumulative_regret_error": [
+        7.947356550630502e-09,
+        7.925471834369091e-09
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 12,
+        "startup_sign": 3,
+        "localize": 26,
+        "excite": 6,
+        "exploit": 9953
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 15,
+        "LOCALIZE": 26,
+        "EXCITE": 6,
+        "EXPLOIT": 9953
+      }
+    },
+    {
+      "case": "sphere_dimension_3",
+      "seed": 6001,
+      "settings": {
+        "D": 3,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.05773502691896258,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 32,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.9,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 3.2128688598476174e-11,
+      "first_slate_difference_over_1e-7": null,
+      "first_winner_difference": null,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        19.6855325951629,
+        25.689888507058356
+      ],
+      "rewrite_final_regrets": [
+        19.68553259470279,
+        25.68988850657177
+      ],
+      "maximum_cumulative_regret_error": [
+        4.468532210921694e-10,
+        4.733209379992331e-10
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 12,
+        "startup_sign": 3,
+        "localize": 26,
+        "excite": 6,
+        "exploit": 9953
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 15,
+        "LOCALIZE": 26,
+        "EXCITE": 6,
+        "EXPLOIT": 9953
+      }
+    },
+    {
+      "case": "sphere_dimension_9",
+      "seed": 6000,
+      "settings": {
+        "D": 9,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.03333333333333333,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 256,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 1.7730178401726038,
+      "first_slate_difference_over_1e-7": 479,
+      "first_winner_difference": 479,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        386.0213238742894,
+        516.1834915324488
+      ],
+      "rewrite_final_regrets": [
+        386.02181387115905,
+        516.184180156552
+      ],
+      "maximum_cumulative_regret_error": [
+        0.2680882231618398,
+        0.2679276449159147
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 432,
+        "startup_sign": 9,
+        "localize": 196,
+        "excite": 60,
+        "exploit": 9303
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 441,
+        "LOCALIZE": 196,
+        "EXCITE": 60,
+        "EXPLOIT": 9303
+      }
+    },
+    {
+      "case": "sphere_dimension_9",
+      "seed": 6001,
+      "settings": {
+        "D": 9,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.03333333333333333,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 256,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 2.813414501368072e-10,
+      "first_slate_difference_over_1e-7": null,
+      "first_winner_difference": null,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        388.8311571824317,
+        509.86013124983435
+      ],
+      "rewrite_final_regrets": [
+        388.8311571845741,
+        509.8601312504831
+      ],
+      "maximum_cumulative_regret_error": [
+        3.4148115446441807e-09,
+        4.874721071246313e-09
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 432,
+        "startup_sign": 9,
+        "localize": 201,
+        "excite": 55,
+        "exploit": 9303
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 441,
+        "LOCALIZE": 201,
+        "EXCITE": 55,
+        "EXPLOIT": 9303
+      }
+    },
+    {
+      "case": "sphere_speed_0.05",
+      "seed": 6000,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.022360679774997897,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 64,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.9,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 1.2370793278648762e-10,
+      "first_slate_difference_over_1e-7": null,
+      "first_winner_difference": null,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        24.922430571448395,
+        34.38081503343352
+      ],
+      "rewrite_final_regrets": [
+        24.92243058907287,
+        34.380815050741234
+      ],
+      "maximum_cumulative_regret_error": [
+        1.7613462688359505e-08,
+        1.7320736844794737e-08
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 20,
+        "startup_sign": 5,
+        "localize": 63,
+        "excite": 1,
+        "exploit": 9911
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 25,
+        "LOCALIZE": 63,
+        "EXCITE": 1,
+        "EXPLOIT": 9911
+      }
+    },
+    {
+      "case": "sphere_speed_0.05",
+      "seed": 6001,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.022360679774997897,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 64,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.9,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 7.553457859188484e-11,
+      "first_slate_difference_over_1e-7": null,
+      "first_winner_difference": null,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        27.354911392974525,
+        35.448173425849085
+      ],
+      "rewrite_final_regrets": [
+        27.354911400099034,
+        35.4481734327365
+      ],
+      "maximum_cumulative_regret_error": [
+        7.136609525559834e-09,
+        6.87136036958691e-09
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 20,
+        "startup_sign": 5,
+        "localize": 63,
+        "excite": 1,
+        "exploit": 9911
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 25,
+        "LOCALIZE": 63,
+        "EXCITE": 1,
+        "EXPLOIT": 9911
+      }
+    },
+    {
+      "case": "sphere_speed_0.2",
+      "seed": 6000,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.08944271909999159,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 256,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 4.0369527165573516e-10,
+      "first_slate_difference_over_1e-7": null,
+      "first_winner_difference": null,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        310.6128921901628,
+        423.40627345563587
+      ],
+      "rewrite_final_regrets": [
+        310.612892197493,
+        423.4062734629175
+      ],
+      "maximum_cumulative_regret_error": [
+        7.114067557267845e-09,
+        7.064556939440081e-09
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 255,
+        "startup_sign": 5,
+        "excite": 170,
+        "localize": 86,
+        "exploit": 9484
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 260,
+        "EXCITE": 170,
+        "LOCALIZE": 86,
+        "EXPLOIT": 9484
+      }
+    },
+    {
+      "case": "sphere_speed_0.2",
+      "seed": 6001,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.08944271909999159,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 256,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 1.9049412515359978,
+      "first_slate_difference_over_1e-7": 318,
+      "first_winner_difference": 318,
+      "first_phase_difference": 442,
+      "origin_final_regrets": [
+        295.6066170801358,
+        412.31135243490854
+      ],
+      "rewrite_final_regrets": [
+        298.44297608292055,
+        414.9269795053613
+      ],
+      "maximum_cumulative_regret_error": [
+        2.8363590026015117,
+        2.6156270702692836
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 255,
+        "startup_sign": 5,
+        "excite": 175,
+        "localize": 81,
+        "exploit": 9484
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 260,
+        "EXCITE": 175,
+        "LOCALIZE": 81,
+        "EXPLOIT": 9484
+      }
+    },
+    {
+      "case": "sphere_K_3",
+      "seed": 6000,
+      "settings": {
+        "D": 5,
+        "K": 3,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 32,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 7.163508675134267e-11,
+      "first_slate_difference_over_1e-7": null,
+      "first_winner_difference": null,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        83.2710601443518,
+        108.9221743969934
+      ],
+      "rewrite_final_regrets": [
+        83.27106011611684,
+        108.92217436858687
+      ],
+      "maximum_cumulative_regret_error": [
+        2.8200474844197743e-08,
+        2.8344999236651347e-08
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "localize": 28,
+        "excite": 4,
+        "exploit": 9898
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "LOCALIZE": 28,
+        "EXCITE": 4,
+        "EXPLOIT": 9898
+      }
+    },
+    {
+      "case": "sphere_K_3",
+      "seed": 6001,
+      "settings": {
+        "D": 5,
+        "K": 3,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 32,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 1.6905903435973957,
+      "first_slate_difference_over_1e-7": 99,
+      "first_winner_difference": 99,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        71.8089802174973,
+        97.26311898201044
+      ],
+      "rewrite_final_regrets": [
+        72.03722417105784,
+        97.5249710556592
+      ],
+      "maximum_cumulative_regret_error": [
+        0.22824395353748628,
+        0.26185207362567553
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "localize": 31,
+        "excite": 1,
+        "exploit": 9898
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "LOCALIZE": 31,
+        "EXCITE": 1,
+        "EXPLOIT": 9898
+      }
+    },
+    {
+      "case": "sphere_K_5",
+      "seed": 6000,
+      "settings": {
+        "D": 5,
+        "K": 5,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 32,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 1.963466056409402e-10,
+      "first_slate_difference_over_1e-7": null,
+      "first_winner_difference": null,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        60.221743214917545,
+        86.18931142055443
+      ],
+      "rewrite_final_regrets": [
+        60.22174319486741,
+        86.1893114000994
+      ],
+      "maximum_cumulative_regret_error": [
+        2.005671717597579e-08,
+        2.0391283328535792e-08
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "localize": 28,
+        "excite": 4,
+        "exploit": 9898
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "LOCALIZE": 28,
+        "EXCITE": 4,
+        "EXPLOIT": 9898
+      }
+    },
+    {
+      "case": "sphere_K_5",
+      "seed": 6001,
+      "settings": {
+        "D": 5,
+        "K": 5,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 32,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 1.961732998267962e-10,
+      "first_slate_difference_over_1e-7": null,
+      "first_winner_difference": null,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        80.53499033108999,
+        106.33111869318616
+      ],
+      "rewrite_final_regrets": [
+        80.53499029620886,
+        106.33111865790748
+      ],
+      "maximum_cumulative_regret_error": [
+        3.4903180790024635e-08,
+        3.5329236425241106e-08
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "localize": 27,
+        "excite": 5,
+        "exploit": 9898
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "LOCALIZE": 27,
+        "EXCITE": 5,
+        "EXPLOIT": 9898
+      }
+    },
+    {
+      "case": "sphere_K_9",
+      "seed": 6000,
+      "settings": {
+        "D": 5,
+        "K": 9,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 32,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.9,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 3.5187736058261976e-10,
+      "first_slate_difference_over_1e-7": null,
+      "first_winner_difference": null,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        59.902008515989145,
+        85.85799093715026
+      ],
+      "rewrite_final_regrets": [
+        59.902008531708006,
+        85.857990952435
+      ],
+      "maximum_cumulative_regret_error": [
+        1.5736461023152515e-08,
+        1.5302319411603094e-08
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "localize": 21,
+        "excite": 11,
+        "exploit": 9898
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "LOCALIZE": 21,
+        "EXCITE": 11,
+        "EXPLOIT": 9898
+      }
+    },
+    {
+      "case": "sphere_K_9",
+      "seed": 6001,
+      "settings": {
+        "D": 5,
+        "K": 9,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 32,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.9,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 3.789370484064136e-10,
+      "first_slate_difference_over_1e-7": null,
+      "first_winner_difference": null,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        56.8386805838258,
+        82.52911850255035
+      ],
+      "rewrite_final_regrets": [
+        56.83868058231864,
+        82.52911850052112
+      ],
+      "maximum_cumulative_regret_error": [
+        1.4961756278353278e-09,
+        2.0171029291304876e-09
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "localize": 22,
+        "excite": 10,
+        "exploit": 9898
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "LOCALIZE": 22,
+        "EXCITE": 10,
+        "EXPLOIT": 9898
+      }
+    },
+    {
+      "case": "sphere_radius_0.25",
+      "seed": 6000,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 64,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": 70.0762116171915,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 8.776319948555766e-11,
+      "first_slate_difference_over_1e-7": null,
+      "first_winner_difference": null,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        194.70345722465785,
+        295.952091438589
+      ],
+      "rewrite_final_regrets": [
+        194.70345722710348,
+        295.95209144114693
+      ],
+      "maximum_cumulative_regret_error": [
+        2.325123205082491e-09,
+        2.4368205231439788e-09
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 285,
+        "startup_sign": 5,
+        "localize": 64,
+        "exploit": 9646
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 290,
+        "LOCALIZE": 64,
+        "EXPLOIT": 9646
+      }
+    },
+    {
+      "case": "sphere_radius_0.25",
+      "seed": 6001,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 64,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": 70.0762116171915,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 1.0279588291695063e-10,
+      "first_slate_difference_over_1e-7": null,
+      "first_winner_difference": null,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        189.6196623669062,
+        296.2933501730358
+      ],
+      "rewrite_final_regrets": [
+        189.6196623579579,
+        296.2933501642169
+      ],
+      "maximum_cumulative_regret_error": [
+        8.903214165911777e-09,
+        9.048108040587977e-09
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 285,
+        "startup_sign": 5,
+        "localize": 64,
+        "exploit": 9646
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 290,
+        "LOCALIZE": 64,
+        "EXPLOIT": 9646
+      }
+    },
+    {
+      "case": "sphere_radius_0.75",
+      "seed": 6000,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 512,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": 83.3587372057305,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 1.671169552446162,
+      "first_slate_difference_over_1e-7": 251,
+      "first_winner_difference": 251,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        350.43183057581723,
+        386.1766148425393
+      ],
+      "rewrite_final_regrets": [
+        350.20849436554823,
+        385.99377963046
+      ],
+      "maximum_cumulative_regret_error": [
+        0.3759634870401385,
+        0.37517301375316947
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 30,
+        "startup_sign": 5,
+        "excite": 405,
+        "localize": 107,
+        "exploit": 9453
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 35,
+        "EXCITE": 405,
+        "LOCALIZE": 107,
+        "EXPLOIT": 9453
+      }
+    },
+    {
+      "case": "sphere_radius_0.75",
+      "seed": 6001,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 512,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": 83.3587372057305,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 1.7965652598013917,
+      "first_slate_difference_over_1e-7": 158,
+      "first_winner_difference": 158,
+      "first_phase_difference": 451,
+      "origin_final_regrets": [
+        328.68926180815464,
+        361.77220077234074
+      ],
+      "rewrite_final_regrets": [
+        328.9586957770253,
+        362.14824416355884
+      ],
+      "maximum_cumulative_regret_error": [
+        2.720333677760948,
+        2.8197854169085304
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 30,
+        "startup_sign": 5,
+        "excite": 413,
+        "localize": 99,
+        "exploit": 9453
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 35,
+        "EXCITE": 413,
+        "LOCALIZE": 99,
+        "EXPLOIT": 9453
+      }
+    }
+  ],
+  "summary": {
+    "runs": 38,
+    "largest_cumulative_regret_error": 2.8363590026015117,
+    "all_close": false,
+    "tolerances": {
+      "slate_entry": 1e-07,
+      "cumulative_regret": 0.0001
+    }
+  }
+}

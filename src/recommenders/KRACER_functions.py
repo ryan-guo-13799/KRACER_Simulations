@@ -244,6 +244,8 @@ def TreeCertificate(
     return None
 
 
+# BEGIN K-RACER PARITY CHANGE (step 1): match the origin's directional
+# excitation, candidate ordering, reference ring, and forward orientation.
 def ExcitationSlate(
     I0: AngularInterval,
     V: Matrix,
@@ -261,22 +263,28 @@ def ExcitationSlate(
     center /= np.linalg.norm(center)
 
     radius = min(0.25, 1 / np.sqrt(2 * (1 + 1 / lambda0)))
-    return ExcitationRing(center, K, radius)
+    slate = ExcitationRing(center, K, radius, reference=c)
+    vectors = np.array([item.emb for item in slate])
+    if float(vectors.mean(axis=0) @ c) < 0:
+        slate = [Item(-item.emb) for item in slate]
+    return slate
 
 
 def WorstNormal(I: AngularInterval, V: Matrix, c: Vector, g_i: Vector):
     """Return the most uncertain normal and its squared V-inverse norm."""
     A, B = I
     # maximize ||n(b)||_{V^{-1}} over the interval
-    inverse_c = np.linalg.solve(V, c)
-    inverse_g = np.linalg.solve(V, g_i)
-    cc = c @ inverse_c
-    gg = g_i @ inverse_g
-    cg = c @ inverse_g
-    maximum_angle = 0.5 * np.arctan2(-2 * cg, gg - cc) # using math, we get this is the angle to maximize in (A, B)
+    inverse = np.linalg.inv(V)
+    cc = c @ inverse @ c
+    gg = g_i @ inverse @ g_i
+    cg = c @ inverse @ g_i
+    stationary_angle = 0.5 * np.arctan2(2 * cg, cc - gg)
     candidates = [A, B]
-    candidates += [maximum_angle + k * np.pi for k in (-1, 0, 1)
-                   if A <= maximum_angle + k * np.pi <= B]
+    if A <= 0 <= B:
+        candidates.append(0.0)
+    candidates += [stationary_angle + k * np.pi / 2 for k in range(-3, 4)
+                   if A <= stationary_angle + k * np.pi / 2 <= B]
+    candidates.sort()
 
     def normal(b: float) -> Vector: # b: the angle
         return -np.sin(b) * c + np.cos(b) * g_i
@@ -284,12 +292,68 @@ def WorstNormal(I: AngularInterval, V: Matrix, c: Vector, g_i: Vector):
     def uncertainty(b: float) -> float: # function we want to maximize
         return float(gg * np.cos(b)**2 + cc * np.sin(b)**2 - 2 * cg * np.sin(b) * np.cos(b))
 
-    angle = max(candidates, key=uncertainty)
+    values = [uncertainty(angle) for angle in candidates]
+    angle = float(candidates[int(np.argmax(values))])
     return normal(angle), uncertainty(angle)
 
 
-def ExcitationRing(center: Vector, K: int, radius: float) -> list[Item]:
+def TangentFrame(center: Vector, reference: Vector | None = None) -> Matrix:
+    """Project the reference, then canonical axes, in the origin's order."""
+    vectors = []
+    candidates = [] if reference is None else [reference]
+    candidates += list(np.eye(center.size))
+    for axis in candidates:
+        tangent = axis - center * (center @ axis)
+        for previous in vectors:
+            tangent -= previous * (previous @ tangent)
+        if np.linalg.norm(tangent) > 1e-10:
+            vectors.append(tangent / np.linalg.norm(tangent))
+        if len(vectors) == center.size - 1:
+            break
+    return np.column_stack(vectors)
+
+
+def ExcitationRing(
+    center: Vector, K: int, radius: float, *, reference: Vector | None = None
+) -> list[Item]:
     """Place K unit items in a ring around a unit center (shared by ablations)."""
+    if reference is not None:
+        frame = TangentFrame(center, reference)
+
+        def ring(frame):
+            if K == 2:
+                return np.array([frame[:, 0], -frame[:, 0]])
+            angles = np.arange(K) * 2 * np.pi / K
+            return (np.cos(angles)[:, None] * frame[:, 0]
+                    + np.sin(angles)[:, None] * frame[:, 1])
+
+        vectors = np.sqrt(1 - radius**2) * center + radius * ring(frame)
+        if (not np.all(np.isfinite(vectors))
+                or np.max(abs(np.linalg.norm(vectors, axis=1) - 1)) >= 1e-8):
+            # Match the origin's fallback for a nearly parallel reference.
+            tangents = []
+            for axis in np.eye(center.size):
+                tangent = axis.copy()
+                for _ in range(2):
+                    tangent -= center * (center @ tangent)
+                    for previous in tangents:
+                        tangent -= previous * (previous @ tangent)
+                length = np.linalg.norm(tangent)
+                if length > 1e-10:
+                    tangents.append(tangent / length)
+                if len(tangents) == center.size - 1:
+                    break
+            if len(tangents) != center.size - 1:
+                raise FloatingPointError("Unable to construct excitation tangent frame")
+            vectors = (np.sqrt(1 - radius**2) * center
+                       + radius * ring(np.column_stack(tangents)))
+            vectors /= np.linalg.norm(vectors, axis=1)[:, None]
+            if (not np.all(np.isfinite(vectors))
+                    or np.max(abs(np.linalg.norm(vectors, axis=1) - 1)) >= 1e-12):
+                raise FloatingPointError("Invalid repaired excitation slate")
+        return [Item(vector) for vector in vectors]
+
+    # Retain the existing no-reference convention for the eigenvector ablation.
     D = center.size
     # Make two perpendicular directions for a ring around the center.
     axes = np.eye(D)
@@ -307,6 +371,7 @@ def ExcitationRing(center: Vector, K: int, radius: float) -> list[Item]:
         q = np.sqrt(1 - radius**2) * center + radius * tangent
         slate.append(Item(q))
     return slate
+# END K-RACER PARITY CHANGE (step 1).
 
 
 # Validation is kept here so the algorithms above remain easy to follow.

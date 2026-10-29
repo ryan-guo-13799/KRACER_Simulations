@@ -1,0 +1,211 @@
+{
+  "environment": {
+    "python": "3.14.0",
+    "numpy": "2.3.3",
+    "scipy": "1.16.2"
+  },
+  "origin": "D:\\comp_courses\\comp3770\\K-RACER\\simulations",
+  "selection_reference": "D:\\comp_courses\\comp3770\\K-RACER\\simulations\\output\\sphere_slow_baseline_20\\selected_T0.csv",
+  "source_hashes": {
+    "rewrite": {
+      "config.py": "3cbb28f037b7824bb137efaba9b56e369d3577443c126d397f087267e82f40ef",
+      "cutoff_validation.py": "50ff9fd7d661921d946487c38d4f940f429d905263d5bbf85eaf2f360f8b22a2",
+      "models\\interaction.py": "af1d018029eccb5cef5a0788747ec342235362b081a2b87dfa751ab735c8fbe1",
+      "models\\item.py": "a4fb37ad7f22adf1de705e07ad089942b9153cdab0959d2e9b602b4981fb435c",
+      "models\\phase.py": "88bf4a6c392ccac9ede69cdd01ddecbd07246ac3f921129619a6aa0b932e4af9",
+      "protocols\\recommender.py": "c4dc751724fb0bed606eaf0cc9c58459f15c6116fcb311f0a889a1d7fa9032f9",
+      "protocols\\user.py": "8d090d41be7f192a87a6961951d8ade73afea50b7c63fb35c36b0f9ae03cc3ef",
+      "recommenders\\analytical_certificate.py": "6c9018117f7b49eab5a5392a021fd335d16a83bf866abec7939cc1fbc6e906f8",
+      "recommenders\\baseline_support\\adapter.py": "a53339ba29fad9baf2b45ce221d6bcf70d70a1aabd7065b5f0058825de5dd872",
+      "recommenders\\baseline_support\\agent.py": "f32d2670a18f2a11a33bbf49db6f8fa7a6ac9a27e1e09ac38edd862ff29aff5d",
+      "recommenders\\baseline_support\\dbgd.py": "480fc60183f25a07a40309056f9b24bf36f60b19342e9b48af1717309c434e7a",
+      "recommenders\\baseline_support\\doubler.py": "4c8165da06f511897447d7c68ba61a1c0e6bddd9462ecd98b2ef8bd349668df3",
+      "recommenders\\baseline_support\\dueling.py": "409bbd49fc795cc04593bc6adec4bbec85b77934e757d7ac3fc70b5609d92c59",
+      "recommenders\\baseline_support\\geometry.py": "f10a9c9414f592031c0e0ecf63894cc8513f1f996e26fb6f3d9514f01ce47c8d",
+      "recommenders\\baseline_support\\oful.py": "4a37a4e8d091e644f4abbc0c1d63bb97587882287636245cee2e8891d5c01e22",
+      "recommenders\\baseline_support\\raes.py": "6010426fd2270d9eb2c759ad0c55786f0dd2fd7330c7476b2915a0b3aafdca6e",
+      "recommenders\\baseline_support\\sparring.py": "ce988ea6c885591af3b0996596935fec1e049b712e7d41ec560ab6392a69c33e",
+      "recommenders\\dbgd.py": "2288568c51c89684386ee72bd6051126f5ff551b55149371789772c4f093d2d2",
+      "recommenders\\doubler.py": "549d210adb8d3c8e14d33e12513313fcfba60fd6db309da190ba15504f935702",
+      "recommenders\\KRACER.py": "9eeed0d0c0240c89a175c6d962c4e92907e83a580f3dc546a2b661c2478ba776",
+      "recommenders\\KRACER_functions.py": "eb43e001b172fa325e13af399e7077e8e3f842ba04130e45d56759f484865f77",
+      "recommenders\\KRACER_state.py": "f30dba4993ed928c738820e371233fcbc20aca6fb86416f71882abd4751c48d1",
+      "recommenders\\minimum_eigenvector.py": "83266dc6762d89134031b72272a383ca9f4225c535e53538b0fb4a784102061d",
+      "recommenders\\raes_reworked.py": "45075ef73158dac4b75374817fb6b357400aae875487e3fe294aed25a7bf6815",
+      "recommenders\\sparring.py": "3c79e1332bee393ce8d0bb115f4a864aeb19ba2fefbda4c7de9dd1b832e88902",
+      "recommenders\\startup.py": "c7ffec5526ca8d11f87d524bd1afee3d1f6074b33494016437125168ec5d9df9",
+      "recommenders\\startup_functions.py": "7096900618500d154c6e314f6dfac2e610cb436d7d0ed3775196ec7ed671b554",
+      "recommenders\\startup_state.py": "768d48996b41e502bf37c994a03117c56c7d67f91aaee3f3dfb113b6ce659faf",
+      "recommenders\\without_restart.py": "afd779f6c8f57d38bba64ddf61345773a32282628e824ac7bbcf218abf405341",
+      "run_pairwise_baselines.py": "632a0d4101baf945fb8506caaea16762eada0b2496a058fff64ebaa9e467af3b",
+      "simulation_function.py": "3e4486b6ca09ff492857a04eebc747c33d492195ee95c826a76b7fe4e7e90cfa",
+      "simulation_main.py": "2c6b9840023a718e068a8aedb5d94f8bb9462cd304936824a670044b953d7c9c",
+      "users\\bayesian_user.py": "89ddb1ce850ece5cc22aabe0087ecf4cff532751b6a428f5375a4537c25abc64",
+      "users\\user_state.py": "343dd7b9fb99175cdef5e37954509aee487836e439c4cb1730fadf6d7f3b37d9"
+    },
+    "origin": {
+      "__init__.py": "4da8840c6cc0d76e8e256898f7d37e6f9f287cc9af894bc8483bec1bab788e93",
+      "agents\\__init__.py": "790e9afd8d6e7dc1a1d1cb34324d411013b0a4fb6720f568b09d846690dbe5db",
+      "agents\\adaptive_eq.py": "62c4701c16e1f8ee64a40772498baeda27257be515c4d4524d0a6ad832fb8920",
+      "agents\\base.py": "f32d2670a18f2a11a33bbf49db6f8fa7a6ac9a27e1e09ac38edd862ff29aff5d",
+      "agents\\dbgd.py": "b67fe5016f0fc1a29aff70e913e62f5722dc57db6d56465089dd2b8c44d0ed89",
+      "agents\\doubler.py": "a477f20a1862a3add56bc23278eb44f871cde3bf06a5f5e61c1893dda22474bd",
+      "agents\\exact_tree.py": "5e58c27478f1fbf7c5dbeafbca2b5b18a8f1df7dcfb70a83ce16b0bfed40c760",
+      "agents\\excitation_full_dimension.py": "c1a13cce4bc07058c2b32d8688f7cbcd122435757203653d274ce3bdd6331db7",
+      "agents\\excitation_max_normal.py": "f414d1a8e725f5294e7c2b4cb8a558bdb8235db5121c493ae4c2ef343edbf2c4",
+      "agents\\excitation_min_eigenvector.py": "449a0a6d5d78170e5cc9516c8cdfe83f45ccea732d199aaaa1b044e28ae54edc",
+      "agents\\fixed_chart.py": "1e0f39f152605a6bb44747dc6244011dd9978f43c33578032521b12b48e86ccc",
+      "agents\\greedy.py": "5cc59dcd3482ab526bb0fda7e7bf3f76c92c3ab6a8da7d47f0687160476b6bd7",
+      "agents\\orientation.py": "e7fc7e4b17e861d7b62689e21d94b53030df7dd3e96e6b9b9ef856a01dbe1729",
+      "agents\\oriented_greedy.py": "b30328d13aac172163627e4e8c5eb69585a434daa7f23dd1eb64b241004b66c8",
+      "agents\\preparation_analytical.py": "7846ee976e30619ef3582fdbed27d7a5a6951ff86f261c10ce133a1e6895e9a0",
+      "agents\\preparation_lookahead.py": "fafcdd793b99ced4ae4b940d58c80a679add9803da8fe3f26e72702d938dbc44",
+      "agents\\raes.py": "41862305cb74f828dccdba2c99a5f0c2f877b709e4cec9466385cc0412451be0",
+      "agents\\sparring.py": "23a5165a07f1be05f67387f6dc2d6c858dad97f33dc6dba5a942f8e414666e35",
+      "audit.py": "d3c86203e5d7f19d327b3fecab46752c68a54950670c961a574a19087c36b7ab",
+      "baselines\\__init__.py": "96c7d67df7185969b33ba5b502393c00fd2dcd443e3643255498f7e17b6ff9da",
+      "baselines\\base.py": "ffa1cd5fea7aab21691f05a8a03e9ee13ed2cb2619aa9c937efa579396d8e0d4",
+      "baselines\\oful.py": "52e7d51a7949c74757865242d59de7f8bc6c1ffa9adee42f629007d5365afedd",
+      "baselines\\oful_debug.py": "f8361d04dab851cb8fc751bfe480daead23a8dadf7edf188cad57409793df69e",
+      "certified_geometry.py": "be55fa2360815272d2153a43563a5d0f449e11439ec2a6ffad77fbd5c8a8a2e1",
+      "config.py": "5ab8181adba5a35795da37077cf2f30cee60c9a5ea0fa082dab4d859d096a34d",
+      "design.py": "d3f2f6372f1324cec60104f95a2904bed484f83929b5771753158e71a40c1718",
+      "episode.py": "c39ec3a7e1168d28ec5ff27d6ef76989e8a2984a2f22150d0b769d2ef540d6e6",
+      "evaluation.py": "c1067dd8b1c448d5194650da0551d9b185075c1e406ed0c056ccec9c878f2a16",
+      "geometry.py": "15f8d04a8537ec376502e87729ee1e5d50c7707d862ae3ad5062a53e5e7f2d2b",
+      "k_speed_reporting.py": "8fbe65b2309e044b3a11f0b8c14bab682d2344a70267a63e5e98c6e2ae72908d",
+      "metrics.py": "aee77a1055fd1dc90efcbc7fe78e9cadddc47e9f1a412a3828bf0f316cf0a4f8",
+      "phase_regret.py": "03b95e6e7b7aee8541766e9c8e3bf9310ee6c874e2a231180097c02ec40e1c06",
+      "registry.py": "6ede1aa750152a1f3842b206751c519199ba70ac5352e3fac7ccc8f61d9b4a91",
+      "reporting.py": "e5e908f058c67ba8933cd3c4bcb9e8f79161fb6c4f8595c14e6657b6b3651f42",
+      "results.py": "bc79d539a619c173d7987864fa8c93374edcacd689e800072e57d7c4c319c5ef",
+      "runner.py": "0f1b38c8a248e3e1268ab43a71cc4c5913af16323d99abf6d524437601e14657",
+      "sphere_startup.py": "53b1c5a06d033c397f50fd6b51b8b7e3a80adac9f5497664711048c7e80526a0",
+      "storage.py": "3f70b2fee3597572cb28d9da093e919863bc6359f1e983191220ba1551c6c145",
+      "study.py": "22bcc5692975ccdf8d990f96a53994d8c16e1e5885432909e7a0cc638fd59d1e",
+      "target_calibration.py": "06363e96d79b118429f16836405da845c746fe6d62a04d5a003fa85b2c9b967b",
+      "tuning.py": "dfa1ba0dcdf939d78eb4db52636a34acb5841d2513962e6028fbc6e86dceb89a",
+      "user.py": "44cd66c60d349b70b4a120209534ea6e33f521d09f4af2fc2d09b7df6e17fcc4",
+      "warm_start.py": "8ae018c2c8da7d924348ced6054da5030f66b56cc06e73a1c8265b53ac075dbf"
+    }
+  },
+  "runs": [
+    {
+      "case": "sphere_baseline",
+      "seed": 6000,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 64,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 7.429123982660712e-11,
+      "first_slate_difference_over_1e-7": null,
+      "first_winner_difference": null,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        73.72320051911986,
+        99.505766426168
+      ],
+      "rewrite_final_regrets": [
+        73.72320052876056,
+        99.50576643559681
+      ],
+      "maximum_cumulative_regret_error": [
+        9.6593026910341e-09,
+        9.447362003811577e-09
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "excite": 6,
+        "localize": 58,
+        "exploit": 9866
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "EXCITE": 6,
+        "LOCALIZE": 58,
+        "EXPLOIT": 9866
+      }
+    },
+    {
+      "case": "sphere_baseline",
+      "seed": 6001,
+      "settings": {
+        "D": 5,
+        "K": 2,
+        "T": 10000,
+        "sigma_u": 0.044721359549995794,
+        "gamma_cara": 1.0,
+        "delta_conf": 0.05,
+        "alpha_deg": 45.0,
+        "widths_deg": null,
+        "kappa_cut": 1.05,
+        "T0": 64,
+        "user_model": "bayesian",
+        "diagnostic_stride": 50,
+        "gamma_ctr": 0.95,
+        "gate_size": 4.0,
+        "a_geo": null,
+        "startup_regime": "sphere",
+        "startup_alpha_deg": null,
+        "startup_budget": null
+      },
+      "rounds": 10000,
+      "maximum_slate_entry_error": 8.141992635657402e-11,
+      "first_slate_difference_over_1e-7": null,
+      "first_winner_difference": null,
+      "first_phase_difference": null,
+      "origin_final_regrets": [
+        62.066284401649405,
+        87.61984574768029
+      ],
+      "rewrite_final_regrets": [
+        62.066284407452635,
+        87.61984575316512
+      ],
+      "maximum_cumulative_regret_error": [
+        5.8053828411175346e-09,
+        5.4870099575055065e-09
+      ],
+      "origin_phase_counts": {
+        "startup_prepare": 65,
+        "startup_sign": 5,
+        "excite": 10,
+        "localize": 54,
+        "exploit": 9866
+      },
+      "rewrite_phase_counts": {
+        "STARTUP": 70,
+        "EXCITE": 10,
+        "LOCALIZE": 54,
+        "EXPLOIT": 9866
+      }
+    }
+  ],
+  "summary": {
+    "runs": 2,
+    "largest_cumulative_regret_error": 9.6593026910341e-09,
+    "all_close": true,
+    "tolerances": {
+      "slate_entry": 1e-07,
+      "cumulative_regret": 0.0001
+    }
+  }
+}

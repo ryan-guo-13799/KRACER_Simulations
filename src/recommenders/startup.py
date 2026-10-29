@@ -27,7 +27,10 @@ class Startup(Recommender):
 
         angle = recommender_config.startup_half_angle
         if angle is None:
-            angle = (math.acos(1 / math.sqrt(D)) + math.pi / 2) / 2
+            # BEGIN K-RACER PARITY CHANGE (step 1): match the origin's degree
+            # midpoint followed by conversion, including floating-point rounding.
+            angle = math.radians((90 + math.degrees(math.acos(1 / math.sqrt(D)))) / 2)
+            # END K-RACER PARITY CHANGE (step 1).
         self.half_angle = angle
         self.threshold = sign_threshold(D, angle)
         self._slate = None
