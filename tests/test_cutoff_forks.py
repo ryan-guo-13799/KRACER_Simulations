@@ -164,7 +164,7 @@ def test_startup_can_certify_on_the_last_horizon_round():
 def test_main_runner_selects_the_same_grid_as_independent_runs(tmp_path, monkeypatch, capsys):
     import json
     import simulation_main as main
-    from cutoff_validation import validate_grid
+    from cutoff_search import validate_grid
 
     case = {'id': 'small', 'label': 'small', 'dimension': 3, 'K': 2, 'noise': .02}
     cutoffs = [0, 1, 4, 9]

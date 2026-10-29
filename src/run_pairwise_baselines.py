@@ -12,7 +12,7 @@ from pathlib import Path
 import sys
 
 from config import RecommenderConfig, SimConfig, UserConfig
-from cutoff_validation import validate_cutoffs
+from cutoff_search import validate_cutoffs
 from models.interaction import Interaction
 from recommenders.dbgd import DBGD
 from recommenders.doubler import Doubler

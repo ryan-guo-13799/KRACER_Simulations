@@ -17,9 +17,8 @@ PROJECT = Path(__file__).resolve().parent.parent
 
 from config import RecommenderConfig, SimConfig, UserConfig
 from simulation_function import RECOMMENDERS, run_simulation
-from cutoff_validation import validate_grid
 # BEGIN T0 FORKING CHANGE: the search evaluator only returns validation scores.
-from cutoff_search import evaluate_cutoffs
+from cutoff_search import evaluate_cutoffs, validate_grid
 # END T0 FORKING CHANGE.
 
 DEFAULT_CUTOFFS = (0, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512)

@@ -4,7 +4,7 @@ import numpy as np
 import pytest
 
 from config import RecommenderConfig, SimConfig, UserConfig
-from cutoff_validation import validate_cutoffs, validate_grid
+from cutoff_search import validate_cutoffs, validate_grid
 from models.phase import Phase
 from simulation_function import run_simulation
 import simulation_main
