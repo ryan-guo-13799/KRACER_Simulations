@@ -1,0 +1,213 @@
+{
+  "environment": {
+    "python": "3.14.0",
+    "numpy": "2.3.3"
+  },
+  "legacy_reference": "t0-before-forking",
+  "legacy_compatibility": [
+    {
+      "algorithm": "kracer",
+      "horizon": 2,
+      "all_interactions_and_private_state_exact": true
+    },
+    {
+      "algorithm": "kracer",
+      "horizon": 180,
+      "all_interactions_and_private_state_exact": true
+    },
+    {
+      "algorithm": "analytical_certificate",
+      "horizon": 2,
+      "all_interactions_and_private_state_exact": true
+    },
+    {
+      "algorithm": "analytical_certificate",
+      "horizon": 180,
+      "all_interactions_and_private_state_exact": true
+    },
+    {
+      "algorithm": "minimum_eigenvector",
+      "horizon": 2,
+      "all_interactions_and_private_state_exact": true
+    },
+    {
+      "algorithm": "minimum_eigenvector",
+      "horizon": 180,
+      "all_interactions_and_private_state_exact": true
+    },
+    {
+      "algorithm": "without_restart",
+      "horizon": 2,
+      "all_interactions_and_private_state_exact": true
+    },
+    {
+      "algorithm": "without_restart",
+      "horizon": 180,
+      "all_interactions_and_private_state_exact": true
+    }
+  ],
+  "benchmarks": [
+    {
+      "algorithm": "kracer",
+      "horizon": 10000,
+      "seed": 120000,
+      "cutoffs": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128
+      ],
+      "all_scores_exact": true,
+      "scores": {
+        "0": 665.8600852280898,
+        "1": 665.9224271551807,
+        "2": 667.1631612431927,
+        "4": 669.356614520774,
+        "8": 583.8114148594714,
+        "16": 593.9786265424339,
+        "32": 355.99987967123104,
+        "64": 98.16555462146977,
+        "128": 115.70378450583817
+      },
+      "independent_seconds": 6.509219499999745,
+      "forked_seconds": 0.7468833000002633,
+      "speedup": 8.715176119210927
+    },
+    {
+      "algorithm": "analytical_certificate",
+      "horizon": 10000,
+      "seed": 120000,
+      "cutoffs": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128
+      ],
+      "all_scores_exact": true,
+      "scores": {
+        "0": 665.8600852280898,
+        "1": 665.9224271551807,
+        "2": 667.1631612431927,
+        "4": 669.356614520774,
+        "8": 587.2238210394835,
+        "16": 393.92139293107965,
+        "32": 376.76593294444746,
+        "64": 401.3526514931149,
+        "128": 164.0046030795059
+      },
+      "independent_seconds": 4.660643000000164,
+      "forked_seconds": 0.06631560000005265,
+      "speedup": 70.27973810078568
+    },
+    {
+      "algorithm": "minimum_eigenvector",
+      "horizon": 10000,
+      "seed": 120000,
+      "cutoffs": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128
+      ],
+      "all_scores_exact": true,
+      "scores": {
+        "0": 665.8600852280898,
+        "1": 667.355393307148,
+        "2": 668.0796785609833,
+        "4": 668.914345076424,
+        "8": 671.7648368828459,
+        "16": 588.2077260491812,
+        "32": 375.44680246141587,
+        "64": 154.35605368966316,
+        "128": 127.30013104667474
+      },
+      "independent_seconds": 8.026770299999953,
+      "forked_seconds": 1.4552074000002904,
+      "speedup": 5.515894366671274
+    },
+    {
+      "algorithm": "without_restart",
+      "horizon": 10000,
+      "seed": 120000,
+      "cutoffs": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128
+      ],
+      "all_scores_exact": true,
+      "scores": {
+        "0": 665.8600852280877,
+        "1": 4279.146431268167,
+        "2": 4126.65713801064,
+        "4": 4512.27124155587,
+        "8": 248.3835353315841,
+        "16": 163.79876440412602,
+        "32": 80.36975054911593,
+        "64": 95.78046143767803,
+        "128": 119.89673259990026
+      },
+      "independent_seconds": 6.960500999999567,
+      "forked_seconds": 0.6442869000002247,
+      "speedup": 10.803418477074638
+    }
+  ],
+  "source_hashes": {
+    "config.py": "3cbb28f037b7824bb137efaba9b56e369d3577443c126d397f087267e82f40ef",
+    "cutoff_search.py": "08a9610cca62fe6670eed1baccde4d5002715d26f98ad1b3082b558607b308e4",
+    "cutoff_validation.py": "50ff9fd7d661921d946487c38d4f940f429d905263d5bbf85eaf2f360f8b22a2",
+    "models\\interaction.py": "af1d018029eccb5cef5a0788747ec342235362b081a2b87dfa751ab735c8fbe1",
+    "models\\item.py": "a4fb37ad7f22adf1de705e07ad089942b9153cdab0959d2e9b602b4981fb435c",
+    "models\\phase.py": "88bf4a6c392ccac9ede69cdd01ddecbd07246ac3f921129619a6aa0b932e4af9",
+    "protocols\\recommender.py": "c4dc751724fb0bed606eaf0cc9c58459f15c6116fcb311f0a889a1d7fa9032f9",
+    "protocols\\user.py": "8d090d41be7f192a87a6961951d8ade73afea50b7c63fb35c36b0f9ae03cc3ef",
+    "recommenders\\analytical_certificate.py": "6c9018117f7b49eab5a5392a021fd335d16a83bf866abec7939cc1fbc6e906f8",
+    "recommenders\\baseline_support\\adapter.py": "a53339ba29fad9baf2b45ce221d6bcf70d70a1aabd7065b5f0058825de5dd872",
+    "recommenders\\baseline_support\\agent.py": "f32d2670a18f2a11a33bbf49db6f8fa7a6ac9a27e1e09ac38edd862ff29aff5d",
+    "recommenders\\baseline_support\\dbgd.py": "480fc60183f25a07a40309056f9b24bf36f60b19342e9b48af1717309c434e7a",
+    "recommenders\\baseline_support\\doubler.py": "4c8165da06f511897447d7c68ba61a1c0e6bddd9462ecd98b2ef8bd349668df3",
+    "recommenders\\baseline_support\\dueling.py": "409bbd49fc795cc04593bc6adec4bbec85b77934e757d7ac3fc70b5609d92c59",
+    "recommenders\\baseline_support\\geometry.py": "f10a9c9414f592031c0e0ecf63894cc8513f1f996e26fb6f3d9514f01ce47c8d",
+    "recommenders\\baseline_support\\oful.py": "4a37a4e8d091e644f4abbc0c1d63bb97587882287636245cee2e8891d5c01e22",
+    "recommenders\\baseline_support\\raes.py": "6010426fd2270d9eb2c759ad0c55786f0dd2fd7330c7476b2915a0b3aafdca6e",
+    "recommenders\\baseline_support\\sparring.py": "ce988ea6c885591af3b0996596935fec1e049b712e7d41ec560ab6392a69c33e",
+    "recommenders\\dbgd.py": "2288568c51c89684386ee72bd6051126f5ff551b55149371789772c4f093d2d2",
+    "recommenders\\doubler.py": "549d210adb8d3c8e14d33e12513313fcfba60fd6db309da190ba15504f935702",
+    "recommenders\\KRACER.py": "9eeed0d0c0240c89a175c6d962c4e92907e83a580f3dc546a2b661c2478ba776",
+    "recommenders\\KRACER_functions.py": "cb2cac28ca0a6090ccc5226f478d6a02e5f3a6ff6e13e1cb2644288b86d8911e",
+    "recommenders\\KRACER_state.py": "f30dba4993ed928c738820e371233fcbc20aca6fb86416f71882abd4751c48d1",
+    "recommenders\\minimum_eigenvector.py": "83266dc6762d89134031b72272a383ca9f4225c535e53538b0fb4a784102061d",
+    "recommenders\\raes_reworked.py": "45075ef73158dac4b75374817fb6b357400aae875487e3fe294aed25a7bf6815",
+    "recommenders\\sparring.py": "3c79e1332bee393ce8d0bb115f4a864aeb19ba2fefbda4c7de9dd1b832e88902",
+    "recommenders\\startup.py": "c7ffec5526ca8d11f87d524bd1afee3d1f6074b33494016437125168ec5d9df9",
+    "recommenders\\startup_functions.py": "7096900618500d154c6e314f6dfac2e610cb436d7d0ed3775196ec7ed671b554",
+    "recommenders\\startup_state.py": "768d48996b41e502bf37c994a03117c56c7d67f91aaee3f3dfb113b6ce659faf",
+    "recommenders\\without_restart.py": "afd779f6c8f57d38bba64ddf61345773a32282628e824ac7bbcf218abf405341",
+    "run_pairwise_baselines.py": "632a0d4101baf945fb8506caaea16762eada0b2496a058fff64ebaa9e467af3b",
+    "simulation_function.py": "ca730da6f972649df6bca549ee0a119ceaad1461b2405cc1eb5935d0fb29a426",
+    "simulation_main.py": "23c35d1fdd034d25f23d24aacad19f43b7d8411ed25731c28513ee0804a6bc4e",
+    "simulation_state.py": "cbdbf57ff06a1641b64c34e6c0441cf51eab2c78d9247a422b8bac3a306e724b",
+    "users\\bayesian_user.py": "89ddb1ce850ece5cc22aabe0087ecf4cff532751b6a428f5375a4537c25abc64",
+    "users\\user_state.py": "343dd7b9fb99175cdef5e37954509aee487836e439c4cb1730fadf6d7f3b37d9"
+  }
+}

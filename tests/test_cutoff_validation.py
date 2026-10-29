@@ -47,14 +47,23 @@ def test_cutoff_is_additional_to_startup_and_keeps_absolute_confidence_time():
 
 def test_runner_selects_using_validation_seeds_only(tmp_path, monkeypatch, capsys):
     calls = []
+    searches = []
 
     def fake_run(case, seed, horizon, cutoff, algorithm, *, gamma_ctr, gate_size):
         calls.append((seed, cutoff, gamma_ctr))
         return {"seed": seed, "settings": {"post_startup_cutoff": cutoff, "gamma_ctr": gamma_ctr},
                 "summary": {"slate_average_regret": abs(cutoff - 2) + abs(gamma_ctr - 0.7) + seed / 1e6}}
 
+    # BEGIN T0 FORKING CHANGE: validation uses one batch per seed/parameter;
+    # held-out seeds still take the ordinary independent run path.
+    def fake_search(case, seed, horizon, cutoffs, algorithm, *, gamma_ctr, gate_size):
+        searches.append((seed, tuple(cutoffs), gamma_ctr))
+        return {cutoff: abs(cutoff - 2) + abs(gamma_ctr - 0.7) + seed / 1e6
+                for cutoff in cutoffs}
+
     monkeypatch.setattr(simulation_main, "study_cases", lambda: [{"id": "one"}])
     monkeypatch.setattr(simulation_main, "run_case", fake_run)
+    monkeypatch.setattr(simulation_main, "run_cutoff_search", fake_search)
     monkeypatch.setattr("sys.argv", ["simulation_main.py", "--horizon", "4", "--cutoffs", "0", "2",
                                      "--gamma-values", "0.3", "0.7", "--validation-seed-count", "2", "--seed-count", "1",
                                      "--algorithms", "kracer", "--output", str(tmp_path / "result")])
@@ -66,12 +75,13 @@ def test_runner_selects_using_validation_seeds_only(tmp_path, monkeypatch, capsy
     assert validation["parameter_name"] == "gamma_ctr"
     assert validation["selected_parameter"] == 0.7
     assert validation["validation_seeds"] == [120000, 120001]
-    assert calls == [(120000, 0, 0.3), (120001, 0, 0.3), (120000, 2, 0.3), (120001, 2, 0.3),
-                     (120000, 0, 0.7), (120001, 0, 0.7), (120000, 2, 0.7), (120001, 2, 0.7),
-                     (6000, 2, 0.7)]
+    assert searches == [(120000, (0, 2), 0.3), (120001, (0, 2), 0.3),
+                        (120000, (0, 2), 0.7), (120001, (0, 2), 0.7)]
+    assert calls == [(6000, 2, 0.7)]
     assert test["settings"]["post_startup_cutoff"] == 2
     assert test["settings"]["gamma_ctr"] == 0.7
     assert "Runs: 9 completed, 0 remaining, 0 failed, 0 skipped (total 9)" in capsys.readouterr().out
+    # END T0 FORKING CHANGE.
 
 
 def test_progress_counts_failed_and_skipped_runs(tmp_path, monkeypatch, capsys):
@@ -80,6 +90,9 @@ def test_progress_counts_failed_and_skipped_runs(tmp_path, monkeypatch, capsys):
 
     monkeypatch.setattr(simulation_main, "study_cases", lambda: [{"id": "one"}])
     monkeypatch.setattr(simulation_main, "run_case", failed_run)
+    # BEGIN T0 FORKING CHANGE: fail the validation batch, not the held-out path.
+    monkeypatch.setattr(simulation_main, "run_cutoff_search", failed_run)
+    # END T0 FORKING CHANGE.
     monkeypatch.setattr("sys.argv", ["simulation_main.py", "--horizon", "4", "--cutoffs", "0", "2",
                                      "--gamma-values", "0.3", "0.3", "0.7", "--validation-seed-count", "2",
                                      "--seed-count", "1", "--algorithms", "kracer",
@@ -91,14 +104,21 @@ def test_progress_counts_failed_and_skipped_runs(tmp_path, monkeypatch, capsys):
 
 def test_runner_tunes_analytical_gate_with_fixed_gamma(tmp_path, monkeypatch):
     calls = []
+    searches = []
 
     def fake_run(case, seed, horizon, cutoff, algorithm, *, gamma_ctr, gate_size):
         calls.append((seed, cutoff, gamma_ctr, gate_size))
         return {"settings": {"gate_size": gate_size, "gamma_ctr": gamma_ctr},
                 "summary": {"slate_average_regret": abs(gate_size - 16)}}
 
+    # BEGIN T0 FORKING CHANGE: keep gate tuning separate from budget sharing.
+    def fake_search(case, seed, horizon, cutoffs, algorithm, *, gamma_ctr, gate_size):
+        searches.append((seed, tuple(cutoffs), gamma_ctr, gate_size))
+        return {cutoff: abs(gate_size - 16) for cutoff in cutoffs}
+
     monkeypatch.setattr(simulation_main, "study_cases", lambda: [{"id": "one"}])
     monkeypatch.setattr(simulation_main, "run_case", fake_run)
+    monkeypatch.setattr(simulation_main, "run_cutoff_search", fake_search)
     monkeypatch.setattr("sys.argv", ["simulation_main.py", "--horizon", "4", "--cutoffs", "1",
                                      "--gate-sizes", "4", "16", "--validation-seed-count", "1",
                                      "--seed-count", "1", "--algorithms", "analytical_certificate",
@@ -109,5 +129,7 @@ def test_runner_tunes_analytical_gate_with_fixed_gamma(tmp_path, monkeypatch):
     test = json.loads((folder / "seed_6000.json").read_text())
     assert validation["parameter_name"] == "analytical_gate_size"
     assert validation["selected_parameter"] == 16
-    assert calls == [(120000, 1, 0.5, 4), (120000, 1, 0.5, 16), (6000, 1, 0.5, 16)]
+    assert searches == [(120000, (1,), 0.5, 4), (120000, (1,), 0.5, 16)]
+    assert calls == [(6000, 1, 0.5, 16)]
     assert test["settings"] == {"gate_size": 16, "gamma_ctr": 0.5}
+    # END T0 FORKING CHANGE.

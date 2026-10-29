@@ -18,6 +18,9 @@ PROJECT = Path(__file__).resolve().parent.parent
 from config import RecommenderConfig, SimConfig, UserConfig
 from simulation_function import RECOMMENDERS, run_simulation
 from cutoff_validation import validate_grid
+# BEGIN T0 FORKING CHANGE: the search evaluator only returns validation scores.
+from cutoff_search import evaluate_cutoffs
+# END T0 FORKING CHANGE.
 
 DEFAULT_CUTOFFS = (0, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512)
 GAMMA_VALUES = (0.8, 0.9, 0.95)
@@ -44,8 +47,8 @@ def study_cases():
     ]
 
 
-def run_case(case, seed, horizon, cutoff, algorithm="kracer", *, gamma_ctr=0.5, gate_size=4.0):
-    """Run one scenario and return its data in JSON-friendly form."""
+# BEGIN T0 FORKING CHANGE: independent runs and searches share config creation.
+def case_configs(case, seed, horizon, cutoff, *, gamma_ctr=0.5, gate_size=4.0):
     sim = SimConfig(
         ambient_dimension=case["dimension"],
         num_steps=horizon,
@@ -59,6 +62,20 @@ def run_case(case, seed, horizon, cutoff, algorithm="kracer", *, gamma_ctr=0.5, 
         gamma_ctr=gamma_ctr,
         analytical_gate_size=gate_size,
     )
+    return sim, rec
+
+
+def run_cutoff_search(case, seed, horizon, cutoffs, algorithm="kracer", *, gamma_ctr=0.5, gate_size=4.0):
+    sim, rec = case_configs(case, seed, horizon, max(cutoffs), gamma_ctr=gamma_ctr, gate_size=gate_size)
+    return evaluate_cutoffs(sim, rec, cutoffs, algorithm)
+# END T0 FORKING CHANGE.
+
+
+def run_case(case, seed, horizon, cutoff, algorithm="kracer", *, gamma_ctr=0.5, gate_size=4.0):
+    """Run one scenario and return its data in JSON-friendly form."""
+    # BEGIN T0 FORKING CHANGE: serialization and held-out runs remain independent.
+    sim, rec = case_configs(case, seed, horizon, cutoff, gamma_ctr=gamma_ctr, gate_size=gate_size)
+    # END T0 FORKING CHANGE.
     result = run_simulation(sim, rec, algorithm, cutoff_after_startup=True)
     preference = result.user.user_state.preference
 
@@ -166,10 +183,11 @@ def main():
         print(f"Runs: {completed:{width}} completed, {remaining:{width}} remaining, "
               f"{failed_runs:{width}} failed, {skipped:{width}} skipped (total {total_runs})", flush=True)
 
-    def run_with_progress(*run_args, **run_kwargs):
+    # BEGIN T0 FORKING CHANGE: count logical candidates, including cached scores.
+    def run_with_progress(*run_args, evaluate=run_case, **run_kwargs):
         nonlocal completed, failed_runs
         try:
-            result = run_case(*run_args, **run_kwargs)
+            result = evaluate(*run_args, **run_kwargs)
         except Exception:
             failed_runs += 1
             raise
@@ -178,6 +196,7 @@ def main():
             return result
         finally:
             show_progress()
+    # END T0 FORKING CHANGE.
 
     failures = 0
     show_progress()
@@ -196,10 +215,21 @@ def main():
                     return {"gamma_ctr": 0.5, "gate_size": value}
                 return {"gamma_ctr": value, "gate_size": 4.0}
 
+            # BEGIN T0 FORKING CHANGE: each seed/parameter shares one T0 search.
+            validation_cache = {}
+
+            def cached_score(seed, cutoff, parameter):
+                key = (seed, parameter)
+                if key not in validation_cache:
+                    validation_cache[key] = run_cutoff_search(
+                        case, seed, args.horizon, cutoffs, algorithm, **parameters_for(parameter)
+                    )
+                return validation_cache[key][cutoff]
+
             def validation_score(seed, cutoff, parameter):
                 print(f"Validating {case['id']}, {algorithm}, cutoff {cutoff}, {parameter_name} {parameter}, seed {seed}...", flush=True)
-                data = run_with_progress(case, seed, args.horizon, cutoff, algorithm, **parameters_for(parameter))
-                return data["summary"]["slate_average_regret"]
+                return run_with_progress(seed, cutoff, parameter, evaluate=cached_score)
+            # END T0 FORKING CHANGE.
 
             try:
                 selected, selected_parameter, scores = validate_grid(cutoffs, parameters, validation_seeds, validation_score)
