@@ -1,0 +1,214 @@
+{
+  "horizon": 10000,
+  "dimension": 5,
+  "slate_size": 2,
+  "normalized_noise": 0.1,
+  "mean_slate_regret": 3277.549299931201,
+  "mean_consumed_regret": 3271.6351651177706,
+  "all_20_runs_match_seed_only_counterfactual": true,
+  "changed_production_source_files": [
+    "manual_simulations/src/recommenders/baseline_support/adapter.py"
+  ],
+  "runs": [
+    {
+      "seed": 6000,
+      "phase_counts": {
+        "DBGD": 10000
+      },
+      "consumed_regret": 10229.35424212596,
+      "slate_average_regret": 10231.027847746012,
+      "slate_regret_error_vs_counterfactual": 0.0,
+      "consumed_regret_error_vs_counterfactual": 0.0
+    },
+    {
+      "seed": 6001,
+      "phase_counts": {
+        "DBGD": 10000
+      },
+      "consumed_regret": 7201.2632680973675,
+      "slate_average_regret": 7202.7025581500475,
+      "slate_regret_error_vs_counterfactual": 0.0,
+      "consumed_regret_error_vs_counterfactual": 0.0
+    },
+    {
+      "seed": 6002,
+      "phase_counts": {
+        "DBGD": 10000
+      },
+      "consumed_regret": 232.17058619765123,
+      "slate_average_regret": 239.374150960201,
+      "slate_regret_error_vs_counterfactual": 0.0,
+      "consumed_regret_error_vs_counterfactual": 0.0
+    },
+    {
+      "seed": 6003,
+      "phase_counts": {
+        "DBGD": 10000
+      },
+      "consumed_regret": 843.7568794036532,
+      "slate_average_regret": 854.6355862785764,
+      "slate_regret_error_vs_counterfactual": 0.0,
+      "consumed_regret_error_vs_counterfactual": 0.0
+    },
+    {
+      "seed": 6004,
+      "phase_counts": {
+        "DBGD": 10000
+      },
+      "consumed_regret": 203.97695981936778,
+      "slate_average_regret": 210.44299494966447,
+      "slate_regret_error_vs_counterfactual": 0.0,
+      "consumed_regret_error_vs_counterfactual": 0.0
+    },
+    {
+      "seed": 6005,
+      "phase_counts": {
+        "DBGD": 10000
+      },
+      "consumed_regret": 384.443702572349,
+      "slate_average_regret": 392.79525321441486,
+      "slate_regret_error_vs_counterfactual": 0.0,
+      "consumed_regret_error_vs_counterfactual": 0.0
+    },
+    {
+      "seed": 6006,
+      "phase_counts": {
+        "DBGD": 10000
+      },
+      "consumed_regret": 271.7250387665347,
+      "slate_average_regret": 279.4525530166683,
+      "slate_regret_error_vs_counterfactual": 0.0,
+      "consumed_regret_error_vs_counterfactual": 0.0
+    },
+    {
+      "seed": 6007,
+      "phase_counts": {
+        "DBGD": 10000
+      },
+      "consumed_regret": 581.4783235636066,
+      "slate_average_regret": 590.7657526800476,
+      "slate_regret_error_vs_counterfactual": 0.0,
+      "consumed_regret_error_vs_counterfactual": 0.0
+    },
+    {
+      "seed": 6008,
+      "phase_counts": {
+        "DBGD": 10000
+      },
+      "consumed_regret": 4969.7088358386445,
+      "slate_average_regret": 4971.2805785785695,
+      "slate_regret_error_vs_counterfactual": 0.0,
+      "consumed_regret_error_vs_counterfactual": 0.0
+    },
+    {
+      "seed": 6009,
+      "phase_counts": {
+        "DBGD": 10000
+      },
+      "consumed_regret": 763.838282230441,
+      "slate_average_regret": 773.8299051547838,
+      "slate_regret_error_vs_counterfactual": 0.0,
+      "consumed_regret_error_vs_counterfactual": 0.0
+    },
+    {
+      "seed": 6010,
+      "phase_counts": {
+        "DBGD": 10000
+      },
+      "consumed_regret": 8060.366825979114,
+      "slate_average_regret": 8059.644569210722,
+      "slate_regret_error_vs_counterfactual": 0.0,
+      "consumed_regret_error_vs_counterfactual": 0.0
+    },
+    {
+      "seed": 6011,
+      "phase_counts": {
+        "DBGD": 10000
+      },
+      "consumed_regret": 11387.995172315972,
+      "slate_average_regret": 11387.594975044,
+      "slate_regret_error_vs_counterfactual": 0.0,
+      "consumed_regret_error_vs_counterfactual": 0.0
+    },
+    {
+      "seed": 6012,
+      "phase_counts": {
+        "DBGD": 10000
+      },
+      "consumed_regret": 10645.430595357484,
+      "slate_average_regret": 10643.769664670484,
+      "slate_regret_error_vs_counterfactual": 0.0,
+      "consumed_regret_error_vs_counterfactual": 0.0
+    },
+    {
+      "seed": 6013,
+      "phase_counts": {
+        "DBGD": 10000
+      },
+      "consumed_regret": 3977.258486375499,
+      "slate_average_regret": 3979.4322398926615,
+      "slate_regret_error_vs_counterfactual": 0.0,
+      "consumed_regret_error_vs_counterfactual": 0.0
+    },
+    {
+      "seed": 6014,
+      "phase_counts": {
+        "DBGD": 10000
+      },
+      "consumed_regret": 417.3440024334894,
+      "slate_average_regret": 425.63950039139996,
+      "slate_regret_error_vs_counterfactual": 0.0,
+      "consumed_regret_error_vs_counterfactual": 0.0
+    },
+    {
+      "seed": 6015,
+      "phase_counts": {
+        "DBGD": 10000
+      },
+      "consumed_regret": 1305.7806320167188,
+      "slate_average_regret": 1317.6779942786488,
+      "slate_regret_error_vs_counterfactual": 0.0,
+      "consumed_regret_error_vs_counterfactual": 0.0
+    },
+    {
+      "seed": 6016,
+      "phase_counts": {
+        "DBGD": 10000
+      },
+      "consumed_regret": 520.3059208434789,
+      "slate_average_regret": 528.850443806758,
+      "slate_regret_error_vs_counterfactual": 0.0,
+      "consumed_regret_error_vs_counterfactual": 0.0
+    },
+    {
+      "seed": 6017,
+      "phase_counts": {
+        "DBGD": 10000
+      },
+      "consumed_regret": 885.4486987081204,
+      "slate_average_regret": 896.4890621096362,
+      "slate_regret_error_vs_counterfactual": 0.0,
+      "consumed_regret_error_vs_counterfactual": 0.0
+    },
+    {
+      "seed": 6018,
+      "phase_counts": {
+        "DBGD": 10000
+      },
+      "consumed_regret": 1380.2501189629813,
+      "slate_average_regret": 1383.153143032205,
+      "slate_regret_error_vs_counterfactual": 0.0,
+      "consumed_regret_error_vs_counterfactual": 0.0
+    },
+    {
+      "seed": 6019,
+      "phase_counts": {
+        "DBGD": 10000
+      },
+      "consumed_regret": 1170.806730746976,
+      "slate_average_regret": 1182.4272254585226,
+      "slate_regret_error_vs_counterfactual": 0.0,
+      "consumed_regret_error_vs_counterfactual": 0.0
+    }
+  ]
+}

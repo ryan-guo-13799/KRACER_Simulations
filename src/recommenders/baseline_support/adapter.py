@@ -6,6 +6,7 @@ import numpy as np
 from models.item import Item
 from models.phase import Phase
 from protocols.recommender import Recommender
+from .dbgd import DBGD
 
 
 class PairwiseAdapter(Recommender):
@@ -23,8 +24,12 @@ class PairwiseAdapter(Recommender):
             D=dimension, K=2, T=sim_config.num_steps,
             T0=recommender_config.cutoff, kappa_cut=1.05,
         )
+        # BEGIN DBGD SEED FIX: use origin's separate stream, not the user's seed.
+        policy_seed = (np.random.SeedSequence([sim_config.seed, 0xDB6D, 17])
+                       if policy_class is DBGD else sim_config.seed)
         self.policy = (policy_class(policy_config, None) if raes else
-                       policy_class(policy_config, seed=sim_config.seed, **options))
+                       policy_class(policy_config, seed=policy_seed, **options))
+        # END DBGD SEED FIX.
 
     def recommend(self, k):
         if k != 2:

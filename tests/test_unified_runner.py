@@ -20,6 +20,22 @@ def configs(cutoff=4):
             RecommenderConfig(slate_size=2, cutoff=cutoff))
 
 
+# BEGIN DBGD SEED FIX: match origin's policy stream without sharing the user's draw.
+@pytest.mark.parametrize('seed', range(6000, 6020))
+@pytest.mark.parametrize('dimension', [3, 5, 9])
+def test_dbgd_uses_independent_origin_seed(seed, dimension):
+    sim, rec = configs()
+    state = SimulationState(replace(sim, seed=seed, ambient_dimension=dimension), rec, 'dbgd')
+    policy = state.recommender.policy
+    expected_rng = np.random.default_rng(np.random.SeedSequence([seed, 0xDB6D, 17]))
+    expected_initial = expected_rng.normal(size=dimension)
+    expected_initial /= np.linalg.norm(expected_initial)
+    np.testing.assert_array_equal(policy.w, expected_initial)
+    assert not np.array_equal(policy.w, state.user.user_state.preference)
+    np.testing.assert_array_equal(policy.rng.normal(size=dimension), expected_rng.normal(size=dimension))
+# END DBGD SEED FIX.
+
+
 @pytest.mark.parametrize('algorithm', BASELINES)
 def test_baselines_do_not_run_cone_startup(algorithm):
     sim, rec = configs()
