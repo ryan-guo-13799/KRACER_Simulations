@@ -57,6 +57,31 @@ The author independently reviewed and checked the simulation code,
 experiment outputs, and plots and **takes responsibility for the final
 simulation project**.
 
+## Saved Simulation Plots
+
+The saved plots are included in this repository in **PNG, SVG, and PDF**:
+
+- [All figure files](docs/plots/figures/)
+- [Plot gallery](docs/plots/index.html) (open locally after cloning or downloading)
+- [Figure metadata and SHA-256 checksums](docs/plots/manifest.json)
+
+| Figure | Preview |
+| --- | --- |
+| 10: Baseline final regret distributions | [PNG](docs/plots/figures/current_reference.png) |
+| 11: Baseline regret trajectories | [PNG](docs/plots/figures/current_reference_trajectories.png) |
+| 12: Paired ablation regret distributions | [PNG](docs/plots/figures/current_report/03_paired_ablations.png) |
+| 13: Regret versus slate size and noise | [PNG](docs/plots/figures/current_report/09_grid_K_effects.png) |
+
+The gallery also includes Figures 16-24. GitHub displays the individual images;
+to view the complete gallery, open it locally from this directory:
+
+```powershell
+Invoke-Item docs/plots/index.html
+```
+
+Only the rendered plots, gallery, and figure metadata are published. Raw
+simulation data, CSV tables, and supplemental-data caches remain local.
+
 ## Running the Simulations
 
 Run K-RACER, its three ablations, and four pairwise baselines, then plot the
@@ -255,10 +280,12 @@ manual_simulations/
 |-- run_all.bash
 `-- docs/
     |-- math-model.pdf
-    `-- simulation-architecture.png
+    |-- simulation-architecture.png
+    `-- plots/
 ```
 
-- `docs/`: the author's handwritten mathematical notes and simulation design.
+- `docs/`: the author's handwritten mathematical notes, simulation design, and
+  published plots under `docs/plots/`.
 - `src/simulation_main.py`: cases, CLI, selection, and saved JSON.
 - `src/simulation_state.py`: shared interaction loop and forkable state.
 - `src/cutoff_search.py`: T0 evaluation and validation selection.

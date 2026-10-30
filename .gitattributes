@@ -1,1 +1,3 @@
 *.bash text eol=lf
+# Preserve exported figure bytes so recorded checksums remain valid.
+docs/plots/figures/** -text -whitespace

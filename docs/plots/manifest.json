@@ -1,0 +1,192 @@
+{
+  "source_plot_manifest_sha256": "b6ede34973e254098f34ed208ff434b339dbef511dd23e87288926ee169c0944",
+  "software": {
+    "python": "3.11.6",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "matplotlib": "3.10.8"
+  },
+  "figures": [
+    {
+      "stem": "current_reference",
+      "title": "Baseline final regret distributions",
+      "paper_figure": 10,
+      "files": {
+        "pdf": "figures/current_reference.pdf",
+        "svg": "figures/current_reference.svg",
+        "png": "figures/current_reference.png"
+      },
+      "description": "Boxes show Q1-Q3, the line is the median, diamonds are means, and dots are individual test-seed regrets. Whiskers use 1.5 IQR; numerical summaries are shown beneath each box."
+    },
+    {
+      "stem": "current_reference_trajectories",
+      "title": "Baseline mean regret trajectories",
+      "paper_figure": 11,
+      "files": {
+        "pdf": "figures/current_reference_trajectories.pdf",
+        "svg": "figures/current_reference_trajectories.svg",
+        "png": "figures/current_reference_trajectories.png"
+      }
+    },
+    {
+      "stem": "current_report/01_all_methods_consumed",
+      "title": "All-method consumed-item regret",
+      "paper_figure": 16,
+      "files": {
+        "pdf": "figures/current_report/01_all_methods_consumed.pdf",
+        "svg": "figures/current_report/01_all_methods_consumed.svg",
+        "png": "figures/current_report/01_all_methods_consumed.png"
+      },
+      "description": "Gold outlines and bold labels identify the lowest unrounded test-mean regret in each scenario column. All exact ties are highlighted. N/A cells are excluded from the comparison."
+    },
+    {
+      "stem": "current_report/01_all_methods_slate",
+      "title": "All-method slate-average regret",
+      "paper_figure": 17,
+      "files": {
+        "pdf": "figures/current_report/01_all_methods_slate.pdf",
+        "svg": "figures/current_report/01_all_methods_slate.svg",
+        "png": "figures/current_report/01_all_methods_slate.png"
+      },
+      "description": "Gold outlines and bold labels identify the lowest unrounded test-mean regret in each scenario column. All exact ties are highlighted. N/A cells are excluded from the comparison."
+    },
+    {
+      "stem": "current_report/03_paired_ablations",
+      "title": "Paired K-RACER ablation regret distributions",
+      "paper_figure": 12,
+      "files": {
+        "pdf": "figures/current_report/03_paired_ablations.pdf",
+        "svg": "figures/current_report/03_paired_ablations.svg",
+        "png": "figures/current_report/03_paired_ablations.png"
+      },
+      "description": "Each dot is one seed-aligned ablation-minus-K-RACER slate-regret difference. Boxes show Q1-Q3, median lines, mean diamonds, and 1.5 IQR whiskers; numerical summaries appear beneath each box. Positive values favor K-RACER."
+    },
+    {
+      "stem": "current_report/06_main_phase_costs",
+      "title": "K-RACER phase costs across scenarios",
+      "paper_figure": 23,
+      "files": {
+        "pdf": "figures/current_report/06_main_phase_costs.pdf",
+        "svg": "figures/current_report/06_main_phase_costs.svg",
+        "png": "figures/current_report/06_main_phase_costs.png"
+      }
+    },
+    {
+      "stem": "current_report/08_grid_selected_parameters",
+      "title": "Validation-selected K-RACER settings in each grid cell",
+      "paper_figure": 19,
+      "files": {
+        "pdf": "figures/current_report/08_grid_selected_parameters.pdf",
+        "svg": "figures/current_report/08_grid_selected_parameters.svg",
+        "png": "figures/current_report/08_grid_selected_parameters.png"
+      }
+    },
+    {
+      "stem": "current_report/09_grid_K_effects",
+      "title": "Regret versus slate size at each experience-noise level",
+      "paper_figure": 13,
+      "files": {
+        "pdf": "figures/current_report/09_grid_K_effects.pdf",
+        "svg": "figures/current_report/09_grid_K_effects.svg",
+        "png": "figures/current_report/09_grid_K_effects.png"
+      }
+    },
+    {
+      "stem": "current_report/11_grid_phase_costs",
+      "title": "K-RACER phase regret across the K/noise grid",
+      "paper_figure": 21,
+      "files": {
+        "pdf": "figures/current_report/11_grid_phase_costs.pdf",
+        "svg": "figures/current_report/11_grid_phase_costs.svg",
+        "png": "figures/current_report/11_grid_phase_costs.png"
+      }
+    },
+    {
+      "stem": "current_report/02_kracer_sensitivity",
+      "title": "K-RACER scenario sensitivity",
+      "paper_figure": 18,
+      "files": {
+        "pdf": "figures/current_report/02_kracer_sensitivity.pdf",
+        "svg": "figures/current_report/02_kracer_sensitivity.svg",
+        "png": "figures/current_report/02_kracer_sensitivity.png"
+      },
+      "description": "Four panels compare dimension, experience noise, maximum slate size, and Startup target fraction. Teal circles show consumed-item regret and orange squares show slate-average regret on the same axes. Bars are marginal 95% Student-t mean intervals. Each Startup target selects gamma and the post-Startup budget on validation seeds before held-out evaluation."
+    },
+    {
+      "stem": "current_report/10_grid_cutoff_curves",
+      "title": "Held-out slate-regret budget sweeps at validation-selected contraction",
+      "paper_figure": 20,
+      "files": {
+        "pdf": "figures/current_report/10_grid_cutoff_curves.pdf",
+        "svg": "figures/current_report/10_grid_cutoff_curves.svg",
+        "png": "figures/current_report/10_grid_cutoff_curves.png"
+      },
+      "description": "One panel per maximum slate size K overlays the current experience-noise levels in different colors. Each K/noise combination retains its own saved validation-selected contraction parameter. Curves show held-out mean final slate-average regret; open circles mark the validation-selected budgets. No test outcome selects a policy."
+    },
+    {
+      "stem": "current_report/05_cutoff_tradeoff",
+      "title": "Held-out exploration-budget tradeoff across experience-noise levels",
+      "paper_figure": 22,
+      "files": {
+        "pdf": "figures/current_report/05_cutoff_tradeoff.pdf",
+        "svg": "figures/current_report/05_cutoff_tradeoff.svg",
+        "png": "figures/current_report/05_cutoff_tradeoff.png"
+      },
+      "description": "D=5 and K=2 at the current noise levels. Within each setting, contraction is fixed at its saved validation selection. Curves are test means, shading is a marginal 95% Student-t interval, and circles mark validation-selected budgets. T0 excludes Startup; no test-based selection is performed."
+    },
+    {
+      "stem": "historical_supplied_cone",
+      "title": "Historical supplied-cone results",
+      "paper_figure": 24,
+      "files": {
+        "pdf": "figures/historical_supplied_cone.pdf",
+        "svg": "figures/historical_supplied_cone.svg",
+        "png": "figures/historical_supplied_cone.png"
+      },
+      "description": "Fresh supplied-cone runs of the historical protocol with the current manual implementation: D=3, a 45-degree cone, T0=64, contraction 0.9, normalized noise 0.10, and disjoint paired seeds 26000-26019. Perfect users choose by true utility with zero comparison margins; learning users use Bayesian-CARA scores. These are new runs, not the paper's archived numerical outcomes. Numerical-precision stops: 0. Connecting lines do not fit scaling laws."
+    }
+  ],
+  "files_sha256": {
+    "figures/current_reference.pdf": "8e70a50e6d5bce10bafb727e8f3b3a21376ae40db0f3328a656222a29ca09cf9",
+    "figures/current_reference.svg": "f65891bb13e923e1ef8736b7e93a8eedea1e8a16e43fc9b85d72ebcc73bd3257",
+    "figures/current_reference.png": "96a46b0e00e0adcd4b07167df85b1cd2b34aa0fc47151c66c2b2e8ab5c3d3319",
+    "figures/current_reference_trajectories.pdf": "708521fad36a0ec792b1d448e17a64be2c6e649112de7f654d5a0da38db4bf82",
+    "figures/current_reference_trajectories.svg": "3d67d1760ba91f79caba272ed378fe35097c2edcaa5c20c50094652a60efc2ff",
+    "figures/current_reference_trajectories.png": "16fe8e4c3318b972cf8cb12a3a46f4dda38449d320d618f88b0233f427a7e164",
+    "figures/current_report/03_paired_ablations.pdf": "b88b24f35eb3c46ae67b9cd99f5978fb4a90f6127d6bd6471dcdc6be77a53ea3",
+    "figures/current_report/03_paired_ablations.svg": "7a49826dfc18501f6e4862ec69f0ecccb340381ee2507403029e43ce2682354d",
+    "figures/current_report/03_paired_ablations.png": "7f0de48cd819dd42ba0203b4fff2c975118acddb5a21f9b8e93b020d7388078a",
+    "figures/current_report/09_grid_K_effects.pdf": "2404f6e9dedae6627172206f360b77e5c4a95d76aae85133a327f4d852f9d113",
+    "figures/current_report/09_grid_K_effects.svg": "458f31ba4a1a0921af73e4dae54df45379fd7245f3068147398d938dc9e9e3d1",
+    "figures/current_report/09_grid_K_effects.png": "d38a04025f51f8f1f4a1128660d2afc375ee0e84645f128aa4d64b158e859151",
+    "figures/current_report/01_all_methods_consumed.pdf": "5aae4ffb506ee55904b94a3a19507d30bd254f4a2ffc183f969afa868d8f798d",
+    "figures/current_report/01_all_methods_consumed.svg": "89faa7bbb890e09eed70ef44cb5d8470f01e831e5c3802c178aa5e6da31b6ec8",
+    "figures/current_report/01_all_methods_consumed.png": "9cc218e0eb56aaa476cdf5c367cfed28876d8c2917fe98efbf3d7e6e4831ee0d",
+    "figures/current_report/01_all_methods_slate.pdf": "b981370681e07e3c7d43e42793a5da1203e78d118aa70fd39d90c6e95850ee7c",
+    "figures/current_report/01_all_methods_slate.svg": "2d7ffe09565090e214e01a0cbf032ce4f8001bdebbde367d814dec9404c0a838",
+    "figures/current_report/01_all_methods_slate.png": "64dab7d9860f1c550bdcc8fc932baff11e2cea11b0ad7d35c6fe48758a66ed96",
+    "figures/current_report/02_kracer_sensitivity.pdf": "858329fd0a02ab6d29eebabf1cd0c9da11fdad91053c7e99f0e527d7d79a1f3e",
+    "figures/current_report/02_kracer_sensitivity.svg": "3ae9b24e008f0fef6aa31053f61ee9fc95af11af4a4e43445e7a4f3854e07a3c",
+    "figures/current_report/02_kracer_sensitivity.png": "c11ccaaa2fe29026884503969d898919a86901d51e29f4c77338dc2b8e65e2e1",
+    "figures/current_report/08_grid_selected_parameters.pdf": "7daf151c27ab358dd1231d318c6e45927dc50193000a4753af5539d28ae00994",
+    "figures/current_report/08_grid_selected_parameters.svg": "6d5dbba1589d0ad1d41e537ec04711b9c0becd75a829ab9dac1fc909cda73e72",
+    "figures/current_report/08_grid_selected_parameters.png": "893129775eb16417a622049118b48745c8af2a64d283e7694de5f4840f543ba0",
+    "figures/current_report/10_grid_cutoff_curves.pdf": "dfaf4574a823dc6c2f1412a4c58b94477f257de23ece326918b4aacae3408685",
+    "figures/current_report/10_grid_cutoff_curves.svg": "d7c483483707b6e8fc8eff5fcaa221a9e3539c6fc5d8c78a7e358f35c0565179",
+    "figures/current_report/10_grid_cutoff_curves.png": "e96244a98bd9e3adbb0565e452a426b6495f8c5b650f5686f0799102edfaf4ec",
+    "figures/current_report/11_grid_phase_costs.pdf": "e992431879a233473629b8cc496a6ff8e15f1d26b63d18dd663c486dce70b9c9",
+    "figures/current_report/11_grid_phase_costs.svg": "9aa165213a0c96c3f039ea194f9c4a87c29bc772e9a5d5e32556032b596bb320",
+    "figures/current_report/11_grid_phase_costs.png": "1b2fdae297f51b0ef12e55cfe8cc25cc2b3e746daf6cb2f034741c04bab654f7",
+    "figures/current_report/05_cutoff_tradeoff.pdf": "84108c0fbfb6d66da902cf38d2b22a3f47bb51fa91eddc3d59f1579048cdf1ab",
+    "figures/current_report/05_cutoff_tradeoff.svg": "f73bfe9604287d72dd0afce0653bb62af18e7ee3b0036b9789a8bef566ba7c35",
+    "figures/current_report/05_cutoff_tradeoff.png": "d98fe04a34d6667a93935ac5c622d07fcbe617a26dc5ad8aae14dc874b34647d",
+    "figures/current_report/06_main_phase_costs.pdf": "b9bd27fe28634b974323c3f3e03d1fa511258eea26dbb44c527622493b1077d6",
+    "figures/current_report/06_main_phase_costs.svg": "72dbf825ff83a17d2b815b01acde1edebbcf28711ac0416861bba09636b53f33",
+    "figures/current_report/06_main_phase_costs.png": "4d06983f1db0f7243b5f52c3eac42b59e300d173336e463ddabdb11fd024fa93",
+    "figures/historical_supplied_cone.pdf": "f41320320f6ac28155a9820b901ee060a325e3e10c6362faf1c8b105364d822f",
+    "figures/historical_supplied_cone.svg": "0868800cd0e59695f81c95980117fdebfb05c6fe211b8dc6aa5151c149150876",
+    "figures/historical_supplied_cone.png": "4d00c4ce90bf493734868c10daf96383868f1f5525b9933197e60031e03b3584"
+  },
+  "includes_raw_simulation_data": false,
+  "includes_csv_tables": false
+}
