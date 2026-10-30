@@ -1,0 +1,13 @@
+sphere_baseline analytical_certificate seed 6000: slate error 7.38e-10, regret curve errors [8.70891768e-08 8.73010322e-08], winner divergence None
+sphere_baseline analytical_certificate seed 6001: slate error 2.96e-09, regret curve errors [4.40518306e-08 4.16308694e-08], winner divergence None
+sphere_baseline analytical_certificate seed 6002: slate error 6.15e-10, regret curve errors [2.51772008e-08 2.45848923e-08], winner divergence None
+sphere_baseline analytical_certificate seed 6003: slate error 1.68, regret curve errors [0.2291941  0.22438057], winner divergence 83
+sphere_baseline minimum_eigenvector seed 6000: slate error 2, regret curve errors [2.63934284 3.66576861], winner divergence 71
+sphere_baseline minimum_eigenvector seed 6001: slate error 2, regret curve errors [5.96977173 4.18592546], winner divergence 71
+sphere_baseline minimum_eigenvector seed 6002: slate error 2, regret curve errors [6.20869041 8.46667825], winner divergence 71
+sphere_baseline minimum_eigenvector seed 6003: slate error 2, regret curve errors [4.96370254 4.63576908], winner divergence 73
+sphere_baseline without_restart seed 6000: slate error 1.03e-10, regret curve errors [1.00708775e-08 9.88812587e-09], winner divergence None
+sphere_baseline without_restart seed 6001: slate error 9.15e-11, regret curve errors [4.48962112e-09 4.29629665e-09], winner divergence None
+sphere_baseline without_restart seed 6002: slate error 1.29e-10, regret curve errors [7.21454398e-08 7.18952720e-08], winner divergence None
+sphere_baseline without_restart seed 6003: slate error 1.08e-10, regret curve errors [3.97081550e-08 3.94686595e-08], winner divergence None
+{"runs": 12, "largest_cumulative_regret_error": 8.466678251308707, "all_close": false, "tolerances": {"slate_entry": 1e-07, "cumulative_regret": 0.0001}}

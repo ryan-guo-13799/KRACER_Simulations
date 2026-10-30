@@ -17,6 +17,12 @@ from .data import MissingDataError
 
 def render_historical(study, output):
     """Plot Fig. 24 only if its cases exist in the supplied manual saved files."""
+    if study.get("historical_records"):
+        figures = _render_historical_records({"records":study["historical_records"]},output)
+        stops = sum(r["summary"].get("precision_stop") is not None for r in study["historical_records"])
+        figures[0]["description"] = ("Fresh supplied-cone runs of the historical protocol with the current manual implementation: D=3, a 45-degree cone, T0=64, contraction 0.9, normalized noise 0.10, and disjoint paired seeds 26000-26019. Perfect users choose by true utility with zero comparison margins; learning users use Bayesian-CARA scores. These are new runs, not the paper's archived numerical outcomes. "
+            +f"Numerical-precision stops: {stops}. Connecting lines do not fit scaling laws.")
+        return figures
     names = {f"cone_K{k}_{model}" for k in (2,3,5) for model in ("perfect","bayesian")}
     names.update({"cone_risk_-5","cone_risk_0","cone_risk_5"})
     missing = sorted(names-set(study["cases"]))

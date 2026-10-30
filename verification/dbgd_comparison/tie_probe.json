@@ -1,0 +1,102 @@
+[
+  {
+    "seed": 6005,
+    "round": 1,
+    "slates_identical": true,
+    "manual_scores": [
+      -0.10000000000000003,
+      -0.1
+    ],
+    "origin_scores": [
+      -0.1,
+      -0.1
+    ],
+    "manual_score_difference": 2.7755575615628914e-17,
+    "origin_score_difference": 0.0,
+    "manual_winner": 1,
+    "origin_winner": 0,
+    "saved_origin_slate_regret": 11488.740660588235,
+    "manual_regret_after_matching_one_choice_only": 11488.740660588235,
+    "absolute_regret_error_after_one_choice_override": 0.0
+  },
+  {
+    "seed": 6007,
+    "round": 1,
+    "slates_identical": true,
+    "manual_scores": [
+      -0.09999999999999998,
+      -0.09999999999999998
+    ],
+    "origin_scores": [
+      -0.1,
+      -0.09999999999999998
+    ],
+    "manual_score_difference": 0.0,
+    "origin_score_difference": 2.7755575615628914e-17,
+    "manual_winner": 0,
+    "origin_winner": 1,
+    "saved_origin_slate_regret": 585.3415691633726,
+    "manual_regret_after_matching_one_choice_only": 585.3415691633725,
+    "absolute_regret_error_after_one_choice_override": 1.1368683772161603e-13
+  },
+  {
+    "seed": 6013,
+    "round": 1,
+    "slates_identical": true,
+    "manual_scores": [
+      -0.09999999999999998,
+      -0.09999999999999998
+    ],
+    "origin_scores": [
+      -0.09999999999999999,
+      -0.09999999999999998
+    ],
+    "manual_score_difference": 0.0,
+    "origin_score_difference": 1.3877787807814457e-17,
+    "manual_winner": 0,
+    "origin_winner": 1,
+    "saved_origin_slate_regret": 147.94219295555305,
+    "manual_regret_after_matching_one_choice_only": 147.94219295555305,
+    "absolute_regret_error_after_one_choice_override": 0.0
+  },
+  {
+    "seed": 6014,
+    "round": 1,
+    "slates_identical": true,
+    "manual_scores": [
+      -0.1,
+      -0.09999999999999999
+    ],
+    "origin_scores": [
+      -0.1,
+      -0.1
+    ],
+    "manual_score_difference": 1.3877787807814457e-17,
+    "origin_score_difference": 0.0,
+    "manual_winner": 1,
+    "origin_winner": 0,
+    "saved_origin_slate_regret": 10496.613714553625,
+    "manual_regret_after_matching_one_choice_only": 10496.613714553625,
+    "absolute_regret_error_after_one_choice_override": 0.0
+  },
+  {
+    "seed": 6018,
+    "round": 1,
+    "slates_identical": true,
+    "manual_scores": [
+      -0.1,
+      -0.1
+    ],
+    "origin_scores": [
+      -0.10000000000000003,
+      -0.1
+    ],
+    "manual_score_difference": 0.0,
+    "origin_score_difference": 2.7755575615628914e-17,
+    "manual_winner": 0,
+    "origin_winner": 1,
+    "saved_origin_slate_regret": 31.414612225076958,
+    "manual_regret_after_matching_one_choice_only": 31.41461222507687,
+    "absolute_regret_error_after_one_choice_override": 8.881784197001252e-14
+  }
+]

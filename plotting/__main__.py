@@ -12,7 +12,7 @@ from .data import MissingDataError, export_csvs, grid_view, load_run, sha256, wr
 HERE = Path(__file__).resolve().parent
 PROJECT = HERE.parent
 FIGURES = {
-    10:"Baseline endpoint regrets", 11:"Baseline regret trajectories", 12:"Paired ablations",
+    10:"Baseline final regret distributions", 11:"Baseline regret trajectories", 12:"Paired ablation regret distributions",
     13:"Regret versus K and noise", 16:"All-method consumed regret", 17:"All-method slate regret",
     18:"K-RACER sensitivity", 19:"Selected grid parameters", 20:"Test budget curves across the grid",
     21:"Grid phase costs", 22:"Test exploration-budget tradeoff", 23:"Main phase costs",
@@ -40,7 +40,8 @@ def _report(output, study, figures, coverage, tables):
             continue
         links = " | ".join(f'<a href="{p}">{fmt.upper()}</a>' for fmt,p in f["files"].items())
         title = f"Figure {f['paper_figure']}: {f['title']}"
-        block = f'<article id="figure-{number}"><h2>{html.escape(title)}</h2><p>{links}</p><img src="{f["files"]["png"]}" alt="{html.escape(title)}"></article>'
+        description = f'<p>{html.escape(f["description"])}</p>' if f.get("description") else ""
+        block = f'<article id="figure-{number}"><h2>{html.escape(title)}</h2><p>{links}</p><img src="{f["files"]["png"]}" alt="{html.escape(title)}">{description}</article>'
         (main_blocks if number in (10,11,12,13) else appendix_blocks).append(block)
     csv_links = "".join(f'<li><a href="data/{t["file"]}">{t["file"]}</a> ({t["rows"]:,} rows)</li>' for t in tables)
     unavailable = "".join(f'<li>Figure {r["paper_figure"]}: {html.escape(r["status"])}</li>' for r in coverage if r["status"] != "generated")
@@ -54,7 +55,7 @@ def _report(output, study, figures, coverage, tables):
 {''.join(appendix_blocks)}
 <section><h2>Saved-data coverage</h2><ul>{unavailable}</ul><p>Absent method/case combinations are N/A. Noise values and K axes come from the manual settings. Incomplete or failed groups are recorded in input_issues.csv; partial groups are excluded by default.</p></section>
 <section id="csv-results"><h2>CSV results</h2><ul>{csv_links}</ul><a href="manifest.json">Input hashes and provenance</a>
-<p>Input: {html.escape(study['root'])}</p><p>Values come exclusively from the selected manual run's saved seed and validation files. Intervals are marginal 95% Student-t intervals.</p></section></html>'''
+<p>Input: {html.escape(study['root'])}</p><p>Values come from saved manual-simulation observations, including verified supplemental sweeps when provided. Mean confidence intervals are marginal 95% Student-t intervals; Figures 10 and 12 boxes show sample quartiles.</p></section></html>'''
     (output/"index.html").write_text(text,encoding="utf-8")
 
 
@@ -63,6 +64,7 @@ def main(argv=None):
     parser.add_argument("--input",type=Path,help="One saved manual campaign directory; defaults to newest output run")
     parser.add_argument("--output",type=Path,default=HERE/"results",help="Destination inside plotting/ (default plotting/results)")
     parser.add_argument("--include-incomplete",action="store_true",help="Include successful seeds from incomplete groups, with their actual n")
+    parser.add_argument("--additional-data",type=Path,help="Additional sweep/supplied-cone JSON (defaults to OUTPUT/additional/supplement.json when present)")
     parser.add_argument("--trajectory-stride",type=int,default=10,help="Trajectory sampling stride; first 128 epochs and endpoint always retained (default 10; use 1 for all)")
     args = parser.parse_args(argv)
     output = args.output.resolve()
@@ -79,6 +81,11 @@ def main(argv=None):
         parser.error(str(error))
     output.mkdir(parents=True,exist_ok=True)
     tables = export_csvs(study,output)
+    supplement = args.additional_data or output/"additional/supplement.json"
+    if supplement.exists():
+        from .additional import attach_supplement,export_additional
+        attach_supplement(study,supplement,output)
+        tables += export_additional(study,output)
     from .main_plots import render_main
     from .grid_plots import render_grid
     from .historical_plots import render_historical

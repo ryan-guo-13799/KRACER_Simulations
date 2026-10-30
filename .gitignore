@@ -1,8 +1,10 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.venv/
+.test_tmp/
 .vscode/
 output/
 plotting/results/
 verification/**/tmp/
-verification/**/*.log
+verification/**/pytest*.log

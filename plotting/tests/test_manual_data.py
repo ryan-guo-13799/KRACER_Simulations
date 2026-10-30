@@ -100,7 +100,7 @@ def test_exports_preserve_input_and_validation_split(tmp_path):
     study = load_run(source)
     copy = deepcopy(study)
     tables = export_csvs(study,output)
-    assert len(tables) == 9
+    assert len(tables) == 10
     assert study == copy
     assert before == {str(p):p.read_bytes() for p in source.rglob("*.json")}
     assert "validation" in (output/"data/validation_scores.csv").read_text()
@@ -115,6 +115,8 @@ def test_no_foreign_data_or_simulation_imports():
     import ast
     root = Path(__file__).resolve().parents[1]
     for path in root.glob("*.py"):
+        if path.name == "collect_additional.py":
+            continue  # Explicit opt-in simulation collector; normal plotting stays read-only.
         tree = ast.parse(path.read_text())
         for node in ast.walk(tree):
             if isinstance(node,ast.ImportFrom):

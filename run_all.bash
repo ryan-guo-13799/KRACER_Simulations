@@ -15,10 +15,15 @@ START_SEED=${START_SEED:-6000}
 VALIDATION_SEED_COUNT=${VALIDATION_SEED_COUNT:-4}
 VALIDATION_START_SEED=${VALIDATION_START_SEED:-120000}
 OUTPUT_ROOT=${OUTPUT_ROOT:-output}
+RUN_NAME=${RUN_NAME:-manual_cases_$(date +%Y%m%d_%H%M%S)}
 algorithms=(kracer analytical_certificate minimum_eigenvector without_restart raes dbgd doubler sparring)
 
 if [[ ! "$JOBS" =~ ^[1-9][0-9]*$ ]]; then
     echo "JOBS must be a positive integer." >&2
+    exit 2
+fi
+if [[ ! "$RUN_NAME" =~ ^[A-Za-z0-9][A-Za-z0-9._-]*$ ]]; then
+    echo "RUN_NAME must start with a letter or digit and contain only letters, digits, dots, underscores, or hyphens." >&2
     exit 2
 fi
 if ! command -v "$PYTHON" >/dev/null 2>&1; then
@@ -28,7 +33,7 @@ fi
 for arg in "$@"; do
     case "$arg" in
         --output|--output=*|--algorithms|--algorithms=*)
-            echo "This script manages --output and --algorithms. Use OUTPUT_ROOT for the output location." >&2
+            echo "This script manages --output and --algorithms. Use OUTPUT_ROOT and RUN_NAME for the output location." >&2
             exit 2 ;;
     esac
 done
@@ -36,7 +41,11 @@ if (( JOBS > ${#algorithms[@]} )); then JOBS=${#algorithms[@]}; fi
 
 mkdir -p "$OUTPUT_ROOT" || exit 1
 OUTPUT_ROOT=$(cd "$OUTPUT_ROOT" && pwd -P) || exit 1
-run_dir=$(mktemp -d "$OUTPUT_ROOT/parallel_XXXXXXXX") || exit 1
+run_dir="$OUTPUT_ROOT/$RUN_NAME"
+if ! mkdir -- "$run_dir"; then
+    echo "Cannot create run directory: $run_dir. Choose an unused RUN_NAME; existing runs are never overwritten." >&2
+    exit 1
+fi
 mkdir -p "$run_dir/results" "$run_dir/logs" "$run_dir/work" || exit 1
 echo "Running eight methods, up to $JOBS at a time. Output: $run_dir"
 # END PARALLEL RUN.

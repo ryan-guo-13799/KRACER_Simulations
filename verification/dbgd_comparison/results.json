@@ -1,0 +1,319 @@
+{
+  "policy_and_protocol_identical_except_imports": true,
+  "manual_saved_run": "D:\\comp_courses\\comp3770\\K-RACER\\manual_simulations\\output\\parallel_TiOHP9zY\\results",
+  "origin_saved_run": "D:\\comp_courses\\comp3770\\K-RACER\\simulations\\output\\sphere_slow_baseline_20\\study.json",
+  "saved_cases": {
+    "baseline": {
+      "seeds": 20,
+      "initial_incumbent_equals_true_preference_in_every_run": true,
+      "mean_slate_regret": 18.17279620188323,
+      "mean_consumed_regret": 14.26416930567484
+    },
+    "dimension_3": {
+      "seeds": 20,
+      "initial_incumbent_equals_true_preference_in_every_run": true,
+      "mean_slate_regret": 12.512456602724415,
+      "mean_consumed_regret": 6.987060210352771
+    },
+    "dimension_9": {
+      "seeds": 20,
+      "initial_incumbent_equals_true_preference_in_every_run": true,
+      "mean_slate_regret": 11.56807325787464,
+      "mean_consumed_regret": 9.152265267589161
+    },
+    "speed_0.05": {
+      "seeds": 20,
+      "initial_incumbent_equals_true_preference_in_every_run": true,
+      "mean_slate_regret": 11.864900612041428,
+      "mean_consumed_regret": 7.912202681210876
+    },
+    "speed_0.15": {
+      "seeds": 20,
+      "initial_incumbent_equals_true_preference_in_every_run": true,
+      "mean_slate_regret": 19.911765871813206,
+      "mean_consumed_regret": 16.01488794143314
+    }
+  },
+  "seed_only_counterfactual": [
+    {
+      "seed": 6000,
+      "initial_alignment_with_separate_policy_seed": -0.022935424212595985,
+      "manual_seed_only_slate_regret": 10231.027847746012,
+      "manual_seed_only_consumed_regret": 10229.35424212596,
+      "manual_seed_only_winner_updates": 0,
+      "saved_origin_slate_regret": 10231.027847746012,
+      "live_origin_comparison": {
+        "max_slate_error": 0.0,
+        "different_winners": 0,
+        "first_different_winner": null,
+        "slate_regret": 10231.027847746012,
+        "consumed_regret": 10229.354242125959,
+        "winner_updates": 0
+      }
+    },
+    {
+      "seed": 6001,
+      "initial_alignment_with_separate_policy_seed": 0.27987367319026324,
+      "manual_seed_only_slate_regret": 7202.7025581500475,
+      "manual_seed_only_consumed_regret": 7201.2632680973675,
+      "manual_seed_only_winner_updates": 0,
+      "saved_origin_slate_regret": 7202.7025581500475,
+      "live_origin_comparison": {
+        "max_slate_error": 0.0,
+        "different_winners": 0,
+        "first_different_winner": null,
+        "slate_regret": 7202.7025581500475,
+        "consumed_regret": 7201.2632680973675,
+        "winner_updates": 0
+      }
+    },
+    {
+      "seed": 6002,
+      "initial_alignment_with_separate_policy_seed": 0.2474221501097451,
+      "manual_seed_only_slate_regret": 239.374150960201,
+      "manual_seed_only_consumed_regret": 232.17058619765123,
+      "manual_seed_only_winner_updates": 407,
+      "saved_origin_slate_regret": 239.37415096020084,
+      "live_origin_comparison": {
+        "max_slate_error": 0.0,
+        "different_winners": 0,
+        "first_different_winner": null,
+        "slate_regret": 239.37415096020084,
+        "consumed_regret": 232.17058619765092,
+        "winner_updates": 407
+      }
+    },
+    {
+      "seed": 6003,
+      "initial_alignment_with_separate_policy_seed": -0.6055670860005141,
+      "manual_seed_only_slate_regret": 854.6355862785764,
+      "manual_seed_only_consumed_regret": 843.7568794036532,
+      "manual_seed_only_winner_updates": 631,
+      "saved_origin_slate_regret": 854.6355862785764
+    },
+    {
+      "seed": 6004,
+      "initial_alignment_with_separate_policy_seed": 0.37955714483683733,
+      "manual_seed_only_slate_regret": 210.44299494966447,
+      "manual_seed_only_consumed_regret": 203.97695981936778,
+      "manual_seed_only_winner_updates": 328,
+      "saved_origin_slate_regret": 210.4429949496645
+    },
+    {
+      "seed": 6005,
+      "initial_alignment_with_separate_policy_seed": -0.1490231140383136,
+      "manual_seed_only_slate_regret": 392.79525321441486,
+      "manual_seed_only_consumed_regret": 384.443702572349,
+      "manual_seed_only_winner_updates": 486,
+      "saved_origin_slate_regret": 11488.740660588235
+    },
+    {
+      "seed": 6006,
+      "initial_alignment_with_separate_policy_seed": 0.19438534774532915,
+      "manual_seed_only_slate_regret": 279.4525530166683,
+      "manual_seed_only_consumed_regret": 271.7250387665347,
+      "manual_seed_only_winner_updates": 391,
+      "saved_origin_slate_regret": 279.4525530166682
+    },
+    {
+      "seed": 6007,
+      "initial_alignment_with_separate_policy_seed": -0.2751551069308942,
+      "manual_seed_only_slate_regret": 590.7657526800476,
+      "manual_seed_only_consumed_regret": 581.4783235636066,
+      "manual_seed_only_winner_updates": 554,
+      "saved_origin_slate_regret": 585.3415691633726
+    },
+    {
+      "seed": 6008,
+      "initial_alignment_with_separate_policy_seed": 0.5030291164161356,
+      "manual_seed_only_slate_regret": 4971.2805785785695,
+      "manual_seed_only_consumed_regret": 4969.7088358386445,
+      "manual_seed_only_winner_updates": 0,
+      "saved_origin_slate_regret": 4971.2805785785695
+    },
+    {
+      "seed": 6009,
+      "initial_alignment_with_separate_policy_seed": -0.5065433247839971,
+      "manual_seed_only_slate_regret": 773.8299051547838,
+      "manual_seed_only_consumed_regret": 763.838282230441,
+      "manual_seed_only_winner_updates": 587,
+      "saved_origin_slate_regret": 773.8299051547838
+    },
+    {
+      "seed": 6010,
+      "initial_alignment_with_separate_policy_seed": 0.19396331740208864,
+      "manual_seed_only_slate_regret": 8059.644569210722,
+      "manual_seed_only_consumed_regret": 8060.366825979114,
+      "manual_seed_only_winner_updates": 0,
+      "saved_origin_slate_regret": 8059.644569210723
+    },
+    {
+      "seed": 6011,
+      "initial_alignment_with_separate_policy_seed": -0.13879951723159734,
+      "manual_seed_only_slate_regret": 11387.594975044,
+      "manual_seed_only_consumed_regret": 11387.995172315972,
+      "manual_seed_only_winner_updates": 0,
+      "saved_origin_slate_regret": 11387.594975044
+    },
+    {
+      "seed": 6012,
+      "initial_alignment_with_separate_policy_seed": -0.0645430595357484,
+      "manual_seed_only_slate_regret": 10643.769664670484,
+      "manual_seed_only_consumed_regret": 10645.430595357484,
+      "manual_seed_only_winner_updates": 0,
+      "saved_origin_slate_regret": 10643.769664670486
+    },
+    {
+      "seed": 6013,
+      "initial_alignment_with_separate_policy_seed": 0.6022741513624501,
+      "manual_seed_only_slate_regret": 3979.4322398926615,
+      "manual_seed_only_consumed_regret": 3977.258486375499,
+      "manual_seed_only_winner_updates": 0,
+      "saved_origin_slate_regret": 147.94219295555305
+    },
+    {
+      "seed": 6014,
+      "initial_alignment_with_separate_policy_seed": -0.04965464397357944,
+      "manual_seed_only_slate_regret": 425.63950039139996,
+      "manual_seed_only_consumed_regret": 417.3440024334894,
+      "manual_seed_only_winner_updates": 456,
+      "saved_origin_slate_regret": 10496.613714553625
+    },
+    {
+      "seed": 6015,
+      "initial_alignment_with_separate_policy_seed": -0.8779538249142771,
+      "manual_seed_only_slate_regret": 1317.6779942786488,
+      "manual_seed_only_consumed_regret": 1305.7806320167188,
+      "manual_seed_only_winner_updates": 755,
+      "saved_origin_slate_regret": 1317.6779942786488
+    },
+    {
+      "seed": 6016,
+      "initial_alignment_with_separate_policy_seed": -0.12117902925136674,
+      "manual_seed_only_slate_regret": 528.850443806758,
+      "manual_seed_only_consumed_regret": 520.3059208434789,
+      "manual_seed_only_winner_updates": 499,
+      "saved_origin_slate_regret": 528.850443806758
+    },
+    {
+      "seed": 6017,
+      "initial_alignment_with_separate_policy_seed": -0.6299045535506134,
+      "manual_seed_only_slate_regret": 896.4890621096362,
+      "manual_seed_only_consumed_regret": 885.4486987081204,
+      "manual_seed_only_winner_updates": 646,
+      "saved_origin_slate_regret": 896.4890621096358
+    },
+    {
+      "seed": 6018,
+      "initial_alignment_with_separate_policy_seed": 0.8619749881037019,
+      "manual_seed_only_slate_regret": 1383.153143032205,
+      "manual_seed_only_consumed_regret": 1380.2501189629813,
+      "manual_seed_only_winner_updates": 0,
+      "saved_origin_slate_regret": 31.414612225076958
+    },
+    {
+      "seed": 6019,
+      "initial_alignment_with_separate_policy_seed": -0.8100772719970192,
+      "manual_seed_only_slate_regret": 1182.4272254585226,
+      "manual_seed_only_consumed_regret": 1170.806730746976,
+      "manual_seed_only_winner_updates": 716,
+      "saved_origin_slate_regret": 1182.4272254585228
+    }
+  ],
+  "source_hashes": {
+    "manual_simulations\\src\\config.py": "3cbb28f037b7824bb137efaba9b56e369d3577443c126d397f087267e82f40ef",
+    "manual_simulations\\src\\cutoff_search.py": "45f8739ef18c470d5d35a469175abc289893cc6e57a4ca42314d8b0548869511",
+    "manual_simulations\\src\\models\\interaction.py": "af1d018029eccb5cef5a0788747ec342235362b081a2b87dfa751ab735c8fbe1",
+    "manual_simulations\\src\\models\\item.py": "a4fb37ad7f22adf1de705e07ad089942b9153cdab0959d2e9b602b4981fb435c",
+    "manual_simulations\\src\\models\\phase.py": "88bf4a6c392ccac9ede69cdd01ddecbd07246ac3f921129619a6aa0b932e4af9",
+    "manual_simulations\\src\\protocols\\recommender.py": "c4dc751724fb0bed606eaf0cc9c58459f15c6116fcb311f0a889a1d7fa9032f9",
+    "manual_simulations\\src\\protocols\\user.py": "8d090d41be7f192a87a6961951d8ade73afea50b7c63fb35c36b0f9ae03cc3ef",
+    "manual_simulations\\src\\recommenders\\analytical_certificate.py": "6c9018117f7b49eab5a5392a021fd335d16a83bf866abec7939cc1fbc6e906f8",
+    "manual_simulations\\src\\recommenders\\baseline_support\\adapter.py": "a53339ba29fad9baf2b45ce221d6bcf70d70a1aabd7065b5f0058825de5dd872",
+    "manual_simulations\\src\\recommenders\\baseline_support\\agent.py": "f32d2670a18f2a11a33bbf49db6f8fa7a6ac9a27e1e09ac38edd862ff29aff5d",
+    "manual_simulations\\src\\recommenders\\baseline_support\\dbgd.py": "480fc60183f25a07a40309056f9b24bf36f60b19342e9b48af1717309c434e7a",
+    "manual_simulations\\src\\recommenders\\baseline_support\\doubler.py": "4c8165da06f511897447d7c68ba61a1c0e6bddd9462ecd98b2ef8bd349668df3",
+    "manual_simulations\\src\\recommenders\\baseline_support\\dueling.py": "409bbd49fc795cc04593bc6adec4bbec85b77934e757d7ac3fc70b5609d92c59",
+    "manual_simulations\\src\\recommenders\\baseline_support\\geometry.py": "f10a9c9414f592031c0e0ecf63894cc8513f1f996e26fb6f3d9514f01ce47c8d",
+    "manual_simulations\\src\\recommenders\\baseline_support\\oful.py": "4a37a4e8d091e644f4abbc0c1d63bb97587882287636245cee2e8891d5c01e22",
+    "manual_simulations\\src\\recommenders\\baseline_support\\raes.py": "6010426fd2270d9eb2c759ad0c55786f0dd2fd7330c7476b2915a0b3aafdca6e",
+    "manual_simulations\\src\\recommenders\\baseline_support\\sparring.py": "ce988ea6c885591af3b0996596935fec1e049b712e7d41ec560ab6392a69c33e",
+    "manual_simulations\\src\\recommenders\\dbgd.py": "2288568c51c89684386ee72bd6051126f5ff551b55149371789772c4f093d2d2",
+    "manual_simulations\\src\\recommenders\\doubler.py": "549d210adb8d3c8e14d33e12513313fcfba60fd6db309da190ba15504f935702",
+    "manual_simulations\\src\\recommenders\\KRACER.py": "9eeed0d0c0240c89a175c6d962c4e92907e83a580f3dc546a2b661c2478ba776",
+    "manual_simulations\\src\\recommenders\\KRACER_functions.py": "cb2cac28ca0a6090ccc5226f478d6a02e5f3a6ff6e13e1cb2644288b86d8911e",
+    "manual_simulations\\src\\recommenders\\KRACER_state.py": "f30dba4993ed928c738820e371233fcbc20aca6fb86416f71882abd4751c48d1",
+    "manual_simulations\\src\\recommenders\\minimum_eigenvector.py": "83266dc6762d89134031b72272a383ca9f4225c535e53538b0fb4a784102061d",
+    "manual_simulations\\src\\recommenders\\raes_reworked.py": "45075ef73158dac4b75374817fb6b357400aae875487e3fe294aed25a7bf6815",
+    "manual_simulations\\src\\recommenders\\sparring.py": "3c79e1332bee393ce8d0bb115f4a864aeb19ba2fefbda4c7de9dd1b832e88902",
+    "manual_simulations\\src\\recommenders\\startup.py": "c7ffec5526ca8d11f87d524bd1afee3d1f6074b33494016437125168ec5d9df9",
+    "manual_simulations\\src\\recommenders\\startup_functions.py": "7096900618500d154c6e314f6dfac2e610cb436d7d0ed3775196ec7ed671b554",
+    "manual_simulations\\src\\recommenders\\startup_state.py": "768d48996b41e502bf37c994a03117c56c7d67f91aaee3f3dfb113b6ce659faf",
+    "manual_simulations\\src\\recommenders\\without_restart.py": "afd779f6c8f57d38bba64ddf61345773a32282628e824ac7bbcf218abf405341",
+    "manual_simulations\\src\\simulation_main.py": "58ddd12150b6c0bfedf86bddfd62ee0eea6026bcb2e4453e410beb7a76428f0f",
+    "manual_simulations\\src\\simulation_state.py": "69a32145d340331ba1ec89c123de2f297b2a4bdd98404c67184dcb2f81bb6508",
+    "manual_simulations\\src\\users\\bayesian_user.py": "89ddb1ce850ece5cc22aabe0087ecf4cff532751b6a428f5375a4537c25abc64",
+    "manual_simulations\\src\\users\\user_state.py": "343dd7b9fb99175cdef5e37954509aee487836e439c4cb1730fadf6d7f3b37d9",
+    "simulations\\simulation\\__init__.py": "4da8840c6cc0d76e8e256898f7d37e6f9f287cc9af894bc8483bec1bab788e93",
+    "simulations\\simulation\\agents\\__init__.py": "790e9afd8d6e7dc1a1d1cb34324d411013b0a4fb6720f568b09d846690dbe5db",
+    "simulations\\simulation\\agents\\adaptive_eq.py": "62c4701c16e1f8ee64a40772498baeda27257be515c4d4524d0a6ad832fb8920",
+    "simulations\\simulation\\agents\\base.py": "f32d2670a18f2a11a33bbf49db6f8fa7a6ac9a27e1e09ac38edd862ff29aff5d",
+    "simulations\\simulation\\agents\\dbgd.py": "b67fe5016f0fc1a29aff70e913e62f5722dc57db6d56465089dd2b8c44d0ed89",
+    "simulations\\simulation\\agents\\doubler.py": "a477f20a1862a3add56bc23278eb44f871cde3bf06a5f5e61c1893dda22474bd",
+    "simulations\\simulation\\agents\\exact_tree.py": "5e58c27478f1fbf7c5dbeafbca2b5b18a8f1df7dcfb70a83ce16b0bfed40c760",
+    "simulations\\simulation\\agents\\excitation_full_dimension.py": "c1a13cce4bc07058c2b32d8688f7cbcd122435757203653d274ce3bdd6331db7",
+    "simulations\\simulation\\agents\\excitation_max_normal.py": "f414d1a8e725f5294e7c2b4cb8a558bdb8235db5121c493ae4c2ef343edbf2c4",
+    "simulations\\simulation\\agents\\excitation_min_eigenvector.py": "449a0a6d5d78170e5cc9516c8cdfe83f45ccea732d199aaaa1b044e28ae54edc",
+    "simulations\\simulation\\agents\\fixed_chart.py": "1e0f39f152605a6bb44747dc6244011dd9978f43c33578032521b12b48e86ccc",
+    "simulations\\simulation\\agents\\greedy.py": "5cc59dcd3482ab526bb0fda7e7bf3f76c92c3ab6a8da7d47f0687160476b6bd7",
+    "simulations\\simulation\\agents\\orientation.py": "e7fc7e4b17e861d7b62689e21d94b53030df7dd3e96e6b9b9ef856a01dbe1729",
+    "simulations\\simulation\\agents\\oriented_greedy.py": "b30328d13aac172163627e4e8c5eb69585a434daa7f23dd1eb64b241004b66c8",
+    "simulations\\simulation\\agents\\preparation_analytical.py": "7846ee976e30619ef3582fdbed27d7a5a6951ff86f261c10ce133a1e6895e9a0",
+    "simulations\\simulation\\agents\\preparation_lookahead.py": "fafcdd793b99ced4ae4b940d58c80a679add9803da8fe3f26e72702d938dbc44",
+    "simulations\\simulation\\agents\\raes.py": "41862305cb74f828dccdba2c99a5f0c2f877b709e4cec9466385cc0412451be0",
+    "simulations\\simulation\\agents\\sparring.py": "23a5165a07f1be05f67387f6dc2d6c858dad97f33dc6dba5a942f8e414666e35",
+    "simulations\\simulation\\audit.py": "d3c86203e5d7f19d327b3fecab46752c68a54950670c961a574a19087c36b7ab",
+    "simulations\\simulation\\baselines\\__init__.py": "96c7d67df7185969b33ba5b502393c00fd2dcd443e3643255498f7e17b6ff9da",
+    "simulations\\simulation\\baselines\\base.py": "ffa1cd5fea7aab21691f05a8a03e9ee13ed2cb2619aa9c937efa579396d8e0d4",
+    "simulations\\simulation\\baselines\\oful.py": "52e7d51a7949c74757865242d59de7f8bc6c1ffa9adee42f629007d5365afedd",
+    "simulations\\simulation\\baselines\\oful_debug.py": "f8361d04dab851cb8fc751bfe480daead23a8dadf7edf188cad57409793df69e",
+    "simulations\\simulation\\certified_geometry.py": "be55fa2360815272d2153a43563a5d0f449e11439ec2a6ffad77fbd5c8a8a2e1",
+    "simulations\\simulation\\config.py": "5ab8181adba5a35795da37077cf2f30cee60c9a5ea0fa082dab4d859d096a34d",
+    "simulations\\simulation\\design.py": "d3f2f6372f1324cec60104f95a2904bed484f83929b5771753158e71a40c1718",
+    "simulations\\simulation\\episode.py": "c39ec3a7e1168d28ec5ff27d6ef76989e8a2984a2f22150d0b769d2ef540d6e6",
+    "simulations\\simulation\\evaluation.py": "c1067dd8b1c448d5194650da0551d9b185075c1e406ed0c056ccec9c878f2a16",
+    "simulations\\simulation\\geometry.py": "15f8d04a8537ec376502e87729ee1e5d50c7707d862ae3ad5062a53e5e7f2d2b",
+    "simulations\\simulation\\k_speed_reporting.py": "8fbe65b2309e044b3a11f0b8c14bab682d2344a70267a63e5e98c6e2ae72908d",
+    "simulations\\simulation\\metrics.py": "aee77a1055fd1dc90efcbc7fe78e9cadddc47e9f1a412a3828bf0f316cf0a4f8",
+    "simulations\\simulation\\phase_regret.py": "03b95e6e7b7aee8541766e9c8e3bf9310ee6c874e2a231180097c02ec40e1c06",
+    "simulations\\simulation\\registry.py": "6ede1aa750152a1f3842b206751c519199ba70ac5352e3fac7ccc8f61d9b4a91",
+    "simulations\\simulation\\reporting.py": "e5e908f058c67ba8933cd3c4bcb9e8f79161fb6c4f8595c14e6657b6b3651f42",
+    "simulations\\simulation\\results.py": "bc79d539a619c173d7987864fa8c93374edcacd689e800072e57d7c4c319c5ef",
+    "simulations\\simulation\\runner.py": "0f1b38c8a248e3e1268ab43a71cc4c5913af16323d99abf6d524437601e14657",
+    "simulations\\simulation\\sphere_startup.py": "53b1c5a06d033c397f50fd6b51b8b7e3a80adac9f5497664711048c7e80526a0",
+    "simulations\\simulation\\storage.py": "3f70b2fee3597572cb28d9da093e919863bc6359f1e983191220ba1551c6c145",
+    "simulations\\simulation\\study.py": "22bcc5692975ccdf8d990f96a53994d8c16e1e5885432909e7a0cc638fd59d1e",
+    "simulations\\simulation\\target_calibration.py": "06363e96d79b118429f16836405da845c746fe6d62a04d5a003fa85b2c9b967b",
+    "simulations\\simulation\\tuning.py": "dfa1ba0dcdf939d78eb4db52636a34acb5841d2513962e6028fbc6e86dceb89a",
+    "simulations\\simulation\\user.py": "44cd66c60d349b70b4a120209534ea6e33f521d09f4af2fc2d09b7df6e17fcc4",
+    "simulations\\simulation\\warm_start.py": "8ae018c2c8da7d924348ced6054da5030f66b56cc06e73a1c8265b53ac075dbf"
+  },
+  "baseline_mean_slate_regret": {
+    "manual_as_saved": 18.17279620188323,
+    "manual_policy_seed_changed_only_in_memory": 3277.549299931201,
+    "origin_as_saved": 4076.4626429449586,
+    "manual_separate_seed_plus_matching_first_choice_in_memory_only": 4076.4626429449586
+  },
+  "source_files_unchanged": true,
+  "round_one_tie_probe_summary": {
+    "affected_seeds": [
+      6005,
+      6007,
+      6013,
+      6014,
+      6018
+    ],
+    "max_final_regret_error_after_diagnostic_choice_match": 1.8189894035458565e-12,
+    "note": "Choice overrides are diagnostic only; no production code was changed."
+  }
+}

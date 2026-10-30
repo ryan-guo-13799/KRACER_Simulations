@@ -135,38 +135,48 @@ def plot_grid_k_effects(study, output: Path):
 
 
 def plot_grid_cutoff_curves(study, output: Path):
+    from .additional import curve_stats
     cells, noises, ks = _cells(study)
-    fig, axes = plt.subplots(len(noises), len(ks), figsize=(3.25 * len(ks), 2.65 * len(noises)),
-                             squeeze=False, constrained_layout=True)
-    for row, noise in enumerate(noises):
-        for column, k in enumerate(ks):
-            ax = axes[row, column]
+    fig, axes = plt.subplots(1,len(ks),figsize=(3.5*len(ks),4.2),
+                             squeeze=False,constrained_layout=True)
+    for column,k in enumerate(ks):
+        ax = axes[0,column]
+        positive = True
+        missing = []
+        for index,noise in enumerate(noises):
+            color = NOISE_COLORS[index%len(NOISE_COLORS)]
             case = cells.get((noise, k))
-            ax.set_title(f"K={k}, noise={noise:.2f}")
-            if case is None:
-                ax.text(0.5, 0.5, "N/A: no saved cell", ha="center", transform=ax.transAxes)
+            if case is None or not case.get("budget_sweep"):
+                missing.append(f"{noise:.2f}")
                 continue
             selected = case["selected_T0"][KEY]
-            for metric, prefix, color in zip(METRICS, ("consumed", "slate"), METRIC_COLORS):
-                entry = _stats(case,metric)
-                ax.errorbar(selected,entry["mean"],yerr=_interval(entry),fmt="o",color=color,
-                            capsize=2,label=LABELS[metric])
-            ax.text(.5,.98,"Test sweep not saved",ha="center",va="top",fontsize=8,
-                    transform=ax.transAxes,color="#6b7480")
-            ax.set_xscale("symlog", linthresh=1)
-            ax.grid(alpha=0.18)
-            if row == len(noises) - 1:
-                ax.set_xlabel(r"Post-Startup budget $T_0$")
-            if column == 0:
-                ax.set_ylabel("Held-out mean regret")
-    handles = [plt.Line2D([], [], color=color, label=LABELS[metric])
-               for metric, color in zip(METRICS, METRIC_COLORS)]
+            budgets,means,_,_ = curve_stats(case,METRICS[1])
+            ax.plot(budgets,means,color=color,lw=1.4,label=f"Noise {noise:.2f}")
+            selected_index = int(np.flatnonzero(budgets == selected)[0])
+            ax.plot(selected,means[selected_index],marker="o",markerfacecolor="white",
+                    markeredgecolor=color,markeredgewidth=1.5,ms=6,zorder=4)
+            positive = positive and bool(np.all(means>0))
+        ax.set_title(f"Maximum slate size K={k}")
+        ax.set_xscale("symlog",linthresh=1,base=2)
+        if positive and ax.lines:
+            ax.set_yscale("log")
+        ax.grid(alpha=.18)
+        ax.set_xlabel(r"Post-Startup budget $T_0$")
+        ax.set_ylabel("Mean final slate-average regret")
+        if missing:
+            ax.text(.5,.98,"Missing noise: "+", ".join(missing),ha="center",va="top",
+                    fontsize=8,color="#687482",transform=ax.transAxes)
+    handles = [plt.Line2D([],[],color=NOISE_COLORS[index%len(NOISE_COLORS)],label=f"Noise {noise:.2f}")
+               for index,noise in enumerate(noises)]
     handles.append(plt.Line2D([], [], color="#4c5663", marker="o", linestyle="none",
+                             markerfacecolor="white",
                              label="Validation-selected budget"))
-    fig.legend(handles=handles, loc="outside upper center", ncol=3, fontsize=9)
+    fig.legend(handles=handles, loc="outside upper center", ncol=len(noises)+1, fontsize=9)
     entry = save_figure(fig, output, "current_report/10_grid_cutoff_curves",
-                       "Selected-budget grid costs (test sweeps unavailable)", number=20)
-    entry["status"] = "partial: test outcomes exist only at selected budget"
+                       "Held-out slate-regret budget sweeps at validation-selected contraction", number=20)
+    entry["description"] = "One panel per maximum slate size K overlays the current experience-noise levels in different colors. Each K/noise combination retains its own saved validation-selected contraction parameter. Curves show held-out mean final slate-average regret; open circles mark the validation-selected budgets. No test outcome selects a policy."
+    if len(cells) != len(ks)*len(noises) or any(not c.get("budget_sweep") for c in cells.values()):
+        entry["status"] = "partial: additional held-out sweeps required"
     return entry
 
 

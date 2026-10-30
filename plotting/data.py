@@ -14,7 +14,7 @@ from pathlib import Path
 
 import numpy as np
 
-from .common import CASE_LABELS, METHODS, METRICS, finals, mean_ci, paired, phase_values
+from .common import CASE_LABELS, METHODS, METRICS, finals, mean_ci, paired, phase_values, endpoint_distribution_rows, paired_distribution_tables
 
 RAW_METRICS = dict(zip(METRICS, ("consumed_regret", "slate_average_regret")))
 
@@ -283,4 +283,11 @@ def export_csvs(study, output):
                         yield {"case":cid,"method":key,"metric":metric,"epoch":epoch,
                             **{field:series[metric][field][i] for field in ("mean","lo","hi")}}
     tables.append(write_csv(output/"trajectories.csv",trajectories()))
+    if "baseline" in study["cases"]:
+        tables.append(write_csv(output/"baseline_boxplot_summary.csv",
+                                endpoint_distribution_rows(study["cases"]["baseline"])))
+    summaries,samples = paired_distribution_tables(study)
+    if summaries:
+        tables.append(write_csv(output/"paired_boxplot_summary.csv",summaries))
+        tables.append(write_csv(output/"paired_boxplot_samples.csv",samples))
     return tables

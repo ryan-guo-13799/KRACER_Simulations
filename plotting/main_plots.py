@@ -3,16 +3,19 @@
 from __future__ import annotations
 
 import math
+from inspect import signature
 from pathlib import Path
 import textwrap
 
 import matplotlib.pyplot as plt
 from matplotlib.colors import LogNorm, Normalize
+from matplotlib.lines import Line2D
+from matplotlib.patches import Patch, Rectangle
 import numpy as np
 
 from .common import (
     CASE_LABELS, LABELS, METHODS, METRICS, STYLE, finals, mean_ci, paired,
-    phase_values, save_figure,
+    phase_values, save_figure, distribution_summary, paired_samples,
 )
 
 
@@ -60,17 +63,49 @@ def _endpoint_plot(case, output):
     keys = _methods(case)
     fig, axes = plt.subplots(1, 2, figsize=(11.8, max(5.6, len(keys) * .58)),
                              sharey=True, layout="constrained")
+    horizontal = {"orientation":"horizontal"} if "orientation" in signature(axes[0].bxp).parameters else {"vert":False}
     for ax, metric in zip(axes, METRICS):
+        all_values = []
         for index, key in enumerate(keys):
-            stat = mean_ci(finals(case, key, metric))
-            ax.errorbar(stat["mean"], index, xerr=_errors(stat), fmt="o", capsize=3,
-                        ms=5, color=COLORS.get(key, "#607080"))
-        ax.set(xscale="log", xlabel=LABELS[metric], yticks=range(len(keys)))
+            values = finals(case,key,metric)
+            stat = distribution_summary(values)
+            color = COLORS.get(key,"#607080")
+            all_values.extend(values)
+            box = {"q1":stat["q1"],"med":stat["median"],"q3":stat["q3"],
+                   "whislo":stat["whisker_low"],"whishi":stat["whisker_high"]}
+            ax.bxp([box],positions=[index],widths=.36,showfliers=False,patch_artist=True,
+                   manage_ticks=False,boxprops={"facecolor":color,"edgecolor":color,"alpha":.22},
+                   whiskerprops={"color":color,"linewidth":1.2},
+                   capprops={"color":color,"linewidth":1.2},
+                   medianprops={"color":color,"linewidth":2.3},**horizontal)
+            # Stable vertical offsets reveal every test observation without altering regret.
+            jitter = np.random.default_rng(10).permutation(np.linspace(-.115,.115,len(values)))
+            ax.scatter(values,index+jitter,s=19,color=color,alpha=.68,
+                       edgecolors="white",linewidths=.35,zorder=3)
+            ax.scatter(stat["mean"],index,marker="D",s=40,facecolors="white",
+                       edgecolors=color,linewidths=1.5,zorder=5)
+            description = (f"Mean {stat['mean']:.2f}   Median {stat['median']:.2f}   "
+                           f"Q1 {stat['q1']:.2f}   Q3 {stat['q3']:.2f}   IQR {stat['iqr']:.2f}")
+            ax.text(.01,index+.34,description,transform=ax.get_yaxis_transform(),
+                    fontsize=6.7,color="#515a64",ha="left",va="center")
+        ax.set_xscale("log" if np.all(np.asarray(all_values)>0) else "symlog")
+        ax.set(xlabel=LABELS[metric], yticks=range(len(keys)))
         ax.grid(axis="x", alpha=.2)
     axes[0].set_yticklabels([_label(key) for key in keys])
-    axes[0].invert_yaxis()
-    fig.suptitle("Baseline scenario: final regret and 95% mean intervals")
-    return save_figure(fig, output, "current_reference", "Baseline final regret", number=10)
+    axes[0].set_ylim(len(keys)-.35,-.45)
+    legend = [Patch(facecolor="#87939f",alpha=.22,label="Q1-Q3 box (IQR)"),
+        Line2D([],[],color="#63717f",linewidth=2.3,label="Median line"),
+        Line2D([],[],marker="D",markerfacecolor="white",markeredgecolor="#63717f",
+               linestyle="none",label="Mean"),
+        Line2D([],[],marker="o",color="#63717f",linestyle="none",markersize=4,
+               label="Test-seed regret")]
+    fig.legend(handles=legend,loc="outside lower center",ncol=4,frameon=False,fontsize=8,
+               title="Box width = IQR = Q3 - Q1; whiskers within 1.5 IQR. All test samples shown.",
+               title_fontsize=8)
+    fig.suptitle("Baseline scenario: final regret distributions")
+    entry = save_figure(fig,output,"current_reference","Baseline final regret distributions",number=10)
+    entry["description"] = "Boxes show Q1-Q3, the line is the median, diamonds are means, and dots are individual test-seed regrets. Whiskers use 1.5 IQR; numerical summaries are shown beneath each box."
+    return entry
 
 
 def _trajectory_plot(case, output):
@@ -110,6 +145,12 @@ def _all_method_heatmap(study, output, metric):
         for row, key in enumerate(keys):
             if key in case.get("raw_selected", {}):
                 values[row, col] = mean_ci(finals(case, key, metric))["mean"]
+    best = np.zeros(values.shape,dtype=bool)
+    for col in range(len(cids)):
+        available = values[:,col][np.isfinite(values[:,col])]
+        if available.size:
+            # Rank full-precision test means, rather than their rounded labels.
+            best[:,col] = np.isfinite(values[:,col]) & (values[:,col] == available.min())
     positive = values[np.isfinite(values) & (values > 0)]
     if positive.size:
         low, high = float(positive.min()), float(positive.max())
@@ -135,14 +176,21 @@ def _all_method_heatmap(study, output, metric):
             else:
                 text = f"{value:,.1f}"
                 color = "white" if mesh.norm(value) > .6 else "#182c36"
-            ax.text(col, row, text, ha="center", va="center", color=color, fontsize=8.4)
-    ax.set_title(f"All methods: {LABELS[metric].lower()} (test means)", pad=13)
+            if best[row,col]:
+                ax.add_patch(Rectangle((col-.46,row-.44),.92,.88,fill=False,
+                                       edgecolor="#b87400",linewidth=2,zorder=4))
+            ax.text(col, row, text, ha="center", va="center", color=color, fontsize=8.4,
+                    fontweight="bold" if best[row,col] else "normal")
+    ax.set_title(f"All methods: {LABELS[metric].lower()} (test means)\n"
+                 "Outlined bold cells: lowest mean in each scenario", pad=13)
     color_label = "Mean final regret (logarithmic color scale)" if positive.size else "Mean final regret (all observed means are zero)"
     fig.colorbar(mesh, ax=ax, shrink=.78, pad=.025, label=color_label)
     consumed = metric == METRICS[0]
     stem = "current_report/01_all_methods_" + ("consumed" if consumed else "slate")
-    return save_figure(fig, output, stem, f"All-method {LABELS[metric].lower()}",
-                       number=16 if consumed else 17)
+    entry = save_figure(fig, output, stem, f"All-method {LABELS[metric].lower()}",
+                        number=16 if consumed else 17)
+    entry["description"] = "Gold outlines and bold labels identify the lowest unrounded test-mean regret in each scenario column. All exact ties are highlighted. N/A cells are excluded from the comparison."
+    return entry
 
 
 def _sensitivity(study, output):
@@ -168,23 +216,32 @@ def _sensitivity(study, output):
         ("Maximum slate size K", entries("K_", "K")),
         ("Startup target fraction", entries("radius_", "startup")),
     ]
-    fig, axes = plt.subplots(2, 4, figsize=(14, 7), layout="constrained")
+    fig, axes = plt.subplots(1, 4, figsize=(14, 4.1), layout="constrained")
+    metric_colors = (COLORS["kracer"],"#b85d22")
+    metric_markers = ("o","s")
     for col, (xlabel, entries) in enumerate(families):
         entries = [(cid, x) for cid, x in entries if cid in study["cases"] and "kracer" in study["cases"][cid]["raw_selected"]]
-        for row, metric in enumerate(METRICS):
-            ax = axes[row, col]
-            if len(entries) < 2:
-                ax.text(.5,.5,"No sweep saved",ha="center",transform=ax.transAxes,color="#687482")
+        ax = axes[col]
+        if len(entries) < 2:
+            ax.text(.5,.5,"No sweep saved",ha="center",transform=ax.transAxes,color="#687482")
+        for metric,color,marker in zip(METRICS,metric_colors,metric_markers):
             stats = [mean_ci(finals(study["cases"][cid], "kracer", metric)) for cid, _ in entries]
             xs = [x for _, x in entries]
-            ax.plot(xs, [s["mean"] for s in stats], color=COLORS["kracer"], marker="o", lw=1.4)
+            ax.plot(xs, [s["mean"] for s in stats], color=color, marker=marker, lw=1.4,
+                    label=LABELS[metric])
             for x, stat in zip(xs, stats):
-                ax.errorbar(x, stat["mean"], yerr=_errors(stat), color=COLORS["kracer"], capsize=3)
-            ax.set(xlabel=xlabel, ylabel=LABELS[metric], xticks=xs)
-            ax.grid(alpha=.2)
+                ax.errorbar(x, stat["mean"], yerr=_errors(stat), color=color, capsize=3)
+        ax.set(xlabel=xlabel, ylabel="Mean final cumulative regret", xticks=xs)
+        ax.grid(alpha=.2)
+    handles,labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles,labels,loc="outside lower center",ncol=2,frameon=False)
     fig.suptitle("K-RACER sensitivity: selected policies and marginal 95% intervals")
-    return save_figure(fig, output, "current_report/02_kracer_sensitivity",
+    entry = save_figure(fig, output, "current_report/02_kracer_sensitivity",
                        "K-RACER scenario sensitivity", number=18)
+    entry["description"] = "Four panels compare dimension, experience noise, maximum slate size, and Startup target fraction. Teal circles show consumed-item regret and orange squares show slate-average regret on the same axes. Bars are marginal 95% Student-t mean intervals. Each Startup target selects gamma and the post-Startup budget on validation seeds before held-out evaluation."
+    if len(families[3][1]) < 3:
+        entry["status"] = "partial: Startup target sweep required"
+    return entry
 
 
 def _paired_ablations(study, output):
@@ -204,26 +261,52 @@ def _paired_ablations(study, output):
                 ax.text(.98, index, "N/A", transform=ax.get_yaxis_transform(), ha="right", color="#777777")
                 continue
             try:
-                stat = paired(case, key, "kracer", METRICS[1])
+                _,values = paired_samples(case, key, "kracer", METRICS[1])
             except ValueError:
                 ax.text(.98,index,"Unpaired seeds",transform=ax.get_yaxis_transform(),ha="right")
                 continue
-            ax.errorbar(stat["mean"], index, xerr=_errors(stat), fmt="o", ms=4, capsize=3,
-                        color=COLORS.get(key, "#52728b"))
+            stat = distribution_summary(values)
+            color = COLORS.get(key,"#52728b")
+            horizontal = {"orientation":"horizontal"} if "orientation" in signature(ax.bxp).parameters else {"vert":False}
+            box = {"q1":stat["q1"],"med":stat["median"],"q3":stat["q3"],
+                   "whislo":stat["whisker_low"],"whishi":stat["whisker_high"]}
+            ax.bxp([box],positions=[index],widths=.36,showfliers=False,patch_artist=True,
+                   manage_ticks=False,boxprops={"facecolor":color,"edgecolor":color,"alpha":.22},
+                   whiskerprops={"color":color,"linewidth":1.2},capprops={"color":color,"linewidth":1.2},
+                   medianprops={"color":color,"linewidth":2.3},**horizontal)
+            jitter = np.random.default_rng(10).permutation(np.linspace(-.115,.115,len(values)))
+            ax.scatter(values,index+jitter,s=19,color=color,alpha=.68,
+                       edgecolors="white",linewidths=.35,zorder=3)
+            ax.scatter(stat["mean"],index,marker="D",s=40,facecolors="white",
+                       edgecolors=color,linewidths=1.5,zorder=5)
+            description = (f"Mean {stat['mean']:.2f}   Median {stat['median']:.2f}   "
+                           f"Q1 {stat['q1']:.2f}   Q3 {stat['q3']:.2f}   IQR {stat['iqr']:.2f}")
+            ax.text(.01,index+.34,description,transform=ax.get_yaxis_transform(),
+                    fontsize=6.1,color="#515a64",ha="left",va="center",
+                    bbox={"facecolor":"white","edgecolor":"none","pad":.3,"alpha":.9})
         ax.set(yticks=range(len(cids)), xlabel="Rival minus K-RACER slate-average regret")
         ax.set_yticklabels([CASE_LABELS[cid] for cid in cids], fontsize=8.5)
-        ax.invert_yaxis()
+        ax.set_ylim(len(cids)-.35,-.45)
         name = METHODS[key].removeprefix("K-RACER Ablation: ")
         ax.set_title(textwrap.fill(name, 32), fontsize=11)
         ax.grid(axis="x", alpha=.2)
     for ax in list(axes.flat)[len(keys):]:
         ax.set_visible(False)
-    fig.suptitle("Paired final slate-regret differences (positive favors K-RACER; marginal 95% intervals)")
-    return save_figure(fig, output, "current_report/03_paired_ablations",
-                       "Paired K-RACER ablation comparisons", number=12)
+    legend = [Patch(facecolor="#87939f",alpha=.22,label="Q1-Q3 box (IQR)"),
+        Line2D([],[],color="#63717f",linewidth=2.3,label="Median line"),
+        Line2D([],[],marker="D",markerfacecolor="white",markeredgecolor="#63717f",linestyle="none",label="Mean"),
+        Line2D([],[],marker="o",color="#63717f",linestyle="none",markersize=4,label="Paired test-seed difference")]
+    fig.legend(handles=legend,loc="outside lower center",ncol=4,frameon=False,fontsize=8,
+               title="Box width = IQR = Q3 - Q1; whiskers within 1.5 IQR. All paired test samples shown.",title_fontsize=8)
+    fig.suptitle("Paired final slate-regret distributions (positive favors K-RACER)")
+    entry = save_figure(fig, output, "current_report/03_paired_ablations",
+                       "Paired K-RACER ablation regret distributions", number=12)
+    entry["description"] = "Each dot is one seed-aligned ablation-minus-K-RACER slate-regret difference. Boxes show Q1-Q3, median lines, mean diamonds, and 1.5 IQR whiskers; numerical summaries appear beneath each box. Positive values favor K-RACER."
+    return entry
 
 
 def _cutoff_tradeoff(study, output):
+    from .additional import curve_stats
     cases = [(cid,case) for cid,case in study["cases"].items()
              if (cid == "baseline" or cid.startswith("speed_")) and "kracer" in case["raw_selected"]]
     if not cases:
@@ -233,18 +316,28 @@ def _cutoff_tradeoff(study, output):
     for i,(cid,case) in enumerate(sorted(cases,key=lambda x:x[1]["config"]["sigma_u"])):
         noise = case["config"]["sigma_u"]*np.sqrt(case["config"]["D"])
         for ax,metric in zip(axes,METRICS):
-            stat = mean_ci(finals(case,"kracer",metric))
-            ax.errorbar(case["selected_T0"]["kracer"],stat["mean"],yerr=_errors(stat),fmt="o",capsize=3,
-                        color=colors[i%len(colors)],label=f"Noise {noise:.2f}")
-            ax.set(xlabel="Selected post-Startup budget $T_0$",ylabel=LABELS[metric])
+            if not case.get("budget_sweep"):
+                ax.text(.5,.5,"Held-out sweeps not saved",ha="center",transform=ax.transAxes)
+                continue
+            budgets,means,lo,hi = curve_stats(case,metric)
+            color = colors[i%len(colors)]
+            ax.plot(budgets,means,color=color,lw=1.6,label=f"Noise {noise:.2f}")
+            if all(value is not None for value in lo):
+                ax.fill_between(budgets,np.asarray(lo,dtype=float),np.asarray(hi,dtype=float),color=color,alpha=.12)
+            selected = case["selected_T0"]["kracer"]
+            index = int(np.flatnonzero(budgets == selected)[0])
+            ax.plot(selected,means[index],marker="o",markerfacecolor="white",markeredgecolor=color,
+                    markeredgewidth=1.5,ms=7,zorder=4)
+            ax.set(xlabel="Post-Startup exploration budget $T_0$",ylabel=LABELS[metric])
             ax.set_xscale("symlog",base=2,linthresh=1)
             ax.grid(alpha=.2)
     axes[1].legend(frameon=False)
-    fig.suptitle("Test regret at validation-selected budgets")
-    fig.text(.5,-.02,"Only selected-budget test runs were saved. Test budget curves cannot be reconstructed.",ha="center",fontsize=9)
+    fig.suptitle("K-RACER exploration-budget tradeoff: open circles mark validation selections")
     entry = save_figure(fig,output,"current_report/05_cutoff_tradeoff",
-                        "Selected-budget test costs (test sweep unavailable)",number=22)
-    entry["status"] = "partial: test outcomes exist only at selected budget"
+                        "Held-out exploration-budget tradeoff across experience-noise levels",number=22)
+    entry["description"] = "D=5 and K=2 at the current noise levels. Within each setting, contraction is fixed at its saved validation selection. Curves are test means, shading is a marginal 95% Student-t interval, and circles mark validation-selected budgets. T0 excludes Startup; no test-based selection is performed."
+    if any(not c.get("budget_sweep") for _,c in cases):
+        entry["status"] = "partial: additional held-out sweeps required"
     return entry
 
 

@@ -80,8 +80,7 @@ def main():
                             delta_conf=cfg.delta_conf)
             rec = RecommenderConfig(slate_size=cfg.K, cutoff=cfg.T0,
                                     gamma_ctr=cfg.gamma_ctr,
-                                    startup_half_angle=(None if cfg.startup_alpha_deg is None
-                                                        else math.radians(cfg.startup_half_angle_deg)))
+                                    startup_half_angle=math.radians(cfg.startup_half_angle_deg))
             rewritten = run_simulation(sim, rec, 'kracer', cutoff_after_startup=True)
             rewrite_rows = [(np.array([item.emb for item in x.slate]), x.chosen_id)
                             for x in rewritten.interactions]

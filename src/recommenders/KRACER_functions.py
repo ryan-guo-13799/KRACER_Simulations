@@ -194,7 +194,6 @@ def Observe(
 
 
 def WinnerTree(I0, V, t, max_depth, K, h_t, cut):
-    """Yield each level of hypothetical intervals and information matrices."""
     nodes = [(I0, V.copy())]
     for step in range(max_depth):
         h = h_t(t + step)
@@ -221,7 +220,6 @@ def TreeCertificate(
     h_t: Callable[[int], float],
     gamma_ctr: float,
 ) -> int | None:
-    """Return the first depth that passes, or None if no depth passes."""
     _validate_tree(t, max_depth, c, F, W, i, K)
     d = c.size - 1
     active_direction = F[:, i]
@@ -244,8 +242,6 @@ def TreeCertificate(
     return None
 
 
-# BEGIN K-RACER PARITY CHANGE (step 1): match the origin's directional
-# excitation, candidate ordering, and reference ring.
 def ExcitationSlate(
     I0: AngularInterval,
     V: Matrix,
@@ -263,14 +259,10 @@ def ExcitationSlate(
     center /= np.linalg.norm(center)
 
     radius = min(0.25, 1 / np.sqrt(2 * (1 + 1 / lambda0)))
-    # BEGIN PAPER ALIGNMENT CHANGE: keep the signed center from Eq. (43).
-    # Eq. (44) displays this cap directly, without a global flip toward c.
     return ExcitationRing(center, K, radius, reference=c)
-    # END PAPER ALIGNMENT CHANGE.
 
 
 def WorstNormal(I: AngularInterval, V: Matrix, c: Vector, g_i: Vector):
-    """Return the most uncertain normal and its squared V-inverse norm."""
     A, B = I
     # maximize ||n(b)||_{V^{-1}} over the interval
     inverse = np.linalg.inv(V)
@@ -297,7 +289,6 @@ def WorstNormal(I: AngularInterval, V: Matrix, c: Vector, g_i: Vector):
 
 
 def TangentFrame(center: Vector, reference: Vector | None = None) -> Matrix:
-    """Project the reference, then canonical axes, in the origin's order."""
     vectors = []
     candidates = [] if reference is None else [reference]
     candidates += list(np.eye(center.size))
@@ -315,7 +306,6 @@ def TangentFrame(center: Vector, reference: Vector | None = None) -> Matrix:
 def ExcitationRing(
     center: Vector, K: int, radius: float, *, reference: Vector | None = None
 ) -> list[Item]:
-    """Place K unit items in a ring around a unit center (shared by ablations)."""
     if reference is not None:
         frame = TangentFrame(center, reference)
 
@@ -370,7 +360,6 @@ def ExcitationRing(
         q = np.sqrt(1 - radius**2) * center + radius * tangent
         slate.append(Item(q))
     return slate
-# END K-RACER PARITY CHANGE (step 1).
 
 
 # Validation is kept here so the algorithms above remain easy to follow.

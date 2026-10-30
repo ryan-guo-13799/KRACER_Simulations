@@ -70,19 +70,72 @@ def finals(case, key, metric):
     return np.asarray(case["raw_selected"][key]["finals"][metric], dtype=float)
 
 
-def paired(case, left, right, metric):
-    """Compute left minus right after explicit seed-ID alignment."""
+def distribution_summary(values):
+    """Descriptive sample statistics in original regret units, before log display.
+
+    Quartiles use linear interpolation. Tukey whiskers end at the most extreme
+    observations within 1.5 IQR of the box; every observation is plotted as a dot.
+    """
+    values = np.asarray(values,dtype=float)
+    if values.ndim != 1 or not len(values) or not np.all(np.isfinite(values)):
+        raise ValueError("Expected a nonempty, finite one-dimensional sample")
+    q1,median,q3 = np.percentile(values,[25,50,75],method="linear")
+    iqr = float(q3-q1)
+    return {"n":len(values),"mean":float(values.mean()),"median":float(median),
+        "q1":float(q1),"q3":float(q3),"iqr":iqr,
+        "whisker_low":float(values[values >= q1-1.5*iqr].min()),
+        "whisker_high":float(values[values <= q3+1.5*iqr].max())}
+
+
+def endpoint_distribution_rows(case):
+    """Return the numerical values shown in Figure 10 for each method/metric."""
+    return [{"case":case.get("id","baseline"),"method":key,"metric":metric,
+             **distribution_summary(finals(case,key,metric))}
+            for key in METHODS if key in case.get("raw_selected",{}) for metric in METRICS]
+
+
+def paired_samples(case, left, right, metric):
+    """Return seed IDs and left-minus-right observations aligned by seed identity."""
     a, b = (case["raw_selected"][key] for key in (left, right))
     for raw in (a, b):
         if len(set(raw["seeds"])) != len(raw["seeds"]):
             raise ValueError("Duplicate paired seed IDs")
     if set(a["seeds"]) != set(b["seeds"]):
         raise ValueError(f"{case.get('id')}: paired seed sets differ")
+    for key,raw in ((left,a),(right,b)):
+        if finals(case,key,metric).shape != (len(raw["seeds"]),):
+            raise ValueError("Paired endpoint/seed count mismatch")
     indices = {seed: i for i, seed in enumerate(b["seeds"])}
     differences = finals(case, left, metric) - finals(case, right, metric)[
         [indices[seed] for seed in a["seeds"]]
     ]
+    return list(a["seeds"]),differences
+
+
+def paired(case, left, right, metric):
+    """Compute left-minus-right mean intervals after explicit seed alignment."""
+    _,differences = paired_samples(case,left,right,metric)
     return mean_ci(differences)
+
+
+def paired_distribution_tables(study):
+    """Figure 12's descriptive summaries and individual paired test differences."""
+    summaries,samples = [],[]
+    ablations = ("analytical_certificate","minimum_eigenvector","full_dimensional",
+                 "maximum_normal","without_restart")
+    for cid,case in study["cases"].items():
+        for key in ablations:
+            if key not in case["raw_selected"] or "kracer" not in case["raw_selected"]:
+                continue
+            try:
+                seeds,values = paired_samples(case,key,"kracer",METRICS[1])
+            except ValueError:
+                continue
+            base = {"case":cid,"left":key,"right":"kracer","metric":METRICS[1]}
+            summaries.append({**base,**distribution_summary(values)})
+            samples.extend({**base,"seed":seed,"difference":float(value)}
+                           for seed,value in zip(seeds,values))
+    return summaries,samples
 
 
 def phase_values(case, key, metric):
